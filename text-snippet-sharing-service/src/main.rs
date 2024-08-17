@@ -1,9 +1,8 @@
-use hash_util::generate_hash;
+use hash_util::generate_random_hash;
 
 mod hash_util;
 
 fn main() {
-    let salt = b"hello world";
-    let result = generate_hash(salt);
+    let result = generate_random_hash();
     println!("{}", result);
 }
