@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 blake3 = "1.5.3"
+dotenv = "0.15.0"
 hex = "0.4.3"
 uuid = { version = "1.10.0", features = ["v4"] }
