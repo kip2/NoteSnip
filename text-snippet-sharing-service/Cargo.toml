@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 blake3 = "1.5.3"
+hex = "0.4.3"
