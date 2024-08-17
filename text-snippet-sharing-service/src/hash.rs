@@ -1,4 +1,4 @@
-use blake3::{Hash, Hasher};
+use blake3::Hasher;
 use uuid::Uuid;
 
 pub fn generate_random_hash() -> String {
