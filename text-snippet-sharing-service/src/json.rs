@@ -84,7 +84,8 @@ mod test {
         };
 
         let expected =
-            "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES (?, ?, ?)".to_string();
+            "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES ($1, $2, $3)"
+                .to_string();
 
         let result = json.generate_query();
         assert_eq!(result, expected);
