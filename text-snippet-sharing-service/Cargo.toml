@@ -12,4 +12,5 @@ dotenv = "0.15.0"
 hex = "0.4.3"
 serde = { version = "1.0.208", features = ["derive"] }
 sqlx = { version = "0.8.0", features = ["any", "postgres", "runtime-tokio-rustls", "macros"]}
+tokio = { version = "1.39.3", features = ["full"] }
 uuid = { version = "1.10.0", features = ["v4"] }
