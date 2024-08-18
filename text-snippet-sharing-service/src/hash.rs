@@ -22,7 +22,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_generate_hash_2() {
+    fn test_generate_hash() {
         let hash_v = generate_hash(b"hello world");
 
         let expected =
