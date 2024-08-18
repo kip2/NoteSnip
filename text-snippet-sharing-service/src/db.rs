@@ -3,7 +3,8 @@ use std::error::Error;
 
 use crate::{env::read_env_value, RequestJson};
 
-pub async fn execute_query(data: RequestJson) -> Result<(), Box<dyn Error>> {
+// todo: 不要な関数の可能性あり
+pub async fn execute_insert(data: RequestJson) -> Result<(), Box<dyn Error>> {
     data.query().await?;
 
     Ok(())
@@ -24,5 +25,5 @@ async fn test_execute_query() {
         expiration_stat: "etnl".to_string(),
     };
 
-    execute_query(json).await.unwrap();
+    execute_insert(json).await.unwrap();
 }

@@ -24,13 +24,36 @@ impl Queryable for RequestJson {
     }
 }
 
+#[derive(Debug)]
+struct ValidationError(String);
+
+impl std::fmt::Display for ValidationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Validation error: {}", self.0)
+    }
+}
+
+impl Error for ValidationError {}
+
 impl RequestJson {
+    fn validate(&self) -> bool {
+        match self.expiration_stat.as_str() {
+            "10m" | "1h" | "1day" | "1mon" | "etnl" => true,
+            _ => false,
+        }
+    }
+
     pub async fn query(&self) -> Result<(), Box<dyn Error>> {
         let pool = generate_db_connection().await?;
         let transaction = pool.begin().await?;
         let domain = generate_url().unwrap();
 
-        // todo: validation
+        if !self.validate() {
+            transaction.rollback().await?;
+            return Err(Box::new(ValidationError(
+                "Invalid expiration_stat value".to_string(),
+            )));
+        }
 
         let query = self.generate_query();
         if let Err(e) = sqlx::query(&query)
