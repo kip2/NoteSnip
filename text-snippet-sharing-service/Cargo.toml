@@ -10,4 +10,5 @@ actix-web = "4.9.0"
 blake3 = "1.5.3"
 dotenv = "0.15.0"
 hex = "0.4.3"
+serde = { version = "1.0.208", features = ["derive"] }
 uuid = { version = "1.10.0", features = ["v4"] }
