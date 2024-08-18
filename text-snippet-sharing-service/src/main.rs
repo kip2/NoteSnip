@@ -2,6 +2,7 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use serde::{Deserialize, Serialize};
 use url::generate_url;
 
+mod db;
 mod env;
 mod hash;
 mod url;
@@ -19,7 +20,7 @@ struct ResponseJson {
 
 #[post("/submit")]
 async fn submit_json(request_data: web::Json<RequestJson>) -> impl Responder {
-    let domain_str = generate_url();
+    let domain_str = generate_url().unwrap();
     let respose = ResponseJson { domain: domain_str };
 
     HttpResponse::Ok().json(respose)
