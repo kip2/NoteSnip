@@ -18,7 +18,7 @@ struct ResponseJson {
 }
 
 #[post("/submit")]
-async fn submit_json(item: web::Json<RequestJson>) -> impl Responder {
+async fn submit_json(request_data: web::Json<RequestJson>) -> impl Responder {
     let domain_str = generate_url();
     let respose = ResponseJson { domain: domain_str };
 
