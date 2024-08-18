@@ -1,22 +1,33 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use serde::{Deserialize, Serialize};
+use url::generate_url;
 
 mod env;
 mod hash;
 mod url;
 
-#[get("/")]
-async fn index() -> impl Responder {
-    "Hello, world!"
+#[derive(Deserialize)]
+struct RequestJson {
+    snippet: String,
+    expiration_stat: String,
 }
 
-#[get("/{name}")]
-async fn hello(name: web::Path<String>) -> impl Responder {
-    format!("Hello {}!", &name)
+#[derive(Serialize)]
+struct ResponseJson {
+    domain: String,
+}
+
+#[post("/submit")]
+async fn submit_json(item: web::Json<RequestJson>) -> impl Responder {
+    let domain_str = generate_url();
+    let respose = ResponseJson { domain: domain_str };
+
+    HttpResponse::Ok().json(respose)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(index).service(hello))
+    HttpServer::new(|| App::new().service(submit_json))
         .bind(("127.0.0.1", 8080))?
         .run()
         .await
