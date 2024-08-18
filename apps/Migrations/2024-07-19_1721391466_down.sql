@@ -1,1 +1,0 @@
-DROP TABLE computer_parts;
