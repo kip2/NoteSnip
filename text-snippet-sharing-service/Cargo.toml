@@ -11,5 +11,5 @@ blake3 = "1.5.3"
 dotenv = "0.15.0"
 hex = "0.4.3"
 serde = { version = "1.0.208", features = ["derive"] }
-sqlx = { version = "0.8.0", features = ["any", "postgres", "runtime-tokio-rustls"]}
+sqlx = { version = "0.8.0", features = ["any", "postgres", "runtime-tokio-rustls", "macros"]}
 uuid = { version = "1.10.0", features = ["v4"] }
