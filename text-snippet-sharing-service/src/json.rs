@@ -1,4 +1,8 @@
 use serde::{Deserialize, Serialize};
+use sqlx::{Pool, Postgres};
+use std::error::Error;
+
+use crate::url::generate_url;
 
 #[derive(Deserialize)]
 pub struct RequestJson {
@@ -18,7 +22,31 @@ trait Queryable {
 impl Queryable for RequestJson {
     // 変数のバインドはクエリ実行側で行うこと
     fn generate_query(&self) -> String {
-        "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES (?, ?, ?)".to_string()
+        "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
+    }
+}
+
+impl RequestJson {
+    pub async fn insert(&self, pool: Pool<Postgres>) -> Result<(), Box<dyn Error>> {
+        let mut transaction = pool.begin().await?;
+        let domain = generate_url().unwrap();
+
+        // todo: validation
+
+        let query = self.generate_query();
+        if let Err(e) = sqlx::query(&query)
+            .bind(domain)
+            .bind(&self.snippet)
+            .bind(&self.expiration_stat)
+            .execute(&pool)
+            .await
+        {
+            transaction.rollback().await?;
+            return Err(Box::new(e));
+        }
+
+        transaction.commit().await?;
+        Ok(())
     }
 }
 
