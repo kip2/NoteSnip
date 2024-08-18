@@ -8,6 +8,7 @@ mod hash;
 mod json;
 mod url;
 
+// todo: 暫定のコードをおいているため、あとでAPIの実情に即したものに直すこと
 #[post("/submit")]
 async fn submit_json(request_data: web::Json<RequestJson>) -> impl Responder {
     let domain_str = generate_url().unwrap();
