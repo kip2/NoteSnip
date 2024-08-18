@@ -16,6 +16,7 @@ trait Queryable {
 }
 
 impl Queryable for RequestJson {
+    // 変数のバインドはクエリ実行側で行うこと
     fn generate_query(&self) -> String {
         "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES (?, ?, ?)".to_string()
     }
