@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 
-use crate::{db::generate_db_connection, url::generate_url};
+use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
 
 #[derive(Deserialize)]
 pub struct RequestJson {
@@ -46,7 +46,7 @@ impl RequestJson {
     pub async fn query(&self) -> Result<(), Box<dyn Error>> {
         let pool = generate_db_connection().await?;
         let transaction = pool.begin().await?;
-        let domain = generate_url().unwrap();
+        let domain = generate_random_hash().unwrap();
 
         if !self.validate() {
             transaction.rollback().await?;

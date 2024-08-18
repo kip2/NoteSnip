@@ -1,11 +1,12 @@
 use blake3::Hasher;
+use std::error::Error;
 use uuid::Uuid;
 
-pub fn generate_random_hash() -> String {
+pub fn generate_random_hash() -> Result<String, Box<dyn Error>> {
     let uuid = Uuid::new_v4();
     let salt = uuid.as_bytes();
     let random_hash = generate_hash(salt);
-    random_hash
+    Ok(random_hash)
 }
 
 fn generate_hash(salt: &[u8]) -> String {
