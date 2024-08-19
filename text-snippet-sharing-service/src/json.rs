@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
+use thiserror::Error;
 
 use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
 
@@ -24,16 +25,9 @@ impl Queryable for RequestJson {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Error)]
+#[error("Validation error: {0}")]
 struct ValidationError(String);
-
-impl std::fmt::Display for ValidationError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Validation error: {}", self.0)
-    }
-}
-
-impl Error for ValidationError {}
 
 impl RequestJson {
     fn validate(&self) -> bool {
