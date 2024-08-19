@@ -1823,6 +1823,7 @@ dependencies = [
  "hex",
  "serde",
  "sqlx",
+ "thiserror",
  "tokio",
  "uuid",
 ]
