@@ -11,7 +11,7 @@ pub struct RequestJson {
 
 #[derive(Serialize)]
 pub struct ResponseJson {
-    pub domain: String,
+    pub url: String,
 }
 
 trait Queryable {
@@ -20,7 +20,7 @@ trait Queryable {
 
 impl Queryable for RequestJson {
     fn generate_query(&self) -> String {
-        "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
+        "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
     }
 }
 
@@ -38,7 +38,7 @@ impl Error for ValidationError {}
 impl RequestJson {
     fn validate(&self) -> bool {
         match self.expiration_stat.as_str() {
-            "10m" | "1h" | "1day" | "1mon" | "etnl" => true,
+            "10min" | "1hour" | "1day" | "1mon" | "eternal" => true,
             _ => false,
         }
     }
@@ -46,7 +46,7 @@ impl RequestJson {
     pub async fn query(&self) -> Result<(), Box<dyn Error>> {
         let pool = generate_db_connection().await?;
         let transaction = pool.begin().await?;
-        let domain = generate_random_hash().unwrap();
+        let url_hash = generate_random_hash().unwrap();
 
         if !self.validate() {
             transaction.rollback().await?;
@@ -57,7 +57,7 @@ impl RequestJson {
 
         let query = self.generate_query();
         if let Err(e) = sqlx::query(&query)
-            .bind(domain)
+            .bind(url_hash)
             .bind(&self.snippet)
             .bind(&self.expiration_stat)
             .execute(&pool)
@@ -80,11 +80,11 @@ mod test {
     fn test_query() {
         let json = RequestJson {
             snippet: "test snippet".to_string(),
-            expiration_stat: "etnl".to_string(),
+            expiration_stat: "eternal".to_string(),
         };
 
         let expected =
-            "INSERT INTO snippets (domain, snippet, expiration_stat) VALUES ($1, $2, $3)"
+            "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)"
                 .to_string();
 
         let result = json.generate_query();
