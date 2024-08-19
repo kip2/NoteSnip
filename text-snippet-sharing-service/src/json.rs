@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 
-use crate::{db::generate_db_connection, hash::generate_random_hash};
+use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
 
 #[derive(Deserialize)]
 pub struct RequestJson {
@@ -43,7 +43,7 @@ impl RequestJson {
         }
     }
 
-    pub async fn query(&self) -> Result<(), Box<dyn Error>> {
+    pub async fn query(&self) -> Result<ResponseJson, Box<dyn Error>> {
         let pool = generate_db_connection().await?;
         let transaction = pool.begin().await?;
         let url_hash = generate_random_hash().unwrap();
@@ -57,7 +57,7 @@ impl RequestJson {
 
         let query = self.generate_query();
         if let Err(e) = sqlx::query(&query)
-            .bind(url_hash)
+            .bind(&url_hash)
             .bind(&self.snippet)
             .bind(&self.expiration_stat)
             .execute(&pool)
@@ -68,7 +68,11 @@ impl RequestJson {
         }
 
         transaction.commit().await?;
-        Ok(())
+
+        // レスポンス用のJSONを作成する処理
+        let url = generate_url(&url_hash).unwrap();
+        let response_json = ResponseJson { url: url };
+        Ok(response_json)
     }
 }
 
