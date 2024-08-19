@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 
-use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
+use crate::{db::generate_db_connection, hash::generate_random_hash};
 
 #[derive(Deserialize)]
 pub struct RequestJson {
@@ -89,5 +89,17 @@ mod tests {
 
         let result = json.generate_query();
         assert_eq!(result, expected);
+    }
+
+    /// DBへのインサート処理のテスト用コード
+    /// インサートするのみでアサートは行わない
+    #[tokio::test]
+    async fn test_execute_insert() {
+        let json = RequestJson {
+            snippet: "test snippet".to_string(),
+            expiration_stat: "eternal".to_string(),
+        };
+
+        json.query().await.unwrap();
     }
 }
