@@ -34,8 +34,8 @@ mod tests {
 
         let request_body = json!({
             "snippet": "test snippet",
-            // 存在しないステータス
-            "expiration_stat" : "etrnal",
+            // 無効なステータスをセット
+            "expiration_stat" : "abcde",
         });
 
         let response = client
