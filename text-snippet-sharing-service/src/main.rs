@@ -1,5 +1,5 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use json::{RequestJson, ResponseJson};
+use json::{RegisterRequest, RegisterResponse};
 
 mod db;
 mod env;
@@ -8,14 +8,14 @@ mod json;
 mod url;
 
 #[post("/submit")]
-async fn submit_snippet(request_data: web::Json<RequestJson>) -> impl Responder {
+async fn submit_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
     let request_json = request_data.into_inner();
 
     match request_json.query().await {
         Ok(response_json) => HttpResponse::Ok().json(response_json),
         Err(e) => {
             eprintln!("Failed to insert snippet: {}", e);
-            HttpResponse::InternalServerError().json(ResponseJson {
+            HttpResponse::InternalServerError().json(RegisterResponse {
                 url: "".to_string(),
             })
         }

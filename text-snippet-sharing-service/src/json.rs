@@ -5,13 +5,13 @@ use thiserror::Error;
 use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
 
 #[derive(Deserialize)]
-pub struct RequestJson {
+pub struct RegisterRequest {
     pub snippet: String,
     pub expiration_stat: String,
 }
 
 #[derive(Serialize)]
-pub struct ResponseJson {
+pub struct RegisterResponse {
     pub url: String,
 }
 
@@ -19,7 +19,7 @@ trait Queryable {
     fn generate_query(&self) -> String;
 }
 
-impl Queryable for RequestJson {
+impl Queryable for RegisterRequest {
     fn generate_query(&self) -> String {
         "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
     }
@@ -29,7 +29,7 @@ impl Queryable for RequestJson {
 #[error("Validation error: {0}")]
 struct ValidationError(String);
 
-impl RequestJson {
+impl RegisterRequest {
     fn validate(&self) -> bool {
         match self.expiration_stat.as_str() {
             "10min" | "1hour" | "1day" | "1mon" | "eternal" => true,
@@ -37,7 +37,7 @@ impl RequestJson {
         }
     }
 
-    pub async fn query(&self) -> Result<ResponseJson, Box<dyn Error>> {
+    pub async fn query(&self) -> Result<RegisterResponse, Box<dyn Error>> {
         let pool = generate_db_connection().await?;
         let transaction = pool.begin().await?;
         let url_hash = generate_random_hash().unwrap();
@@ -65,7 +65,7 @@ impl RequestJson {
 
         // レスポンス用のJSONを作成する処理
         let url = generate_url(&url_hash).unwrap();
-        let response_json = ResponseJson { url: url };
+        let response_json = RegisterResponse { url: url };
         Ok(response_json)
     }
 }
@@ -76,7 +76,7 @@ mod tests {
 
     #[test]
     fn test_query() {
-        let json = RequestJson {
+        let json = RegisterRequest {
             snippet: "test snippet".to_string(),
             expiration_stat: "eternal".to_string(),
         };
@@ -93,7 +93,7 @@ mod tests {
     /// インサートするのみでアサートは行わない
     #[tokio::test]
     async fn test_execute_insert() {
-        let json = RequestJson {
+        let json = RegisterRequest {
             snippet: "test snippet".to_string(),
             expiration_stat: "eternal".to_string(),
         };
