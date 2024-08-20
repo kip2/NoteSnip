@@ -132,7 +132,7 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_error() {
+    async fn test_api_submit_with_error_status() {
         let url = "http://127.0.0.1:8080/submit";
 
         let client = Client::new();
