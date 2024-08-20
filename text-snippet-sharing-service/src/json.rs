@@ -1,21 +1,20 @@
 use serde::{Deserialize, Serialize};
-use std::error::Error;
 use thiserror::Error;
 
 use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
 
-#[derive(Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
     pub snippet: String,
     pub expiration_stat: String,
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize)]
 pub struct RegisterResponse {
     pub url: String,
 }
 
-#[derive(Serialize)]
+#[derive(Debug, Serialize)]
 pub struct ErrorResponse {
     pub error: String,
 }
