@@ -91,6 +91,10 @@ mod tests {
 
     /// DBへのインサート処理のテスト用コード
     /// インサートするのみでアサートは行わない
+    ///
+    /// ローカル環境の場合、事前準備をしてから行うこと
+    /// 1.Dockerによる検証環境の立ち上げ
+    /// 2.APIアプリを起動状態にする
     #[tokio::test]
     async fn test_execute_insert() {
         let json = RegisterRequest {
