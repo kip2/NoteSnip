@@ -15,6 +15,11 @@ pub struct RegisterResponse {
     pub url: String,
 }
 
+#[derive(Serialize)]
+pub struct ErrorResponse {
+    pub error: String,
+}
+
 trait Queryable {
     fn generate_query(&self) -> String;
 }
@@ -37,16 +42,21 @@ impl RegisterRequest {
         }
     }
 
-    pub async fn query(&self) -> Result<RegisterResponse, Box<dyn Error>> {
-        let pool = generate_db_connection().await?;
-        let transaction = pool.begin().await?;
+    pub async fn query(&self) -> Result<RegisterResponse, ErrorResponse> {
+        let pool = generate_db_connection().await.map_err(|e| ErrorResponse {
+            error: format!("Database connection error: {}", e),
+        })?;
+
+        let transaction = pool.begin().await.map_err(|e| ErrorResponse {
+            error: format!("Transaction start error: {}", e),
+        })?;
         let url_hash = generate_random_hash().unwrap();
 
         if !self.validate() {
-            transaction.rollback().await?;
-            return Err(Box::new(ValidationError(
-                "Invalid expiration_stat value".to_string(),
-            )));
+            transaction.rollback().await.ok();
+            return Err(ErrorResponse {
+                error: "Invalid expiration_stat value".to_string(),
+            });
         }
 
         let query = self.generate_query();
@@ -57,15 +67,20 @@ impl RegisterRequest {
             .execute(&pool)
             .await
         {
-            transaction.rollback().await?;
-            return Err(Box::new(e));
+            transaction.rollback().await.ok();
+            return Err(ErrorResponse {
+                error: format!("Query execution error: {}", e),
+            });
         }
 
-        transaction.commit().await?;
+        transaction.commit().await.map_err(|e| ErrorResponse {
+            error: format!("Transaction commit error: {}", e),
+        })?;
 
         // レスポンス用のJSONを作成する処理
         let url = generate_url(&url_hash).unwrap();
         let response_json = RegisterResponse { url: url };
+
         Ok(response_json)
     }
 }

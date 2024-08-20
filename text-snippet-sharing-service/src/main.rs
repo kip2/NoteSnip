@@ -13,11 +13,9 @@ async fn submit_snippet(request_data: web::Json<RegisterRequest>) -> impl Respon
 
     match request_json.query().await {
         Ok(response_json) => HttpResponse::Ok().json(response_json),
-        Err(e) => {
-            eprintln!("Failed to insert snippet: {}", e);
-            HttpResponse::InternalServerError().json(RegisterResponse {
-                url: "".to_string(),
-            })
+        Err(error_response) => {
+            eprintln!("Failed to insert snippet: {}", error_response.error);
+            HttpResponse::InternalServerError().json(error_response)
         }
     }
 }

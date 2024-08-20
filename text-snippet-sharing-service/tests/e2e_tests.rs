@@ -151,5 +151,8 @@ mod tests {
             .expect("Failed to send request");
 
         assert_eq!(response.status(), 500);
+
+        let response_body: serde_json::Value = response.json().await.expect("Failed to parse JSON");
+        assert_eq!(response_body["error"], "Invalid expiration_stat value");
     }
 }
