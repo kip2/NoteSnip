@@ -43,14 +43,25 @@ impl RegisterRequest {
     }
 
     pub async fn query(&self) -> Result<RegisterResponse, ErrorResponse> {
-        let pool = generate_db_connection().await.map_err(|e| ErrorResponse {
-            error: format!("Database connection error: {}", e),
+        let pool = generate_db_connection().await.map_err(|e| {
+            eprintln!("Database connection error: {:?}", e);
+            ErrorResponse {
+                error: "Internal server error".to_string(),
+            }
         })?;
 
-        let transaction = pool.begin().await.map_err(|e| ErrorResponse {
-            error: format!("Transaction start error: {}", e),
+        let transaction = pool.begin().await.map_err(|e| {
+            eprintln!("Transaction start error: {:?}", e);
+            ErrorResponse {
+                error: "Internal server error".to_string(),
+            }
         })?;
-        let url_hash = generate_random_hash().unwrap();
+        let url_hash = generate_random_hash().map_err(|e| {
+            eprintln!("Hash generation error: {:?}", e);
+            ErrorResponse {
+                error: "Internal server error".to_string(),
+            }
+        })?;
 
         if !self.validate() {
             transaction.rollback().await.ok();
@@ -68,17 +79,26 @@ impl RegisterRequest {
             .await
         {
             transaction.rollback().await.ok();
+            eprintln!("Database query failed: {:?}", e);
             return Err(ErrorResponse {
-                error: format!("Query execution error: {}", e),
+                error: "Internal server error".to_string(),
             });
         }
 
-        transaction.commit().await.map_err(|e| ErrorResponse {
-            error: format!("Transaction commit error: {}", e),
+        transaction.commit().await.map_err(|e| {
+            eprintln!("Transaction commit error: {:?}", e);
+            ErrorResponse {
+                error: "Internal server error".to_string(),
+            }
         })?;
 
         // レスポンス用のJSONを作成する処理
-        let url = generate_url(&url_hash).unwrap();
+        let url = generate_url(&url_hash).map_err(|e| {
+            eprintln!("URL generation error: {:?}", e);
+            ErrorResponse {
+                error: "Internal server error".to_string(),
+            }
+        })?;
         let response_json = RegisterResponse { url: url };
 
         Ok(response_json)
