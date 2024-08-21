@@ -1,5 +1,5 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use json::{RegisterRequest, RegisterResponse};
+use json::RegisterRequest;
 
 mod db;
 mod env;
