@@ -13,6 +13,7 @@ hex = "0.4.3"
 reqwest = { version = "0.12.5", features = ["json"]}
 serde = { version = "1.0.208", features = ["derive"] }
 serde_json = "1.0.125"
+sqids = "0.4.1"
 sqlx = { version = "0.8.0", features = ["any", "postgres", "runtime-tokio-rustls", "macros"]}
 thiserror = "1.0.63"
 tokio = { version = "1.39.3", features = ["full"] }
