@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::{db::generate_db_connection, hash::generate_random_hash, url::generate_url};
+use crate::{db::generate_db_connection, hash::generate_hash, url::generate_url};
 
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
@@ -55,7 +55,7 @@ impl RegisterRequest {
                 error: "Internal server error".to_string(),
             }
         })?;
-        let url_hash = generate_random_hash().map_err(|e| {
+        let url_hash = generate_hash().map_err(|e| {
             eprintln!("Hash generation error: {:?}", e);
             ErrorResponse {
                 error: "Internal server error".to_string(),
