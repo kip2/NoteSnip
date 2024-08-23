@@ -1,3 +1,4 @@
+use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use json::RegisterRequest;
 
@@ -6,6 +7,11 @@ mod env;
 mod hash;
 mod json;
 mod url;
+
+#[get("/")]
+async fn index() -> impl Responder {
+    "Message fetched."
+}
 
 #[post("/submit")]
 async fn submit_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
@@ -21,11 +27,22 @@ async fn submit_snippet(request_data: web::Json<RegisterRequest>) -> impl Respon
 }
 
 async fn run() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(submit_snippet))
-        // todo: bindしているURLを最後に変更すること
-        .bind(("127.0.0.1", 8080))?
-        .run()
-        .await
+    HttpServer::new(|| {
+        App::new()
+            // todo: Corsは暫定で追加しているため、本番環境で不要であれば削除する
+            .wrap(
+                Cors::default()
+                    .allow_any_origin()
+                    .allowed_methods(vec!["GET", "POST"])
+                    .allowed_headers(vec!["Content-Type"]),
+            )
+            .service(index)
+            .service(submit_snippet)
+    })
+    // todo: bindしているURLを最後に変更すること
+    .bind(("127.0.0.1", 8000))?
+    .run()
+    .await
 }
 
 #[actix_web::main]
