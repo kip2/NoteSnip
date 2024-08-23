@@ -2,12 +2,25 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
 
   const handleClick = () => {
-    fetch('http://127.0.0.1:8000/')
-      .then(response => response.text())
-      .then(data => setMessage(data))
+    const requestData = {
+      snippet: "Example Snippet",
+      expiration_stat: "eternal"
+    }
+
+    fetch('http://127.0.0.1:8000/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        setResponse(data)
+      })
       .catch(error => console.error('Error fetching data:', error))
   }
 
@@ -16,7 +29,7 @@ function App() {
       <h1>API Fetch Test</h1>
       <div className="card">
         <p>
-          {message}
+          {response ? `Response: ${response.url}` : "No response yet"}
         </p>
         <button onClick={handleClick}>
           Fetch Message
