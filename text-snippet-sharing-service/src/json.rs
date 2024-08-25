@@ -19,11 +19,11 @@ pub struct ErrorResponse {
     pub error: String,
 }
 
-trait Queryable {
+trait Insertable {
     fn generate_query(&self) -> String;
 }
 
-impl Queryable for RegisterRequest {
+impl Insertable for RegisterRequest {
     fn generate_query(&self) -> String {
         "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
     }

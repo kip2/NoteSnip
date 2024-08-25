@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use json::RegisterRequest;
@@ -12,6 +14,25 @@ mod url;
 async fn index() -> impl Responder {
     "Message fetched."
 }
+
+// todo: パス文字列がない場合のエラー処理用
+// #[get("/get/")]
+// async fn get_without_snippet() -> impl Responder {
+//     HttpResponse::BadRequest().body("Hash parameter is missing")
+// }
+
+// #[get("/get/{hash}")]
+// async fn get_snippet(
+//     path: web::Path<String>,
+//     data: web::Data<HashMap<String, String>>,
+// ) -> impl Responder {
+//     let hash = path.into_inner();
+
+//     match data.get(&hash) {
+//         Some(snippet) => HttpResponse::Ok().body(snippet.clone()),
+//         None => HttpResponse::NotFound().body("Snippet not found"),
+//     }
+// }
 
 #[post("/register")]
 async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
