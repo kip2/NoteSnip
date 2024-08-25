@@ -54,6 +54,12 @@ impl RequestHash {
             }
         };
 
+        if !snippet_data.is_not_expired() {
+            return Err(ErrorResponse {
+                error: "Data is expired".to_string(),
+            });
+        }
+
         let response_view_data = ResponseViewData {
             snippet: snippet_data.snippet,
             expiration_stat: snippet_data.expiration_stat,
@@ -65,6 +71,7 @@ impl RequestHash {
 
 /// DBからのデータ取得テスト用
 /// 環境によりデータが違うため、必ず動くわけではないことに注意する
+/// todo: テスト用の初期データを投入しておくことで、対応しようと覆う
 #[tokio::test]
 async fn test_search() {
     let request = RequestHash {
@@ -78,9 +85,28 @@ async fn test_search() {
         expiration_stat: "eternal".to_string(),
     };
 
-    println!("result: {:?}", result);
-    println!("expected: {:?}", expected);
     assert_eq!(result, expected);
+}
+
+/// DBからのデータ取得テスト用
+/// 環境によりデータが違うため、必ず動くわけではないことに注意する
+/// todo: テスト用の初期データを投入しておくことで、対応しようと覆う
+#[tokio::test]
+async fn test_search_with_expired_data() {
+    let request = RequestHash {
+        hash: "KRi1XopV7HZQ5PAkaofbCma4".to_string(),
+    };
+
+    let result = request.search().await;
+
+    let expected_error = "Data is expired";
+
+    match result {
+        Ok(_) => panic!("Expected an error but got Ok result"),
+        Err(e) => {
+            assert_eq!(e.error, expected_error);
+        }
+    }
 }
 
 pub fn generate_hash() -> Result<String, Box<dyn Error>> {

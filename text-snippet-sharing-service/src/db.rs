@@ -15,7 +15,7 @@ pub struct SnippetData {
 }
 
 impl SnippetData {
-    pub fn is_expired(&self) -> bool {
+    pub fn is_not_expired(&self) -> bool {
         let now: DateTime<Utc> = Utc::now();
 
         match self.expiration_stat.as_str() {
@@ -35,7 +35,7 @@ impl SnippetData {
                 let expiration_time = self.created_at + Duration::weeks(1);
                 now <= expiration_time
             }
-            "eternal" => false,
+            "eternal" => true,
             _ => false,
         }
     }
@@ -59,7 +59,7 @@ fn test_is_expired() {
         updated_at: Utc::now(),
     };
 
-    assert!(snippet.is_expired());
+    assert!(snippet.is_not_expired());
 
     let snippet = SnippetData {
         id: 1,
@@ -70,5 +70,5 @@ fn test_is_expired() {
         updated_at: Utc::now(),
     };
 
-    assert!(!snippet.is_expired());
+    assert!(!snippet.is_not_expired());
 }
