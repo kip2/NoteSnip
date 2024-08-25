@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Duration, Utc};
 use sqlx::{PgPool, Pool, Postgres};
 use std::error::Error;
 
@@ -14,9 +14,61 @@ pub struct SnippetData {
     pub updated_at: DateTime<Utc>,
 }
 
+impl SnippetData {
+    pub fn is_expired(&self) -> bool {
+        let now: DateTime<Utc> = Utc::now();
+
+        match self.expiration_stat.as_str() {
+            "10min" => {
+                let expiration_time = self.created_at + Duration::minutes(10);
+                now <= expiration_time
+            }
+            "1hour" => {
+                let expiration_time = self.created_at + Duration::hours(1);
+                now <= expiration_time
+            }
+            "1day" => {
+                let expiration_time = self.created_at + Duration::days(1);
+                now <= expiration_time
+            }
+            "1week" => {
+                let expiration_time = self.created_at + Duration::weeks(1);
+                now <= expiration_time
+            }
+            "eternal" => false,
+            _ => false,
+        }
+    }
+}
+
 pub async fn generate_db_connection() -> Result<Pool<Postgres>, Box<dyn Error>> {
     let database_url = read_env_value("DATABASE_URL")?;
     let pool = PgPool::connect(&database_url).await?;
 
     Ok(pool)
+}
+
+#[test]
+fn test_is_expired() {
+    let snippet = SnippetData {
+        id: 1,
+        url_hash: "examplehash".to_string(),
+        snippet: "example snippet".to_string(),
+        expiration_stat: "1week".to_string(),
+        created_at: Utc::now() - Duration::days(5),
+        updated_at: Utc::now(),
+    };
+
+    assert!(snippet.is_expired());
+
+    let snippet = SnippetData {
+        id: 1,
+        url_hash: "examplehash".to_string(),
+        snippet: "example snippet".to_string(),
+        expiration_stat: "1week".to_string(),
+        created_at: Utc::now() - Duration::days(8),
+        updated_at: Utc::now(),
+    };
+
+    assert!(!snippet.is_expired());
 }

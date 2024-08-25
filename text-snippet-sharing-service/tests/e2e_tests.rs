@@ -42,7 +42,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
-            "expiration_stat" : "1mon",
+            "expiration_stat" : "1week",
         });
 
         let response = client

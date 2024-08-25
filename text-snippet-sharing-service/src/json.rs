@@ -36,7 +36,7 @@ struct ValidationError(String);
 impl RegisterRequest {
     fn validate(&self) -> bool {
         match self.expiration_stat.as_str() {
-            "10min" | "1hour" | "1day" | "1mon" | "eternal" => true,
+            "10min" | "1hour" | "1day" | "1week" | "eternal" => true,
             _ => false,
         }
     }

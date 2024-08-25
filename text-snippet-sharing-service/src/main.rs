@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use json::RegisterRequest;
