@@ -1,5 +1,6 @@
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use hash::RequestHash;
 use json::RegisterRequest;
 
 mod db;
@@ -19,18 +20,19 @@ async fn index() -> impl Responder {
 //     HttpResponse::BadRequest().body("Hash parameter is missing")
 // }
 
-// #[get("/get/{hash}")]
-// async fn get_snippet(
-//     path: web::Path<String>,
-//     data: web::Data<HashMap<String, String>>,
-// ) -> impl Responder {
-//     let hash = path.into_inner();
+#[get("/get/{hash}")]
+async fn get_snippet(path: web::Path<String>) -> impl Responder {
+    let hash = path.into_inner();
+    let request_data = RequestHash { hash };
 
-//     match data.get(&hash) {
-//         Some(snippet) => HttpResponse::Ok().body(snippet.clone()),
-//         None => HttpResponse::NotFound().body("Snippet not found"),
-//     }
-// }
+    match request_data.search().await {
+        Ok(response) => HttpResponse::Ok().json(response),
+        Err(error_response) => {
+            eprintln!("Failed to insert snippet: {}", error_response.error);
+            HttpResponse::Ok().json(error_response)
+        }
+    }
+}
 
 #[post("/register")]
 async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
@@ -40,7 +42,7 @@ async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Resp
         Ok(response_json) => HttpResponse::Ok().json(response_json),
         Err(error_response) => {
             eprintln!("Failed to insert snippet: {}", error_response.error);
-            HttpResponse::InternalServerError().json(error_response)
+            HttpResponse::Ok().json(error_response)
         }
     }
 }
@@ -56,6 +58,7 @@ async fn run() -> std::io::Result<()> {
                     .allowed_headers(vec!["Content-Type"]),
             )
             .service(index)
+            .service(get_snippet)
             .service(register_snippet)
     })
     // todo: bindしているURLを最後に変更すること

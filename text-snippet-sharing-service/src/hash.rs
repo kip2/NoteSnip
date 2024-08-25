@@ -1,3 +1,4 @@
+use serde::Serialize;
 use sqids::Sqids;
 use std::error::Error;
 use uuid::Uuid;
@@ -9,10 +10,10 @@ use crate::{
 
 #[derive(Debug, PartialEq)]
 pub struct RequestHash {
-    hash: String,
+    pub hash: String,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize)]
 pub struct ResponseViewData {
     snippet: String,
     expiration_stat: String,
