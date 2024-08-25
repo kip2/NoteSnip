@@ -15,7 +15,7 @@ impl RequestHash {
         "SELECT * FROM snippets WHERE url_hash = $1".to_string()
     }
 
-    pub async fn search(&self) -> Result<i64, ErrorResponse> {
+    pub async fn search(&self) -> Result<ResponseViewData, ErrorResponse> {
         let pool = generate_db_connection().await.map_err(|e| {
             eprintln!("Database connection error: {:?}", e);
             ErrorResponse {
@@ -25,14 +25,32 @@ impl RequestHash {
 
         let url_hash = "XTWDuRIIqvq0bF7v5Z75sMRd".to_string();
         let query = self.generate_query();
-        let result = sqlx::query(&query).bind(url_hash).fetch_one(&pool).await;
+        let result = sqlx::query(&query)
+            .bind(url_hash)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
 
-        let ret: i64 = result.unwrap().try_get("id").unwrap();
+        let snippet = result.try_get("snippet").unwrap();
+        let expiration_stat = result.try_get("expiration_stat").unwrap();
 
-        Ok(ret)
+        let response_view_data = ResponseViewData {
+            snippet: snippet,
+            expiration_stat: expiration_stat,
+        };
+
+        Ok(response_view_data)
     }
 }
 
+#[derive(Debug, PartialEq)]
+pub struct ResponseViewData {
+    snippet: String,
+    expiration_stat: String,
+}
+
+/// DBからのデータ取得テスト用
+/// 環境によりデータが違うため、必ず動くわけではないことに注意する
 #[tokio::test]
 async fn test_search() {
     let request = RequestHash {
@@ -41,7 +59,13 @@ async fn test_search() {
 
     let result = request.search().await.unwrap();
 
-    let expected: i64 = 69;
+    let expected = ResponseViewData {
+        snippet: "Example Snippet".to_string(),
+        expiration_stat: "eternal".to_string(),
+    };
+
+    println!("result: {:?}", result);
+    println!("expected: {:?}", expected);
     assert_eq!(result, expected);
 }
 
