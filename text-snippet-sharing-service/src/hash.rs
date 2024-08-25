@@ -1,3 +1,4 @@
+use chrono::{DateTime, Utc};
 use sqids::Sqids;
 use sqlx::Row;
 use std::error::Error;
@@ -5,9 +6,25 @@ use uuid::Uuid;
 
 use crate::{db::generate_db_connection, json::ErrorResponse};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct RequestHash {
     hash: String,
+}
+
+#[derive(Debug, PartialEq)]
+pub struct ResponseViewData {
+    snippet: String,
+    expiration_stat: String,
+}
+
+#[derive(Debug, PartialEq, sqlx::FromRow)]
+pub struct SnippetData {
+    id: i64,
+    url_hash: String,
+    snippet: String,
+    expiration_stat: String,
+    created_at: DateTime<Utc>,
+    updated_at: DateTime<Utc>,
 }
 
 impl RequestHash {
@@ -15,6 +32,7 @@ impl RequestHash {
         "SELECT * FROM snippets WHERE url_hash = $1".to_string()
     }
 
+    // todo: 有効期限切れのデータの場合の処理を追加する
     pub async fn search(&self) -> Result<ResponseViewData, ErrorResponse> {
         let pool = generate_db_connection().await.map_err(|e| {
             eprintln!("Database connection error: {:?}", e);
@@ -23,30 +41,35 @@ impl RequestHash {
             }
         })?;
 
-        let url_hash = "XTWDuRIIqvq0bF7v5Z75sMRd".to_string();
         let query = self.generate_query();
-        let result = sqlx::query(&query)
-            .bind(url_hash)
-            .fetch_one(&pool)
-            .await
-            .unwrap();
 
-        let snippet = result.try_get("snippet").unwrap();
-        let expiration_stat = result.try_get("expiration_stat").unwrap();
+        let query_result = sqlx::query_as::<_, SnippetData>(&query)
+            .bind(&self.hash)
+            .fetch_optional(&pool)
+            .await
+            .map_err(|e| {
+                eprintln!("Database Query failed: {:?}", e);
+                ErrorResponse {
+                    error: "Internal server error".to_string(),
+                }
+            })?;
+
+        let snippet_data = match query_result {
+            Some(data) => data,
+            None => {
+                return Err(ErrorResponse {
+                    error: "No data found".to_string(),
+                });
+            }
+        };
 
         let response_view_data = ResponseViewData {
-            snippet: snippet,
-            expiration_stat: expiration_stat,
+            snippet: snippet_data.snippet,
+            expiration_stat: snippet_data.expiration_stat,
         };
 
         Ok(response_view_data)
     }
-}
-
-#[derive(Debug, PartialEq)]
-pub struct ResponseViewData {
-    snippet: String,
-    expiration_stat: String,
 }
 
 /// DBからのデータ取得テスト用
