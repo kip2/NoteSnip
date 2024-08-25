@@ -88,6 +88,24 @@ async fn test_search() {
     assert_eq!(result, expected);
 }
 
+#[tokio::test]
+async fn test_search_no_data() {
+    let request = RequestHash {
+        hash: "no data hash".to_string(),
+    };
+
+    let result = request.search().await;
+
+    let expected_error = "No data found";
+
+    match result {
+        Ok(_) => panic!("Expected an error but got Ok result"),
+        Err(e) => {
+            assert_eq!(e.error, expected_error);
+        }
+    }
+}
+
 /// DBからのデータ取得テスト用
 /// 環境によりデータが違うため、必ず動くわけではないことに注意する
 /// todo: テスト用の初期データを投入しておくことで、対応しようと覆う
