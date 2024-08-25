@@ -9,11 +9,6 @@ mod hash;
 mod json;
 mod url;
 
-#[get("/")]
-async fn index() -> impl Responder {
-    "Message fetched."
-}
-
 #[get("/get/{hash}")]
 async fn get_snippet(path: web::Path<String>) -> impl Responder {
     let hash = path.into_inner();
