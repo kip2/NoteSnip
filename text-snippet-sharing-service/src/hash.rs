@@ -1,10 +1,11 @@
-use chrono::{DateTime, Utc};
 use sqids::Sqids;
-use sqlx::Row;
 use std::error::Error;
 use uuid::Uuid;
 
-use crate::{db::generate_db_connection, json::ErrorResponse};
+use crate::{
+    db::{generate_db_connection, SnippetData},
+    json::ErrorResponse,
+};
 
 #[derive(Debug, PartialEq)]
 pub struct RequestHash {
@@ -15,16 +16,6 @@ pub struct RequestHash {
 pub struct ResponseViewData {
     snippet: String,
     expiration_stat: String,
-}
-
-#[derive(Debug, PartialEq, sqlx::FromRow)]
-pub struct SnippetData {
-    id: i64,
-    url_hash: String,
-    snippet: String,
-    expiration_stat: String,
-    created_at: DateTime<Utc>,
-    updated_at: DateTime<Utc>,
 }
 
 impl RequestHash {
