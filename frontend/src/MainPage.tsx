@@ -2,19 +2,19 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 const MainPage = () => {
-    const params = useParams<{ hash?: string}>()
-
     const [response, setResponse] = useState('');
-
+    // URLパラメータからハッシュ値を取得
+    const params = useParams<{ hash?: string}>()
     const hash = params.hash
 
     const handleClick = () => {
+        // todo: 画面ができたら、画面からデータを受け渡すこと
         const requestData = {
             snippet: "Example Snippet",
             expiration_stat: "eternal"
         }
 
-    fetch('http://127.0.0.1:8000/submit', {
+    fetch('http://127.0.0.1:8000/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

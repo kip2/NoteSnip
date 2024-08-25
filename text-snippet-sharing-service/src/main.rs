@@ -13,8 +13,8 @@ async fn index() -> impl Responder {
     "Message fetched."
 }
 
-#[post("/submit")]
-async fn submit_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
+#[post("/register")]
+async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Responder {
     let request_json = request_data.into_inner();
 
     match request_json.query().await {
@@ -37,7 +37,7 @@ async fn run() -> std::io::Result<()> {
                     .allowed_headers(vec!["Content-Type"]),
             )
             .service(index)
-            .service(submit_snippet)
+            .service(register_snippet)
     })
     // todo: bindしているURLを最後に変更すること
     .bind(("127.0.0.1", 8000))?

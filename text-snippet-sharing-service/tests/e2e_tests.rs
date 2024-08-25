@@ -9,8 +9,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_eternal_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_eternal_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
@@ -34,8 +34,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_1mon_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_1mon_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
@@ -58,8 +58,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_1day_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_1day_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
@@ -82,8 +82,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_1hour_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_1hour_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
@@ -107,8 +107,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_10min_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_10min_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
@@ -132,8 +132,8 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_submit_with_error_status() {
-        let url = "http://127.0.0.1:8080/submit";
+    async fn test_api_register_with_error_status() {
+        let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
 
