@@ -1,6 +1,7 @@
 import { Box, Button, MultiSelect, SelectItem, Text, useColorMode, Wrap } from '@yamada-ui/react';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Editor from './Editor';
 
 const MainPage = () => {
     const [response, setResponse] = useState('');
@@ -64,6 +65,12 @@ const MainPage = () => {
                 placeholder='有効期限を選択' items={items} />
             </Box>
             </Wrap>
+            <Box>
+                <Text>
+                    ほぅ...青ざめた血ねぇ...
+                </Text>
+                <Editor></Editor>
+            </Box>
         </>
     )
 }
