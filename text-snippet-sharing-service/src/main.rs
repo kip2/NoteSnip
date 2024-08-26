@@ -46,7 +46,6 @@ async fn run() -> std::io::Result<()> {
                     .allowed_methods(vec!["GET", "POST"])
                     .allowed_headers(vec!["Content-Type"]),
             )
-            .service(index)
             .service(get_snippet)
             .service(register_snippet)
     })
