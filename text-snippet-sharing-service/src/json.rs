@@ -35,7 +35,7 @@ impl Insertable for RegisterRequest {
 struct ValidationError(String);
 
 impl RegisterRequest {
-    fn validate(&self) -> bool {
+    fn validate_expiration_stat(&self) -> bool {
         match self.expiration_stat.as_str() {
             "10min" | "1hour" | "1day" | "1week" | "eternal" => true,
             _ => false,
@@ -63,7 +63,7 @@ impl RegisterRequest {
             }
         })?;
 
-        if !self.validate() {
+        if !self.validate_expiration_stat() {
             transaction.rollback().await.ok();
             return Err(ErrorResponse {
                 error: "Invalid expiration_stat value".to_string(),
@@ -109,6 +109,29 @@ impl RegisterRequest {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_validate_expiration_stat() {
+        let json = RegisterRequest {
+            snippet: "test snippet".to_string(),
+            snippet_language: "plain text".to_string(),
+            expiration_stat: "eternal".to_string(),
+        };
+
+        assert!(json.validate_expiration_stat());
+    }
+
+    #[test]
+    fn test_validate_expiration_stat_fails_with_invalid_value() {
+        let json = RegisterRequest {
+            snippet: "test snippet".to_string(),
+            snippet_language: "plain text".to_string(),
+            // invalid value
+            expiration_stat: "abcdefg".to_string(),
+        };
+
+        assert!(!json.validate_expiration_stat());
+    }
 
     #[test]
     fn test_generate_query() {
