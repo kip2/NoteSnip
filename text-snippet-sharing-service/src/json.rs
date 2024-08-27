@@ -1,7 +1,11 @@
+use std::{collections::HashSet, fs::File, io::BufReader};
+
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::{db::generate_db_connection, hash::generate_hash, url::generate_url};
+use crate::{
+    db::generate_db_connection, env::read_env_value, hash::generate_hash, url::generate_url,
+};
 
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
@@ -34,12 +38,61 @@ impl Insertable for RegisterRequest {
 #[error("Validation error: {0}")]
 struct ValidationError(String);
 
+#[derive(Debug, Deserialize, Clone)]
+struct ValidSnippetLanguages {
+    snippet_languages: HashSet<String>,
+}
+
+impl ValidSnippetLanguages {
+    fn new() -> Result<Self, ErrorResponse> {
+        let file_path = read_env_value("SNIPPET_LANGUAGES_PATH").map_err(|e| {
+            eprintln!("Snippet language validate file path is not set");
+            ErrorResponse {
+                error: "Internal serve error".to_string(),
+            }
+        })?;
+
+        let file = File::open(file_path).map_err(|e| {
+            eprintln!("Failed to open file: {}", e);
+            ErrorResponse {
+                error: "Internal serve error".to_string(),
+            }
+        })?;
+
+        let reader = BufReader::new(file);
+
+        let mut valid_snippet_languages: ValidSnippetLanguages = serde_json::from_reader(reader)
+            .map_err(|e| {
+                eprintln!("Failed to read snippet languages file: {}", e);
+                ErrorResponse {
+                    error: "Internal serve error".to_string(),
+                }
+            })?;
+
+        valid_snippet_languages.snippet_languages = valid_snippet_languages
+            .snippet_languages
+            .into_iter()
+            .map(|lang| lang.to_lowercase())
+            .collect();
+
+        Ok(valid_snippet_languages.clone())
+    }
+
+    fn validate_language(&self, language: &str) -> bool {
+        self.snippet_languages.contains(&language.to_lowercase())
+    }
+}
+
 impl RegisterRequest {
     fn validate_expiration_stat(&self) -> bool {
         match self.expiration_stat.as_str() {
             "10min" | "1hour" | "1day" | "1week" | "eternal" => true,
             _ => false,
         }
+    }
+
+    fn validate_snippet_language(&self) -> bool {
+        true
     }
 
     pub async fn query(&self) -> Result<RegisterResponse, ErrorResponse> {
@@ -67,6 +120,13 @@ impl RegisterRequest {
             transaction.rollback().await.ok();
             return Err(ErrorResponse {
                 error: "Invalid expiration_stat value".to_string(),
+            });
+        }
+
+        if !self.validate_snippet_language() {
+            transaction.rollback().await.ok();
+            return Err(ErrorResponse {
+                error: "Invalid snippet_language value".to_string(),
             });
         }
 
@@ -109,6 +169,28 @@ impl RegisterRequest {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_validate_snippet_language() {
+        let json = RegisterRequest {
+            snippet: "test snippet".to_string(),
+            snippet_language: "Rust".to_string(),
+            expiration_stat: "eternal".to_string(),
+        };
+
+        assert!(json.validate_snippet_language());
+    }
+
+    #[test]
+    fn test_validate_snippet_language_fails_with_invalid_value() {
+        let json = RegisterRequest {
+            snippet: "test snippet".to_string(),
+            snippet_language: "abcdefg".to_string(),
+            expiration_stat: "eternal".to_string(),
+        };
+
+        assert!(!json.validate_snippet_language());
+    }
 
     #[test]
     fn test_validate_expiration_stat() {
@@ -164,5 +246,39 @@ mod tests {
         };
 
         json.query().await.unwrap();
+    }
+
+    #[test]
+    fn test_new_valid_snippet_language() {
+        let valid_languages: HashSet<String> = vec![
+            "c++".to_string(),
+            "javascript".to_string(),
+            "rust".to_string(),
+            "typescript".to_string(),
+        ]
+        .into_iter()
+        .collect();
+
+        let valid_snippet_languages = ValidSnippetLanguages {
+            snippet_languages: valid_languages,
+        };
+
+        assert!(valid_snippet_languages.validate_language("C++"));
+        assert!(valid_snippet_languages.validate_language("JavaScript"));
+        assert!(valid_snippet_languages.validate_language("Rust"));
+        assert!(valid_snippet_languages.validate_language("TypeScript"));
+    }
+
+    #[test]
+    fn test_validate_language_empty() {
+        let valid_languages: HashSet<String> = HashSet::new();
+
+        let valid_snippet_languages = ValidSnippetLanguages {
+            snippet_languages: valid_languages,
+        };
+
+        assert!(!valid_snippet_languages.validate_language("Rust"));
+        assert!(!valid_snippet_languages.validate_language("Python"));
+        assert!(!valid_snippet_languages.validate_language("JavaScript"));
     }
 }
