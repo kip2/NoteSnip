@@ -24,7 +24,6 @@ impl RequestHash {
         "SELECT * FROM snippets WHERE url_hash = $1".to_string()
     }
 
-    // todo: 有効期限切れのデータの場合の処理を追加する
     pub async fn search(&self) -> Result<ResponseViewData, ErrorResponse> {
         let pool = generate_db_connection().await.map_err(|e| {
             eprintln!("Database connection error: {:?}", e);
@@ -70,9 +69,19 @@ impl RequestHash {
     }
 }
 
+pub fn generate_hash() -> Result<String, Box<dyn Error>> {
+    let uuid = Uuid::new_v4();
+    let uuid_bytes = uuid.as_bytes();
+    let sqids = Sqids::default();
+
+    let part1 = u64::from_be_bytes(uuid_bytes[0..8].try_into().unwrap());
+    let part2 = u64::from_be_bytes(uuid_bytes[8..16].try_into().unwrap());
+
+    Ok(sqids.encode(&[part1, part2]).unwrap())
+}
+
 /// DBからのデータ取得テスト用
-/// 環境によりデータが違うため、必ず動くわけではないことに注意する
-/// todo: テスト用の初期データを投入しておくことで、対応しようと覆う
+/// テストデータをDBにシードしてから行うこと
 #[tokio::test]
 async fn test_search() {
     let request = RequestHash {
@@ -108,8 +117,7 @@ async fn test_search_no_data() {
 }
 
 /// DBからのデータ取得テスト用
-/// 環境によりデータが違うため、必ず動くわけではないことに注意する
-/// todo: テスト用の初期データを投入しておくことで、対応しようと覆う
+/// テストデータをDBにシードしてから行うこと
 #[tokio::test]
 async fn test_search_with_expired_data() {
     let request = RequestHash {
@@ -126,15 +134,4 @@ async fn test_search_with_expired_data() {
             assert_eq!(e.error, expected_error);
         }
     }
-}
-
-pub fn generate_hash() -> Result<String, Box<dyn Error>> {
-    let uuid = Uuid::new_v4();
-    let uuid_bytes = uuid.as_bytes();
-    let sqids = Sqids::default();
-
-    let part1 = u64::from_be_bytes(uuid_bytes[0..8].try_into().unwrap());
-    let part2 = u64::from_be_bytes(uuid_bytes[8..16].try_into().unwrap());
-
-    Ok(sqids.encode(&[part1, part2]).unwrap())
 }
