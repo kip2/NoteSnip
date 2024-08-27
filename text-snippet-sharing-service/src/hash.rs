@@ -5,7 +5,7 @@ use uuid::Uuid;
 
 use crate::{
     db::{generate_db_connection, SnippetData},
-    json::ErrorResponse,
+    register::ErrorResponse,
 };
 
 #[derive(Debug, PartialEq)]

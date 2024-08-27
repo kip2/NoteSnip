@@ -1,12 +1,12 @@
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use hash::RequestHash;
-use json::RegisterRequest;
+use register::RegisterRequest;
 
 mod db;
 mod env;
 mod hash;
-mod json;
+mod register;
 mod url;
 
 #[get("/get/{hash}")]
