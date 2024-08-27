@@ -1,0 +1,1 @@
+ALTER TABLE snippets ADD COLUMN snippet_language VARCHAR NOT NULL DEFAULT 'plain text';
