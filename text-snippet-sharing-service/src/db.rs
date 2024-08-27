@@ -9,6 +9,7 @@ pub struct SnippetData {
     pub id: i64,
     pub url_hash: String,
     pub snippet: String,
+    pub snippet_language: String,
     pub expiration_stat: String,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
@@ -48,27 +49,33 @@ pub async fn generate_db_connection() -> Result<Pool<Postgres>, Box<dyn Error>> 
     Ok(pool)
 }
 
-#[test]
-fn test_is_expired() {
-    let snippet = SnippetData {
-        id: 1,
-        url_hash: "examplehash".to_string(),
-        snippet: "example snippet".to_string(),
-        expiration_stat: "1week".to_string(),
-        created_at: Utc::now() - Duration::days(5),
-        updated_at: Utc::now(),
-    };
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_is_expired() {
+        let snippet = SnippetData {
+            id: 1,
+            url_hash: "examplehash".to_string(),
+            snippet: "example snippet".to_string(),
+            snippet_language: "plain text".to_string(),
+            expiration_stat: "1week".to_string(),
+            created_at: Utc::now() - Duration::days(5),
+            updated_at: Utc::now(),
+        };
 
-    assert!(snippet.is_not_expired());
+        assert!(snippet.is_not_expired());
 
-    let snippet = SnippetData {
-        id: 1,
-        url_hash: "examplehash".to_string(),
-        snippet: "example snippet".to_string(),
-        expiration_stat: "1week".to_string(),
-        created_at: Utc::now() - Duration::days(8),
-        updated_at: Utc::now(),
-    };
+        let snippet = SnippetData {
+            id: 1,
+            url_hash: "examplehash".to_string(),
+            snippet: "example snippet".to_string(),
+            snippet_language: "plain text".to_string(),
+            expiration_stat: "1week".to_string(),
+            created_at: Utc::now() - Duration::days(8),
+            updated_at: Utc::now(),
+        };
 
-    assert!(!snippet.is_not_expired());
+        assert!(!snippet.is_not_expired());
+    }
 }

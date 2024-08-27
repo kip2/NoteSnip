@@ -16,6 +16,7 @@ pub struct RequestHash {
 #[derive(Debug, PartialEq, Serialize)]
 pub struct ResponseViewData {
     snippet: String,
+    snippet_language: String,
     expiration_stat: String,
 }
 
@@ -62,6 +63,7 @@ impl RequestHash {
 
         let response_view_data = ResponseViewData {
             snippet: snippet_data.snippet,
+            snippet_language: snippet_data.snippet_language,
             expiration_stat: snippet_data.expiration_stat,
         };
 
@@ -80,58 +82,63 @@ pub fn generate_hash() -> Result<String, Box<dyn Error>> {
     Ok(sqids.encode(&[part1, part2]).unwrap())
 }
 
-/// DBからのデータ取得テスト用
-/// テストデータをDBにシードしてから行うこと
-#[tokio::test]
-async fn test_search() {
-    let request = RequestHash {
-        hash: "XTWDuRIIqvq0bF7v5Z75sMRd".to_string(),
-    };
+#[cfg(test)]
+mod tests {
+    use super::*;
+    /// DBからのデータ取得テスト用
+    /// テストデータをDBにシードしてから行うこと
+    #[tokio::test]
+    async fn test_search() {
+        let request = RequestHash {
+            hash: "XTWDuRIIqvq0bF7v5Z75sMRd".to_string(),
+        };
 
-    let result = request.search().await.unwrap();
+        let result = request.search().await.unwrap();
 
-    let expected = ResponseViewData {
-        snippet: "Example Snippet".to_string(),
-        expiration_stat: "eternal".to_string(),
-    };
+        let expected = ResponseViewData {
+            snippet: "Example Snippet".to_string(),
+            snippet_language: "plain text".to_string(),
+            expiration_stat: "eternal".to_string(),
+        };
 
-    assert_eq!(result, expected);
-}
+        assert_eq!(result, expected);
+    }
 
-#[tokio::test]
-async fn test_search_no_data() {
-    let request = RequestHash {
-        hash: "no data hash".to_string(),
-    };
+    #[tokio::test]
+    async fn test_search_no_data() {
+        let request = RequestHash {
+            hash: "no data hash".to_string(),
+        };
 
-    let result = request.search().await;
+        let result = request.search().await;
 
-    let expected_error = "No data found";
+        let expected_error = "No data found";
 
-    match result {
-        Ok(_) => panic!("Expected an error but got Ok result"),
-        Err(e) => {
-            assert_eq!(e.error, expected_error);
+        match result {
+            Ok(_) => panic!("Expected an error but got Ok result"),
+            Err(e) => {
+                assert_eq!(e.error, expected_error);
+            }
         }
     }
-}
 
-/// DBからのデータ取得テスト用
-/// テストデータをDBにシードしてから行うこと
-#[tokio::test]
-async fn test_search_with_expired_data() {
-    let request = RequestHash {
-        hash: "KRi1XopV7HZQ5PAkaofbCma4".to_string(),
-    };
+    /// DBからのデータ取得テスト用
+    /// テストデータをDBにシードしてから行うこと
+    #[tokio::test]
+    async fn test_search_with_expired_data() {
+        let request = RequestHash {
+            hash: "KRi1XopV7HZQ5PAkaofbCma4".to_string(),
+        };
 
-    let result = request.search().await;
+        let result = request.search().await;
 
-    let expected_error = "Data is expired";
+        let expected_error = "Data is expired";
 
-    match result {
-        Ok(_) => panic!("Expected an error but got Ok result"),
-        Err(e) => {
-            assert_eq!(e.error, expected_error);
+        match result {
+            Ok(_) => panic!("Expected an error but got Ok result"),
+            Err(e) => {
+                assert_eq!(e.error, expected_error);
+            }
         }
     }
 }

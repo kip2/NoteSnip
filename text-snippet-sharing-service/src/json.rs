@@ -6,6 +6,7 @@ use crate::{db::generate_db_connection, hash::generate_hash, url::generate_url};
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
     pub snippet: String,
+    pub snippet_language: String,
     pub expiration_stat: String,
 }
 
@@ -25,7 +26,7 @@ trait Insertable {
 
 impl Insertable for RegisterRequest {
     fn generate_query(&self) -> String {
-        "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)".to_string()
+        "INSERT INTO snippets (url_hash, snippet, snippet_language, expiration_stat) VALUES ($1, $2, $3, $4)".to_string()
     }
 }
 
@@ -73,6 +74,7 @@ impl RegisterRequest {
         if let Err(e) = sqlx::query(&query)
             .bind(&url_hash)
             .bind(&self.snippet)
+            .bind(&self.snippet_language)
             .bind(&self.expiration_stat)
             .execute(&pool)
             .await
@@ -109,14 +111,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_query() {
+    fn test_generate_query() {
         let json = RegisterRequest {
             snippet: "test snippet".to_string(),
+            snippet_language: "plain text".to_string(),
             expiration_stat: "eternal".to_string(),
         };
 
         let expected =
-            "INSERT INTO snippets (url_hash, snippet, expiration_stat) VALUES ($1, $2, $3)"
+            "INSERT INTO snippets (url_hash, snippet, snippet_language, expiration_stat) VALUES ($1, $2, $3, $4)"
                 .to_string();
 
         let result = json.generate_query();
@@ -133,6 +136,7 @@ mod tests {
     async fn test_execute_insert() {
         let json = RegisterRequest {
             snippet: "test snippet".to_string(),
+            snippet_language: "plain text".to_string(),
             expiration_stat: "eternal".to_string(),
         };
 
