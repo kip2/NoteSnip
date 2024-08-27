@@ -17,6 +17,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat" : "eternal",
         });
 
@@ -34,7 +35,7 @@ mod tests {
     /// 1.Dockerによる検証環境の立ち上げ
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
-    async fn test_api_register_with_1mon_status() {
+    async fn test_api_register_with_1week_status() {
         let url = "http://127.0.0.1:8000/register";
 
         let client = Client::new();
@@ -42,6 +43,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat" : "1week",
         });
 
@@ -66,6 +68,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat" : "1day",
         });
 
@@ -90,6 +93,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat" : "1hour",
         });
 
@@ -115,6 +119,7 @@ mod tests {
         // eternal
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat" : "10min",
         });
 
@@ -139,6 +144,7 @@ mod tests {
 
         let request_body = json!({
             "snippet": "test snippet",
+            "snippet_language": "Rust",
             // 無効なステータスをセット
             "expiration_stat" : "abcde",
         });
@@ -176,6 +182,7 @@ mod tests {
         let response_body: serde_json::Value = response.json().await.expect("Failed to parse JSON");
         let expected_json = json!({
             "snippet": "Example Snippet",
+            "snippet_language": "plain text",
             "expiration_stat": "eternal"
         });
 
