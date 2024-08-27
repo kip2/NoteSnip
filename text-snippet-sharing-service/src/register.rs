@@ -46,14 +46,14 @@ impl ValidSnippetLanguages {
         let file_path = read_env_value("SNIPPET_LANGUAGES_PATH").map_err(|e| {
             eprintln!("Snippet language validate file path is not set: {}", e);
             ErrorResponse {
-                error: "Internal serve error".to_string(),
+                error: "Internal server error".to_string(),
             }
         })?;
 
         let file = File::open(file_path).map_err(|e| {
             eprintln!("Failed to open file: {}", e);
             ErrorResponse {
-                error: "Internal serve error".to_string(),
+                error: "Internal server error".to_string(),
             }
         })?;
 
@@ -63,7 +63,7 @@ impl ValidSnippetLanguages {
             .map_err(|e| {
                 eprintln!("Failed to read snippet languages file: {}", e);
                 ErrorResponse {
-                    error: "Internal serve error".to_string(),
+                    error: "Internal server error".to_string(),
                 }
             })?;
 
