@@ -3,9 +3,7 @@ use std::{collections::HashSet, fs::File, io::BufReader};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::{
-    db::generate_db_connection, env::read_env_value, hash::generate_hash, url::generate_url,
-};
+use crate::{db::generate_db_connection, env::read_env_value, hash::generate_hash};
 
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
@@ -46,7 +44,7 @@ struct ValidSnippetLanguages {
 impl ValidSnippetLanguages {
     fn new() -> Result<Self, ErrorResponse> {
         let file_path = read_env_value("SNIPPET_LANGUAGES_PATH").map_err(|e| {
-            eprintln!("Snippet language validate file path is not set");
+            eprintln!("Snippet language validate file path is not set: {}", e);
             ErrorResponse {
                 error: "Internal serve error".to_string(),
             }
@@ -167,9 +165,32 @@ impl RegisterRequest {
     }
 }
 
+fn generate_url(url_hash: &str) -> Result<String, ErrorResponse> {
+    let url_prefix = read_env_value("URL_PREFIX").map_err(|e| {
+        eprintln!("Read URL_PREFIX in .env file error: {:?}", e);
+        ErrorResponse {
+            error: "Internal server error".to_string(),
+        }
+    })?;
+    let url = format!("{}{}", url_prefix, url_hash);
+    Ok(url)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_generate_hash() {
+        let hash = "123456778900";
+
+        let url_prefix = read_env_value("URL_PREFIX").unwrap();
+        let expected = format!("{}{}", url_prefix, hash);
+
+        let result = generate_url(hash).unwrap();
+
+        assert_eq!(result, expected);
+    }
 
     #[test]
     fn test_validate_snippet_language() {
@@ -242,7 +263,7 @@ mod tests {
     async fn test_execute_insert() {
         let json = RegisterRequest {
             snippet: "test snippet".to_string(),
-            snippet_language: "plain text".to_string(),
+            snippet_language: "rust".to_string(),
             expiration_stat: "eternal".to_string(),
         };
 

@@ -7,7 +7,6 @@ mod db;
 mod env;
 mod hash;
 mod register;
-mod url;
 
 #[get("/get/{hash}")]
 async fn get_snippet(path: web::Path<String>) -> impl Responder {
