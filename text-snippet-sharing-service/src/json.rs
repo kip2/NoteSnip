@@ -179,7 +179,7 @@ mod tests {
             expiration_stat: "eternal".to_string(),
         };
 
-        assert!(json.validate_snippet_language());
+        assert!(json.validate_snippet_language().unwrap());
     }
 
     #[test]
@@ -190,7 +190,7 @@ mod tests {
             expiration_stat: "eternal".to_string(),
         };
 
-        assert!(!json.validate_snippet_language());
+        assert!(!json.validate_snippet_language().unwrap());
     }
 
     #[test]
