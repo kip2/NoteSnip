@@ -78,7 +78,7 @@ impl ValidSnippetLanguages {
         Ok(valid_snippet_languages.clone())
     }
 
-    fn validate_language(&self, language: &str) -> bool {
+    pub fn validate_language(&self, language: &str) -> bool {
         self.snippet_languages.contains(&language.to_lowercase())
     }
 }
@@ -91,8 +91,9 @@ impl RegisterRequest {
         }
     }
 
-    fn validate_snippet_language(&self) -> bool {
-        true
+    fn validate_snippet_language(&self) -> Result<bool, ErrorResponse> {
+        let valid_snippet_languages = ValidSnippetLanguages::new()?;
+        Ok(valid_snippet_languages.validate_language(&self.snippet_language))
     }
 
     pub async fn query(&self) -> Result<RegisterResponse, ErrorResponse> {
@@ -123,7 +124,7 @@ impl RegisterRequest {
             });
         }
 
-        if !self.validate_snippet_language() {
+        if !self.validate_snippet_language()? {
             transaction.rollback().await.ok();
             return Err(ErrorResponse {
                 error: "Invalid snippet_language value".to_string(),
