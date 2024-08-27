@@ -1,0 +1,29 @@
+{
+  "table_name": "snippets",
+  "table_columns": [
+    {
+      "data_type": "string",
+      "column_name": "url_hash"
+    },
+    {
+      "data_type": "string",
+      "column_name": "snippet"
+    },
+    {
+      "data_type": "string",
+      "column_name": "expiration_stat"
+    }
+  ],
+  "table_rows": [
+    [
+      "KRi1XopV7HZQ5PAkaofbCma4",
+      "Example Snippet",
+      "10min"
+    ],
+    [
+      "XTWDuRIIqvq0bF7v5Z75sMRd",
+      "Example Snippet",
+      "eternal"
+    ]
+  ]
+}
