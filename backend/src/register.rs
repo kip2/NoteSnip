@@ -3,7 +3,10 @@ use std::{collections::HashSet, fs::File, io::BufReader};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::{db::generate_db_connection, env::read_env_value, hash::generate_hash};
+use crate::{
+    db::generate_db_connection, env::read_env_value, error::MapToInternalServerError,
+    hash::generate_hash,
+};
 
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
@@ -43,29 +46,15 @@ struct ValidSnippetLanguages {
 
 impl ValidSnippetLanguages {
     fn new() -> Result<Self, ErrorResponse> {
-        let file_path = read_env_value("SNIPPET_LANGUAGES_PATH").map_err(|e| {
-            eprintln!("Snippet language validate file path is not set: {}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let file_path = read_env_value("SNIPPET_LANGUAGES_PATH")
+            .map_to_internal_server_error("Snippet language validate file path is not set")?;
 
-        let file = File::open(file_path).map_err(|e| {
-            eprintln!("Failed to open file: {}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let file = File::open(file_path).map_to_internal_server_error("Failed to open file")?;
 
         let reader = BufReader::new(file);
 
         let mut valid_snippet_languages: ValidSnippetLanguages = serde_json::from_reader(reader)
-            .map_err(|e| {
-                eprintln!("Failed to read snippet languages file: {}", e);
-                ErrorResponse {
-                    error: "Internal server error".to_string(),
-                }
-            })?;
+            .map_to_internal_server_error("Failed to read snippet languages file")?;
 
         valid_snippet_languages.snippet_languages = valid_snippet_languages
             .snippet_languages
@@ -95,25 +84,16 @@ impl RegisterRequest {
     }
 
     pub async fn query(&self) -> Result<RegisterResponse, ErrorResponse> {
-        let pool = generate_db_connection().await.map_err(|e| {
-            eprintln!("Database connection error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let pool = generate_db_connection()
+            .await
+            .map_to_internal_server_error("Database connection error")?;
 
-        let transaction = pool.begin().await.map_err(|e| {
-            eprintln!("Transaction start error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
-        let url_hash = generate_hash().map_err(|e| {
-            eprintln!("Hash generation error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let transaction = pool
+            .begin()
+            .await
+            .map_to_internal_server_error("Transaction start error")?;
+
+        let url_hash = generate_hash().map_to_internal_server_error("Hash generation error")?;
 
         if !self.validate_expiration_stat() {
             transaction.rollback().await.ok();
@@ -145,20 +125,14 @@ impl RegisterRequest {
             });
         }
 
-        transaction.commit().await.map_err(|e| {
-            eprintln!("Transaction commit error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        transaction
+            .commit()
+            .await
+            .map_to_internal_server_error("Transaction comit error")?;
 
         // レスポンス用のJSONを作成する処理
-        let url = generate_url(&url_hash).map_err(|e| {
-            eprintln!("URL generation error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let url = generate_url(&url_hash).map_to_internal_server_error("URL generation error")?;
+
         let response_json = RegisterResponse { url: url };
 
         Ok(response_json)
@@ -166,12 +140,8 @@ impl RegisterRequest {
 }
 
 fn generate_url(url_hash: &str) -> Result<String, ErrorResponse> {
-    let url_prefix = read_env_value("URL_PREFIX").map_err(|e| {
-        eprintln!("Read URL_PREFIX in .env file error: {:?}", e);
-        ErrorResponse {
-            error: "Internal server error".to_string(),
-        }
-    })?;
+    let url_prefix = read_env_value("URL_PREFIX")
+        .map_to_internal_server_error("Reading URL_PREFIX from .env file error")?;
     let url = format!("{}{}", url_prefix, url_hash);
     Ok(url)
 }

@@ -5,6 +5,7 @@ use uuid::Uuid;
 
 use crate::{
     db::{generate_db_connection, SnippetData},
+    error::MapToInternalServerError,
     register::ErrorResponse,
 };
 
@@ -26,12 +27,9 @@ impl RequestHash {
     }
 
     pub async fn search(&self) -> Result<ResponseViewData, ErrorResponse> {
-        let pool = generate_db_connection().await.map_err(|e| {
-            eprintln!("Database connection error: {:?}", e);
-            ErrorResponse {
-                error: "Internal server error".to_string(),
-            }
-        })?;
+        let pool = generate_db_connection()
+            .await
+            .map_to_internal_server_error("Database connection error")?;
 
         let query = self.generate_query();
 
@@ -39,12 +37,7 @@ impl RequestHash {
             .bind(&self.hash)
             .fetch_optional(&pool)
             .await
-            .map_err(|e| {
-                eprintln!("Database Query failed: {:?}", e);
-                ErrorResponse {
-                    error: "Internal server error".to_string(),
-                }
-            })?;
+            .map_to_internal_server_error("Database query failed")?;
 
         let snippet_data = match query_result {
             Some(data) => data,
