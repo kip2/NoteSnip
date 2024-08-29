@@ -2,13 +2,15 @@ import { javascript } from "@codemirror/lang-javascript";
 import { rust } from '@codemirror/lang-rust';
 import { cpp } from '@codemirror/lang-cpp';
 import { html } from "@codemirror/lang-html";
+import { java } from "@codemirror/lang-java";
 
 type LanguageOption = 
     'javascript' |
     'rust' |
     'jsx' |
     'cpp' |
-    'html'
+    'html' |
+    'java'
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -18,6 +20,7 @@ export const items: NativeSelectItem[] = [
     { label: "rust", value: "rust"},
     { label: "c++", value: "cpp"},
     { label: "html", value: "html"},
+    { label: "java", value: "java"},
 ]
 
 const languages = {
@@ -26,6 +29,7 @@ const languages = {
     rust: rust(),
     cpp: cpp(),
     html: html(),
+    java: java(),
 }
 
 
