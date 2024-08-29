@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { githubDark } from "@uiw/codemirror-themes-all";
 import { Container, NativeSelect} from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
-import { items } from "./Languages/NativeItems";
+import { items } from "./Languages/Languages";
 import { defaultSnippet } from "./Languages/DefaultSnippet";
 
 const Editor = () => {
@@ -17,8 +17,6 @@ const Editor = () => {
     const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setLanguage(event.target.value)
     }
-
-
 
     return (
         <>
