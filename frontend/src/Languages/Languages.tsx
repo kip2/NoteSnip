@@ -11,6 +11,7 @@ import { sql } from "@codemirror/lang-sql";
 import { xml } from "@codemirror/lang-xml";
 import { less } from "@codemirror/lang-less"
 import { sass } from "@codemirror/lang-sass"
+import { clojure } from "@nextjournal/lang-clojure"
 
 type LanguageOption = 
     "javascript" |
@@ -26,7 +27,8 @@ type LanguageOption =
     "sql" |
     "xml" |
     "less" |
-    "sass"
+    "sass" |
+    "clojure"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -45,6 +47,7 @@ export const items: NativeSelectItem[] = [
     { label: "xml", value: "xml"},
     { label: "less", value: "less"},
     { label: "sass", value: "sass"},
+    { label: "clojure", value: "clojure"},
 ]
 
 const languages = {
@@ -62,6 +65,7 @@ const languages = {
     xml: xml(),
     less: less(),
     sass: sass(),
+    clojure: clojure(),
 }
 
 
