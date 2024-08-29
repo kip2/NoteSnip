@@ -6,17 +6,19 @@ import { java } from "@codemirror/lang-java";
 import { json } from "@codemirror/lang-json";
 import { markdown } from "@codemirror/lang-markdown";
 import { php } from "@codemirror/lang-php";
+import { python } from "@codemirror/lang-python";
 
 type LanguageOption = 
-    'javascript' |
-    'rust' |
-    'jsx' |
-    'cpp' |
-    'html' |
-    'java' |
-    'json' |
-    'markdown' | 
-    'php'
+    "javascript" |
+    "rust" |
+    "jsx" |
+    "cpp" |
+    "html" |
+    "java" |
+    "json" |
+    "markdown" | 
+    "php" |
+    "python"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -30,6 +32,7 @@ export const items: NativeSelectItem[] = [
     { label: "json", value: "json"},
     { label: "markdown", value: "markdown"},
     { label: "php", value: "php"},
+    { label: "python", value: "python"},
 ]
 
 const languages = {
@@ -42,6 +45,7 @@ const languages = {
     json: json(),
     markdown: markdown(),
     php: php(),
+    python: python(),
 }
 
 
