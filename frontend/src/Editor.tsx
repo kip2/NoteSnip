@@ -1,37 +1,23 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
-import { javascript } from '@codemirror/lang-javascript';
-import { rust } from '@codemirror/lang-rust';
 import { githubDark } from "@uiw/codemirror-themes-all";
-import { Container, NativeSelect } from "@yamada-ui/react";
+import { Container, NativeSelect} from "@yamada-ui/react";
+import getLanguageExtension from "./Languages/Languages";
+import { items } from "./Languages/NativeItems";
+import { defaultSnippet } from "./Languages/DefaultSnippet";
 
 const Editor = () => {
-    const [code, setCode] = useState('console.log("Hello, world")')
-    const onCodeChange = useCallback((val, viewUpdate) => {
+    const [code, setCode] = useState(defaultSnippet)
+    const onCodeChange = useCallback((val: string) => {
         console.log('val', val)
         setCode(val)
     }, [])
 
     const [language, setLanguage] = useState('rust')
-    const handleLanguageChange = (event) => {
+    const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setLanguage(event.target.value)
     }
 
-    const getLanguageExtension = () => {
-        switch(language) {
-            case 'javascript':
-                return javascript({ jsx: true})
-            case 'rust':
-                return rust()
-            default:
-                return rust()
-        }
-    }
-
-    const items: NativeSelectItem[] = [
-        { label: "javascript", value: "javascript"},
-        { label: "rust", value: "rust"},
-    ]
 
 
     return (
@@ -39,13 +25,16 @@ const Editor = () => {
             <CodeMirror
                 value={code}
                 height="700px"
-                // extensions={[javascript({ jsx: true })]}
-                extensions={[getLanguageExtension()]}
+                extensions={[getLanguageExtension(language)]}
                 theme={githubDark}
                 onChange={onCodeChange}
             />
             <Container>
-                <NativeSelect onChange={handleLanguageChange} items={items}>
+                <NativeSelect 
+                    placeholder="言語を選択してください"
+                    onChange={handleLanguageChange} 
+                    items={items}
+                >
                 </NativeSelect>
             </Container>
         </>
