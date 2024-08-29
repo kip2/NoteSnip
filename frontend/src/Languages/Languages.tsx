@@ -12,6 +12,7 @@ import { xml } from "@codemirror/lang-xml";
 import { less } from "@codemirror/lang-less"
 import { sass } from "@codemirror/lang-sass"
 import { clojure } from "@nextjournal/lang-clojure"
+import { csharp } from "@replit/codemirror-lang-csharp"
 
 type LanguageOption = 
     "javascript" |
@@ -28,7 +29,8 @@ type LanguageOption =
     "xml" |
     "less" |
     "sass" |
-    "clojure"
+    "clojure" |
+    "csharp"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -48,6 +50,7 @@ export const items: NativeSelectItem[] = [
     { label: "less", value: "less"},
     { label: "sass", value: "sass"},
     { label: "clojure", value: "clojure"},
+    { label: "C#", value: "csharp"},
 ]
 
 const languages = {
@@ -66,6 +69,7 @@ const languages = {
     less: less(),
     sass: sass(),
     clojure: clojure(),
+    csharp: csharp(),
 }
 
 
