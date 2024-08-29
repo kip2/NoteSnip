@@ -4,6 +4,7 @@ import { cpp } from '@codemirror/lang-cpp';
 import { html } from "@codemirror/lang-html";
 import { java } from "@codemirror/lang-java";
 import { json } from "@codemirror/lang-json";
+import { markdown } from "@codemirror/lang-markdown";
 
 type LanguageOption = 
     'javascript' |
@@ -12,7 +13,8 @@ type LanguageOption =
     'cpp' |
     'html' |
     'java' |
-    'json'
+    'json' |
+    'markdown'
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -24,6 +26,7 @@ export const items: NativeSelectItem[] = [
     { label: "html", value: "html"},
     { label: "java", value: "java"},
     { label: "json", value: "json"},
+    { label: "markdown", value: "markdown"},
 ]
 
 const languages = {
@@ -34,6 +37,7 @@ const languages = {
     html: html(),
     java: java(),
     json: json(),
+    markdown: markdown(),
 }
 
 
