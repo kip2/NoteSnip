@@ -28,6 +28,12 @@ const Editor = () => {
         }
     }
 
+    const items: NativeSelectItem[] = [
+        { label: "javascript", value: "javascript"},
+        { label: "rust", value: "rust"},
+    ]
+
+
     return (
         <>
             <CodeMirror
@@ -39,9 +45,7 @@ const Editor = () => {
                 onChange={onCodeChange}
             />
             <Container>
-                <NativeSelect onChange={handleLanguageChange} value={language}>
-                    <option value="javascript">Javascript</option>
-                    <option value="rust">Rust</option>
+                <NativeSelect onChange={handleLanguageChange} items={items}>
                 </NativeSelect>
             </Container>
         </>
