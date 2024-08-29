@@ -9,6 +9,7 @@ import { php } from "@codemirror/lang-php";
 import { python } from "@codemirror/lang-python";
 import { sql } from "@codemirror/lang-sql";
 import { xml } from "@codemirror/lang-xml";
+import { less } from "@codemirror/lang-less"
 
 type LanguageOption = 
     "javascript" |
@@ -22,7 +23,8 @@ type LanguageOption =
     "php" |
     "python" |
     "sql" |
-    "xml"
+    "xml" |
+    "less"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -39,6 +41,7 @@ export const items: NativeSelectItem[] = [
     { label: "python", value: "python"},
     { label: "sql", value: "sql"},
     { label: "xml", value: "xml"},
+    { label: "less", value: "less"},
 ]
 
 const languages = {
@@ -54,6 +57,7 @@ const languages = {
     python: python(),
     sql: sql(),
     xml: xml(),
+    less: less(),
 }
 
 
