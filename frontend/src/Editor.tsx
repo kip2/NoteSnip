@@ -4,7 +4,7 @@ import { githubDark } from "@uiw/codemirror-themes-all";
 import { Container, NativeSelect} from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
-import { defaultSnippet } from "./Languages/DefaultSnippet";
+import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
 
 const Editor = () => {
     const [code, setCode] = useState(defaultSnippet)
@@ -13,7 +13,7 @@ const Editor = () => {
         setCode(val)
     }, [])
 
-    const [language, setLanguage] = useState('rust')
+    const [language, setLanguage] = useState(defaultLanguage)
     const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setLanguage(event.target.value)
     }

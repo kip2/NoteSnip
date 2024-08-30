@@ -1,4 +1,6 @@
 
+export const defaultLanguage = "rust"
+
 
 export const defaultSnippet = `#[derive(Debug, Error)]
 #[error("Validation error: {0}")]
