@@ -103,41 +103,27 @@ import { d } from "@codemirror/legacy-modes/mode/d"
 import { elm } from "@codemirror/legacy-modes/mode/elm"
 
 type LanguageOption = 
-    "javascript" |
-    "rust" |
-    "jsx" |
-    "cpp" |
-    "html" |
-    "java" |
-    "json" |
-    "markdown" | 
-    "php" |
-    "python" |
-    "sql" |
-    "xml" |
-    "less" |
-    "sass" |
-    "clojure" |
-    "csharp" |
-    "lezer" |
-    "go" |
     "apl" |
     "asciiArmor" |
     "asterisk" |
     "brainfuck" |
+    "clojure" |
     "cmake" |
     "cobol" |
     "coffeeScript" |
     "commonLisp" |
+    "cpp" |
     "crystal" |
-    "d" |
     "css" |
-    "cypher"|
+    "csharp" |
+    "cypher" |
+    "d" |
     "diff" |
     "dockerFile" |
     "dtd" |
     "dylan" |
     "ebnf" |
+    "ecl" |
     "eiffel" |
     "elm" |
     "erlang" |
@@ -146,16 +132,24 @@ type LanguageOption =
     "forth" |
     "fortran" |
     "gas" |
-    "gherkin"  |
+    "gherkin" |
+    "go" |
     "groovy" |
     "haskell" |
     "haxe" |
+    "html" |
     "http" |
     "idl" |
+    "java" |
+    "javascript" |
     "jinja2" |
+    "json" |
     "julia" |
-    "livescript" |
+    "lezer" |
+    "less" |
+    "liveScript" |
     "lua" |
+    "markdown" |
     "mathematica" |
     "mbox" |
     "mirc" |
@@ -168,15 +162,19 @@ type LanguageOption =
     "octave" |
     "oz" |
     "pascal" |
+    "php" |
     "pig" |
-    "powershell" |
+    "powerShell" |
     "properties" |
     "protobuf" |
     "puppet" |
+    "python" |
     "q" |
     "r" |
     "ruby" |
+    "rust" |
     "sas" |
+    "sass" |
     "scheme" |
     "shell" |
     "sieve" |
@@ -184,6 +182,7 @@ type LanguageOption =
     "solr" |
     "sparql" |
     "spreadsheet" |
+    "sql" |
     "stex" |
     "stylus" |
     "swift" |
@@ -195,156 +194,141 @@ type LanguageOption =
     "ttcn" |
     "turtle" |
     "vb" |
-    "vbscript" |
+    "vbScript" |
     "velocity" |
     "verilog" |
     "vhdl" |
     "wast" |
     "webIDL" |
+    "xml" |
     "xQuery" |
     "yacas" |
     "yaml" |
-    "z80" 
+    "z80"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
 export const items: NativeSelectItem[] = [
-    { label: "javascript", value: "javascript"},
-    { label: "jsx", value: "jsx"},
-    { label: "rust", value: "rust"},
-    { label: "c++", value: "cpp"},
-    { label: "html", value: "html"},
-    { label: "java", value: "java"},
-    { label: "json", value: "json"},
-    { label: "markdown", value: "markdown"},
-    { label: "php", value: "php"},
-    { label: "python", value: "python"},
-    { label: "sql", value: "sql"},
-    { label: "xml", value: "xml"},
-    { label: "less", value: "less"},
-    { label: "sass", value: "sass"},
-    { label: "clojure", value: "clojure"},
-    { label: "C#", value: "csharp"},
-    { label: "lezer", value: "lezer"},
-    { label: "go", value: "go"},
-    { label: "apl", value: "apl"},
-    { label: "asciiArmor", value: "asciiArmor"},
-    { label: "asterisk", value: "asterisk"},
-    { label: "brainfuck", value: "brainfuck"},
-    { label: "cmake", value: "cmake"},
-    { label: "cobol", value: "cobol"},
-    { label: "coffeeScript", value: "coffeeScript"},
-    { label: "commonLisp", value: "commonLisp"},
-    { label: "crystal", value: "crystal"},
-    { label: "d", value: "d"},
-    { label: "css", value: "css"},
-    { label: "cypher", value: "cypher"},
-    { label: "diff", value: "diff"},
-    { label: "dockerFile", value: "dockerFile"},
-    { label: "dtd", value: "dtd"},
-    { label: "dylan", value: "dylan"},
-    { label: "ebnf", value: "ebnf"},
-    { label: "ecl", value: "ecl"},
-    { label: "eiffel", value: "eiffel"},
-    { label: "elm", value: "elm"},
-    { label: "erlang", value: "erlang"},
-    { label: "factor", value: "factor"},
-    { label: "fcl", value: "fcl"},
-    { label: "forth", value: "forth"},
-    { label: "fortran", value: "fortran"},
-    { label: "gas", value: "gas"},
-    { label: "gherkin", value: "gherkin"},
-    { label: "groovy", value: "groovy"},
-    { label: "haskell", value: "haskell"},
-    { label: "haxe", value: "haxe"},
-    { label: "http", value: "http"},
-    { label: "idl", value: "idl"},
-    { label: "jinja2", value: "jinja2"},
-    { label: "julia", value: "julia"},
-    { label: "livescript", value: "livescript"},
-    { label: "lua", value: "lua"},
-    { label: "mathematica", value: "mathematica"},
-    { label: "mbox", value: "mbox"},
-    { label: "mIRC", value: "mirc"},
-    { label: "modelica", value: "modelica"},
-    { label: "mscgen", value: "mscgen"},
-    { label: "mumps", value: "mumps"},
-    { label: "nginx", value: "nginx"},
-    { label: "nsis", value: "nsis"},
-    { label: "ntriples", value: "ntriples"},
-    { label: "octave", value: "octave"},
-    { label: "oz", value: "oz"},
-    { label: "pascal", value: "pascal"},
-    { label: "pig", value: "pig"},
-    { label: "powershell", value: "powershell"},
-    { label: "properties", value: "properties"},
-    { label: "protobuf", value: "protobuf"},
-    { label: "puppet", value: "puppet"},
-    { label: "q", value: "q"},
-    { label: "r", value: "r"},
-    { label: "ruby", value: "ruby"},
-    { label: "sas", value: "sas"},
-    { label: "scheme", value: "scheme"},
-    { label: "shell", value: "shell"},
-    { label: "sieve", value: "sieve"},
-    { label: "smalltalk", value: "smalltalk"},
-    { label: "solr", value: "solr"},
-    { label: "sparql", value: "sparql"},
-    { label: "spreadsheet", value: "spreadsheet"},
-    { label: "stex", value: "stex"},
-    { label: "stylus", value: "stylus"},
-    { label: "swift", value: "swift"},
-    { label: "tcl", value: "tcl"},
-    { label: "textile", value: "textile"},
-    { label: "tiddlyWiki", value: "tiddlyWiki"},
-    { label: "tiki", value: "tiki"},
-    { label: "toml", value: "toml"},
-    { label: "ttcn", value: "ttcn"},
-    { label: "turtle", value: "turtle"},
-    { label: "VB.net", value: "vb"},
-    { label: "VBScript", value: "vbscript"},
-    { label: "velocity", value: "velocity"},
-    { label: "verilog", value: "verilog"},
-    { label: "vhdl", value: "vhdl"},
-    { label: "wast", value: "wast"},
-    { label: "webIDL", value: "webIDL"},
-    { label: "xQuery", value: "xQuery"},
-    { label: "yacas", value: "yacas"},
-    { label: "yaml", value: "yaml"},
-    { label: "z80", value: "z80"},
-]
+    { label: "APL", value: "apl" },
+    { label: "AsciiArmor", value: "asciiArmor" },
+    { label: "Asterisk", value: "asterisk" },
+    { label: "Brainfuck", value: "brainfuck" },
+    { label: "Clojure", value: "clojure" },
+    { label: "CMake", value: "cmake" },
+    { label: "COBOL", value: "cobol" },
+    { label: "CoffeeScript", value: "coffeeScript" },
+    { label: "Common Lisp", value: "commonLisp" },
+    { label: "C++", value: "cpp" },
+    { label: "Crystal", value: "crystal" },
+    { label: "CSS", value: "css" },
+    { label: "C#", value: "csharp" },
+    { label: "Cypher", value: "cypher" },
+    { label: "D", value: "d" },
+    { label: "Diff", value: "diff" },
+    { label: "Dockerfile", value: "dockerFile" },
+    { label: "DTD", value: "dtd" },
+    { label: "Dylan", value: "dylan" },
+    { label: "EBNF", value: "ebnf" },
+    { label: "ECL", value: "ecl" },
+    { label: "Eiffel", value: "eiffel" },
+    { label: "Elm", value: "elm" },
+    { label: "Erlang", value: "erlang" },
+    { label: "Factor", value: "factor" },
+    { label: "FCL", value: "fcl" },
+    { label: "Forth", value: "forth" },
+    { label: "Fortran", value: "fortran" },
+    { label: "Gas", value: "gas" },
+    { label: "Gherkin", value: "gherkin" },
+    { label: "Go", value: "go" },
+    { label: "Groovy", value: "groovy" },
+    { label: "Haskell", value: "haskell" },
+    { label: "Haxe", value: "haxe" },
+    { label: "HTML", value: "html" },
+    { label: "HTTP", value: "http" },
+    { label: "IDL", value: "idl" },
+    { label: "Java", value: "java" },
+    { label: "JavaScript", value: "javascript" },
+    { label: "Jinja2", value: "jinja2" },
+    { label: "JSON", value: "json" },
+    { label: "Julia", value: "julia" },
+    { label: "Lezer", value: "lezer" },
+    { label: "Less", value: "less" },
+    { label: "LiveScript", value: "liveScript" },
+    { label: "Lua", value: "lua" },
+    { label: "Markdown", value: "markdown" },
+    { label: "Mathematica", value: "mathematica" },
+    { label: "Mbox", value: "mbox" },
+    { label: "mIRC", value: "mirc" },
+    { label: "Modelica", value: "modelica" },
+    { label: "Mscgen", value: "mscgen" },
+    { label: "MUMPS", value: "mumps" },
+    { label: "Nginx", value: "nginx" },
+    { label: "NSIS", value: "nsis" },
+    { label: "N-Triples", value: "ntriples" },
+    { label: "Octave", value: "octave" },
+    { label: "Oz", value: "oz" },
+    { label: "Pascal", value: "pascal" },
+    { label: "PHP", value: "php" },
+    { label: "Pig", value: "pig" },
+    { label: "PowerShell", value: "powerShell" },
+    { label: "Properties", value: "properties" },
+    { label: "Protobuf", value: "protobuf" },
+    { label: "Puppet", value: "puppet" },
+    { label: "Python", value: "python" },
+    { label: "Q", value: "q" },
+    { label: "R", value: "r" },
+    { label: "Ruby", value: "ruby" },
+    { label: "Rust", value: "rust" },
+    { label: "SAS", value: "sas" },
+    { label: "SASS", value: "sass" },
+    { label: "Scheme", value: "scheme" },
+    { label: "Shell", value: "shell" },
+    { label: "Sieve", value: "sieve" },
+    { label: "Smalltalk", value: "smalltalk" },
+    { label: "Solr", value: "solr" },
+    { label: "SPARQL", value: "sparql" },
+    { label: "Spreadsheet", value: "spreadsheet" },
+    { label: "SQL", value: "sql" },
+    { label: "STEX", value: "stex" },
+    { label: "Stylus", value: "stylus" },
+    { label: "Swift", value: "swift" },
+    { label: "Tcl", value: "tcl" },
+    { label: "Textile", value: "textile" },
+    { label: "TiddlyWiki", value: "tiddlyWiki" },
+    { label: "Tiki", value: "tiki" },
+    { label: "TOML", value: "toml" },
+    { label: "TTCN", value: "ttcn" },
+    { label: "Turtle", value: "turtle" },
+    { label: "VB", value: "vb" },
+    { label: "VBScript", value: "vbscript" },
+    { label: "Velocity", value: "velocity" },
+    { label: "Verilog", value: "verilog" },
+    { label: "VHDL", value: "vhdl" },
+    { label: "WAST", value: "wast" },
+    { label: "WebIDL", value: "webIDL" },
+    { label: "XML", value: "xml" },
+    { label: "XQuery", value: "xQuery" },
+    { label: "Yacas", value: "yacas" },
+    { label: "YAML", value: "yaml" },
+    { label: "Z80", value: "z80" },
+];
 
-const languages = {
-    jsx: javascript({ jsx: true }),
-    javascript: javascript(),
-    rust: rust(),
-    cpp: cpp(),
-    html: html(),
-    java: java(),
-    json: json(),
-    markdown: markdown(),
-    php: php(),
-    python: python(),
-    sql: sql(),
-    xml: xml(),
-    less: less(),
-    sass: sass(),
-    clojure: clojure(),
-    csharp: csharp(),
-    lezer: lezer(),
-    go: StreamLanguage.define(go),
+const languages =  {
     apl: StreamLanguage.define(apl),
     asciiArmor: StreamLanguage.define(asciiArmor),
     asterisk: StreamLanguage.define(asterisk),
     brainfuck: StreamLanguage.define(brainfuck),
+    clojure: clojure(),
     cmake: StreamLanguage.define(cmake),
     cobol: StreamLanguage.define(cobol),
     coffeeScript: StreamLanguage.define(coffeeScript),
-    crystal: StreamLanguage.define(crystal),
     commonLisp: StreamLanguage.define(commonLisp),
-    d: StreamLanguage.define(d),
+    cpp: cpp(),
+    crystal: StreamLanguage.define(crystal),
     css: StreamLanguage.define(css),
+    csharp: csharp(),
     cypher: StreamLanguage.define(cypher),
+    d: StreamLanguage.define(d),
     diff: StreamLanguage.define(diff),
     dockerFile: StreamLanguage.define(dockerFile),
     dtd: StreamLanguage.define(dtd),
@@ -360,15 +344,23 @@ const languages = {
     fortran: StreamLanguage.define(fortran),
     gas: StreamLanguage.define(gas),
     gherkin: StreamLanguage.define(gherkin),
+    go: StreamLanguage.define(go),
     groovy: StreamLanguage.define(groovy),
     haskell: StreamLanguage.define(haskell),
     haxe: StreamLanguage.define(haxe),
+    html: html(),
     http: StreamLanguage.define(http),
     idl: StreamLanguage.define(idl),
+    java: java(),
+    javascript: javascript(),
     jinja2: StreamLanguage.define(jinja2),
+    json: json(),
     julia: StreamLanguage.define(julia),
-    livescript: StreamLanguage.define(liveScript),
+    lezer: lezer(),
+    less: less(),
+    liveScript: StreamLanguage.define(liveScript),
     lua: StreamLanguage.define(lua),
+    markdown: markdown(),
     mathematica: StreamLanguage.define(mathematica),
     mbox: StreamLanguage.define(mbox),
     mirc: StreamLanguage.define(mirc),
@@ -381,15 +373,19 @@ const languages = {
     octave: StreamLanguage.define(octave),
     oz: StreamLanguage.define(oz),
     pascal: StreamLanguage.define(pascal),
+    php: php(),
     pig: StreamLanguage.define(pig),
-    powershell: StreamLanguage.define(powerShell),
+    powerShell: StreamLanguage.define(powerShell),
     properties: StreamLanguage.define(properties),
     protobuf: StreamLanguage.define(protobuf),
     puppet: StreamLanguage.define(puppet),
+    python: python(),
     q: StreamLanguage.define(q),
     r: StreamLanguage.define(r),
     ruby: StreamLanguage.define(ruby),
+    rust: rust(),
     sas: StreamLanguage.define(sas),
+    sass: sass(),
     scheme: StreamLanguage.define(scheme),
     shell: StreamLanguage.define(shell),
     sieve: StreamLanguage.define(sieve),
@@ -397,6 +393,7 @@ const languages = {
     solr: StreamLanguage.define(solr),
     sparql: StreamLanguage.define(sparql),
     spreadsheet: StreamLanguage.define(spreadsheet),
+    sql: sql(),
     stex: StreamLanguage.define(stex),
     stylus: StreamLanguage.define(stylus),
     swift: StreamLanguage.define(swift),
@@ -408,19 +405,18 @@ const languages = {
     ttcn: StreamLanguage.define(ttcn),
     turtle: StreamLanguage.define(turtle),
     vb: StreamLanguage.define(vb),
-    vbscript: StreamLanguage.define(vbScript),
+    vbScript: StreamLanguage.define(vbScript),
     velocity: StreamLanguage.define(velocity),
     verilog: StreamLanguage.define(verilog),
     vhdl: StreamLanguage.define(vhdl),
     wast: StreamLanguage.define(wast),
     webIDL: StreamLanguage.define(webIDL),
+    xml: xml(),
     xQuery: StreamLanguage.define(xQuery),
     yacas: StreamLanguage.define(yacas),
     yaml: StreamLanguage.define(yaml),
     z80: StreamLanguage.define(z80),
-}
-
-
+};
 const getLanguageExtension = (lang: string) => {
     return languages[lang as LanguageOption] || [] 
 }
