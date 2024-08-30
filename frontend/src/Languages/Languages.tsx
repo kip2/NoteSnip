@@ -25,6 +25,9 @@ import { cobol } from "@codemirror/legacy-modes/mode/cobol"
 import { coffeeScript } from "@codemirror/legacy-modes/mode/coffeescript"
 import { commonLisp } from "@codemirror/legacy-modes/mode/commonlisp"
 import { crystal} from "@codemirror/legacy-modes/mode/crystal"
+import { css } from "@codemirror/legacy-modes/mode/css"
+// おかしいので見直す
+import { d } from "@codemirror/legacy-modes/mode/d"
 
 type LanguageOption = 
     "javascript" |
@@ -53,7 +56,9 @@ type LanguageOption =
     "cobol" |
     "coffeeScript" |
     "commonLisp" |
-    "crystal" 
+    "crystal" |
+    "d" |
+    "css"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -85,6 +90,8 @@ export const items: NativeSelectItem[] = [
     { label: "coffeeScript", value: "coffeeScript"},
     { label: "commonLisp", value: "commonLisp"},
     { label: "crystal", value: "crystal"},
+    { label: "d", value: "d"},
+    { label: "css", value: "css"},
     // { label: "go", value: "go"},
 ]
 
@@ -116,6 +123,8 @@ const languages = {
     coffeeScript: StreamLanguage.define(coffeeScript),
     crystal: StreamLanguage.define(crystal),
     commonLisp: StreamLanguage.define(commonLisp),
+    d: StreamLanguage.define(d),
+    css: StreamLanguage.define(css),
     // go: StreamLanguage.define(go),
 }
 
