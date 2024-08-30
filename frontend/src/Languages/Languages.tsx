@@ -27,8 +27,24 @@ import { commonLisp } from "@codemirror/legacy-modes/mode/commonlisp"
 import { crystal} from "@codemirror/legacy-modes/mode/crystal"
 import { css } from "@codemirror/legacy-modes/mode/css"
 import { cypher } from "@codemirror/legacy-modes/mode/cypher"
+import { diff } from "@codemirror/legacy-modes/mode/diff"
+import { dockerFile } from "@codemirror/legacy-modes/mode/dockerfile"
+import { dtd } from "@codemirror/legacy-modes/mode/dtd"
+import { dylan } from "@codemirror/legacy-modes/mode/dylan"
+import { ebnf } from "@codemirror/legacy-modes/mode/ebnf"
+import { ecl } from "@codemirror/legacy-modes/mode/ecl"
+import { eiffel } from "@codemirror/legacy-modes/mode/eiffel"
+import { erlang } from "@codemirror/legacy-modes/mode/erlang"
+import { factor } from "@codemirror/legacy-modes/mode/factor"
+import { fcl } from "@codemirror/legacy-modes/mode/fcl"
+import { forth } from "@codemirror/legacy-modes/mode/forth"
+import { fortran } from "@codemirror/legacy-modes/mode/fortran"
+import { gas } from "@codemirror/legacy-modes/mode/gas"
+import { gherkin } from "@codemirror/legacy-modes/mode/gherkin"
+
 // おかしいので見直す
 import { d } from "@codemirror/legacy-modes/mode/d"
+import { elm } from "@codemirror/legacy-modes/mode/elm"
 
 type LanguageOption = 
     "javascript" |
@@ -60,7 +76,21 @@ type LanguageOption =
     "crystal" |
     "d" |
     "css" |
-    "cypher"
+    "cypher"|
+    "diff" |
+    "dockerFile" |
+    "dtd" |
+    "dylan" |
+    "ebnf" |
+    "eiffel" |
+    "elm" |
+    "erlang" |
+    "factor" |
+    "fcl" |
+    "forth" |
+    "fortran" |
+    "gas" |
+    "gherkin" 
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -95,6 +125,21 @@ export const items: NativeSelectItem[] = [
     { label: "d", value: "d"},
     { label: "css", value: "css"},
     { label: "cypher", value: "cypher"},
+    { label: "diff", value: "diff"},
+    { label: "dockerFile", value: "dockerFile"},
+    { label: "dtd", value: "dtd"},
+    { label: "dylan", value: "dylan"},
+    { label: "ebnf", value: "ebnf"},
+    { label: "ecl", value: "ecl"},
+    { label: "eiffel", value: "eiffel"},
+    { label: "elm", value: "elm"},
+    { label: "erlang", value: "erlang"},
+    { label: "factor", value: "factor"},
+    { label: "fcl", value: "fcl"},
+    { label: "forth", value: "forth"},
+    { label: "fortran", value: "fortran"},
+    { label: "gas", value: "gas"},
+    { label: "gherkin", value: "gherkin"},
     // { label: "go", value: "go"},
 ]
 
@@ -129,6 +174,21 @@ const languages = {
     d: StreamLanguage.define(d),
     css: StreamLanguage.define(css),
     cypher: StreamLanguage.define(cypher),
+    diff: StreamLanguage.define(diff),
+    dockerFile: StreamLanguage.define(dockerFile),
+    dtd: StreamLanguage.define(dtd),
+    dylan: StreamLanguage.define(dylan),
+    ebnf: StreamLanguage.define(ebnf),
+    ecl: StreamLanguage.define(ecl),
+    eiffel: StreamLanguage.define(eiffel),
+    elm: StreamLanguage.define(elm),
+    erlang: StreamLanguage.define(erlang),
+    factor: StreamLanguage.define(factor),
+    fcl: StreamLanguage.define(fcl),
+    forth: StreamLanguage.define(forth),
+    fortran: StreamLanguage.define(fortran),
+    gas: StreamLanguage.define(gas),
+    gherkin: StreamLanguage.define(gherkin),
     // go: StreamLanguage.define(go),
 }
 
