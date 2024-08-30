@@ -99,8 +99,6 @@ import { xQuery } from "@codemirror/legacy-modes/mode/xquery"
 import { yacas } from "@codemirror/legacy-modes/mode/yacas"
 import { yaml } from "@codemirror/legacy-modes/mode/yaml"
 import { z80 } from "@codemirror/legacy-modes/mode/z80"
-
-// おかしいので見直す
 import { d } from "@codemirror/legacy-modes/mode/d"
 import { elm } from "@codemirror/legacy-modes/mode/elm"
 
