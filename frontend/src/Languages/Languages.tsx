@@ -14,6 +14,8 @@ import { sass } from "@codemirror/lang-sass"
 import { clojure } from "@nextjournal/lang-clojure"
 import { csharp } from "@replit/codemirror-lang-csharp"
 import { lezer } from "@codemirror/lang-lezer"
+import { StreamLanguage } from "@codemirror/language";
+import { go } from "@codemirror/legacy-modes/mode/go"
 
 type LanguageOption = 
     "javascript" |
@@ -32,7 +34,8 @@ type LanguageOption =
     "sass" |
     "clojure" |
     "csharp" |
-    "lezer"
+    "lezer" |
+    "go"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -54,6 +57,7 @@ export const items: NativeSelectItem[] = [
     { label: "clojure", value: "clojure"},
     { label: "C#", value: "csharp"},
     { label: "lezer", value: "lezer"},
+    { label: "go", value: "go"},
 ]
 
 const languages = {
@@ -74,6 +78,7 @@ const languages = {
     clojure: clojure(),
     csharp: csharp(),
     lezer: lezer(),
+    go: StreamLanguage.define(go),
 }
 
 
