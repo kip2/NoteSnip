@@ -16,6 +16,15 @@ import { csharp } from "@replit/codemirror-lang-csharp"
 import { lezer } from "@codemirror/lang-lezer"
 import { StreamLanguage } from "@codemirror/language";
 import { go } from "@codemirror/legacy-modes/mode/go"
+import { apl } from "@codemirror/legacy-modes/mode/apl"
+import { asciiArmor} from "@codemirror/legacy-modes/mode/asciiarmor"
+import { asterisk } from "@codemirror/legacy-modes/mode/asterisk"
+import { brainfuck } from "@codemirror/legacy-modes/mode/brainfuck"
+import { cmake } from "@codemirror/legacy-modes/mode/cmake"
+import { cobol } from "@codemirror/legacy-modes/mode/cobol"
+import { coffeeScript } from "@codemirror/legacy-modes/mode/coffeescript"
+import { commonLisp } from "@codemirror/legacy-modes/mode/commonlisp"
+import { crystal} from "@codemirror/legacy-modes/mode/crystal"
 
 type LanguageOption = 
     "javascript" |
@@ -35,7 +44,16 @@ type LanguageOption =
     "clojure" |
     "csharp" |
     "lezer" |
-    "go"
+    "go" |
+    "apl" |
+    "asciiArmor" |
+    "asterisk" |
+    "brainfuck" |
+    "cmake" |
+    "cobol" |
+    "coffeeScript" |
+    "commonLisp" |
+    "crystal" 
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -58,6 +76,16 @@ export const items: NativeSelectItem[] = [
     { label: "C#", value: "csharp"},
     { label: "lezer", value: "lezer"},
     { label: "go", value: "go"},
+    { label: "apl", value: "apl"},
+    { label: "asciiArmor", value: "asciiArmor"},
+    { label: "asterisk", value: "asterisk"},
+    { label: "brainfuck", value: "brainfuck"},
+    { label: "cmake", value: "cmake"},
+    { label: "cobol", value: "cobol"},
+    { label: "coffeeScript", value: "coffeeScript"},
+    { label: "commonLisp", value: "commonLisp"},
+    { label: "crystal", value: "crystal"},
+    // { label: "go", value: "go"},
 ]
 
 const languages = {
@@ -79,6 +107,16 @@ const languages = {
     csharp: csharp(),
     lezer: lezer(),
     go: StreamLanguage.define(go),
+    apl: StreamLanguage.define(apl),
+    asciiArmor: StreamLanguage.define(asciiArmor),
+    asterisk: StreamLanguage.define(asterisk),
+    brainfuck: StreamLanguage.define(brainfuck),
+    cmake: StreamLanguage.define(cmake),
+    cobol: StreamLanguage.define(cobol),
+    coffeeScript: StreamLanguage.define(coffeeScript),
+    crystal: StreamLanguage.define(crystal),
+    commonLisp: StreamLanguage.define(commonLisp),
+    // go: StreamLanguage.define(go),
 }
 
 
