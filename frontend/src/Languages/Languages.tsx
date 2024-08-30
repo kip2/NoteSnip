@@ -26,6 +26,7 @@ import { coffeeScript } from "@codemirror/legacy-modes/mode/coffeescript"
 import { commonLisp } from "@codemirror/legacy-modes/mode/commonlisp"
 import { crystal} from "@codemirror/legacy-modes/mode/crystal"
 import { css } from "@codemirror/legacy-modes/mode/css"
+import { cypher } from "@codemirror/legacy-modes/mode/cypher"
 // おかしいので見直す
 import { d } from "@codemirror/legacy-modes/mode/d"
 
@@ -58,7 +59,8 @@ type LanguageOption =
     "commonLisp" |
     "crystal" |
     "d" |
-    "css"
+    "css" |
+    "cypher"
 
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -92,6 +94,7 @@ export const items: NativeSelectItem[] = [
     { label: "crystal", value: "crystal"},
     { label: "d", value: "d"},
     { label: "css", value: "css"},
+    { label: "cypher", value: "cypher"},
     // { label: "go", value: "go"},
 ]
 
@@ -125,6 +128,7 @@ const languages = {
     commonLisp: StreamLanguage.define(commonLisp),
     d: StreamLanguage.define(d),
     css: StreamLanguage.define(css),
+    cypher: StreamLanguage.define(cypher),
     // go: StreamLanguage.define(go),
 }
 
