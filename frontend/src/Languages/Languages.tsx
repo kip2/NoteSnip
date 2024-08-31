@@ -208,6 +208,7 @@ type LanguageOption =
     "php" |
     "pig" |
     "plsql" |
+    "plaintext" |
     "powerShell" |
     "postgresql" |
     "properties" |
@@ -348,6 +349,7 @@ export const items: AutocompleteItem[] = [
     { label: "Perl", value: "perl" },
     { label: "PHP", value: "php" },
     { label: "Pig", value: "pig" },
+    { label: "PlainText", value: "plaintext" },
     { label: "PLSQL", value: "plsql" },
     { label: "PowerShell", value: "powerShell" },
     { label: "PostgreSQL", value: "postgresql" },
@@ -490,6 +492,7 @@ const languages =  {
     php: php(),
     pig: StreamLanguage.define(pig),
     plsql: PLSQL,
+    plaintext: [],
     powerShell: StreamLanguage.define(powerShell),
     postgresql: PostgreSQL,
     properties: StreamLanguage.define(properties),
