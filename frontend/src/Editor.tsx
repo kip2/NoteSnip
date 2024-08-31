@@ -1,6 +1,6 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
-import { githubDark } from "@uiw/codemirror-themes-all";
+import { githubDark, basicDark } from "@uiw/codemirror-themes-all";
 import { Container, Autocomplete, Center } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
@@ -23,7 +23,7 @@ const Editor = () => {
                 value={code}
                 height="700px"
                 extensions={[getLanguageExtension(language)]}
-                theme={githubDark}
+                theme={basicDark}
                 onChange={onCodeChange}
             />
             <Container>
