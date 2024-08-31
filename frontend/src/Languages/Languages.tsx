@@ -1,3 +1,5 @@
+import { AutocompleteItem } from "@yamada-ui/react";
+
 import { javascript } from "@codemirror/lang-javascript";
 import { rust } from '@codemirror/lang-rust';
 import { cpp } from '@codemirror/lang-cpp';
@@ -109,8 +111,8 @@ import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
 import { hcl } from "codemirror-lang-hcl"
 import { j } from "codemirror-lang-j"
 import { janet } from "codemirror-lang-janet"
-import { AutocompleteItem } from "@yamada-ui/react";
 import { liquidHTMLLanguage } from "codemirror-lang-liquid"
+import { nix } from "@replit/codemirror-lang-nix"
 
 type LanguageOption = 
     "apl" |
@@ -176,6 +178,7 @@ type LanguageOption =
     "mscgen" |
     "mumps" |
     "nginx" |
+    "nix" |
     "nsis" |
     "ntriples" |
     "octave" |
@@ -293,6 +296,7 @@ export const items: AutocompleteItem[] = [
     { label: "Mscgen", value: "mscgen" },
     { label: "MUMPS", value: "mumps" },
     { label: "Nginx", value: "nginx" },
+    { label: "Nix", value: "nix" },
     { label: "NSIS", value: "nsis" },
     { label: "N-Triples", value: "ntriples" },
     { label: "Octave", value: "octave" },
@@ -410,6 +414,7 @@ const languages =  {
     mscgen: StreamLanguage.define(mscgen),
     mumps: StreamLanguage.define(mumps),
     nginx: StreamLanguage.define(nginx),
+    nix: nix(),
     nsis: StreamLanguage.define(nsis),
     ntriples: StreamLanguage.define(ntriples),
     octave: StreamLanguage.define(octave),
