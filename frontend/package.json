@@ -27,6 +27,7 @@
     "@codemirror/lang-xml": "^6.1.0",
     "@codemirror/language": "^6.10.2",
     "@codemirror/legacy-modes": "^6.4.1",
+    "@iizukak/codemirror-lang-wgsl": "^0.3.0",
     "@nextjournal/lang-clojure": "^1.0.0",
     "@replit/codemirror-lang-csharp": "^6.2.0",
     "@replit/codemirror-lang-nix": "^6.0.1",

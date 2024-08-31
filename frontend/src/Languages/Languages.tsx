@@ -114,6 +114,7 @@ import { janet } from "codemirror-lang-janet"
 import { liquidHTMLLanguage } from "codemirror-lang-liquid"
 import { nix } from "@replit/codemirror-lang-nix"
 import { solidity } from "@replit/codemirror-lang-solidity"
+import { wgsl, WGSL } from "@iizukak/codemirror-lang-wgsl"
 
 type LanguageOption = 
     "apl" |
@@ -227,6 +228,7 @@ type LanguageOption =
     "vhdl" |
     "wast" |
     "webIDL" |
+    "wgsl" |
     "xml" |
     "xQuery" |
     "yacas" |
@@ -346,6 +348,7 @@ export const items: AutocompleteItem[] = [
     { label: "VHDL", value: "vhdl" },
     { label: "WAST", value: "wast" },
     { label: "WebIDL", value: "webIDL" },
+    { label: "WGSL", value: "wgsl" },
     { label: "XML", value: "xml" },
     { label: "XQuery", value: "xQuery" },
     { label: "Yacas", value: "yacas" },
@@ -465,6 +468,7 @@ const languages =  {
     vhdl: StreamLanguage.define(vhdl),
     wast: StreamLanguage.define(wast),
     webIDL: StreamLanguage.define(webIDL),
+    wgsl: wgsl(),
     xml: xml(),
     xQuery: StreamLanguage.define(xQuery),
     yacas: StreamLanguage.define(yacas),
