@@ -109,6 +109,7 @@ import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
 import { hcl } from "codemirror-lang-hcl"
 import { j } from "codemirror-lang-j"
 import { janet } from "codemirror-lang-janet"
+import { AutocompleteItem } from "@yamada-ui/react";
 
 type LanguageOption = 
     "apl" |
@@ -225,9 +226,8 @@ type LanguageOption =
     "yaml" |
     "z80"
 
-import { NativeSelectItem } from "@yamada-ui/react";
 
-export const items: NativeSelectItem[] = [
+export const items: AutocompleteItem[] = [
     { label: "APL", value: "apl" },
     { label: "AsciiArmor", value: "asciiArmor" },
     { label: "Asterisk", value: "asterisk" },

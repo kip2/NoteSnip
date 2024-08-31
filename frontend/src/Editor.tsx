@@ -1,7 +1,7 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
 import { githubDark } from "@uiw/codemirror-themes-all";
-import { Container, NativeSelect} from "@yamada-ui/react";
+import { Container, Autocomplete, Center } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
 import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
@@ -13,8 +13,8 @@ const Editor = () => {
     }, [])
 
     const [language, setLanguage] = useState(defaultLanguage)
-    const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setLanguage(event.target.value)
+    const handleLanguageChange = (value: string) => {
+        setLanguage(value)
     }
 
     return (
@@ -27,12 +27,17 @@ const Editor = () => {
                 onChange={onCodeChange}
             />
             <Container>
-                <NativeSelect 
+                <Autocomplete 
                     placeholder="言語を選択してください"
+                    header={
+                        <Center pt="2" px="3">
+                            "言語を選択してください"
+                        </Center>
+                    }
                     onChange={handleLanguageChange} 
                     items={items}
                 >
-                </NativeSelect>
+                </Autocomplete>
             </Container>
         </>
 
