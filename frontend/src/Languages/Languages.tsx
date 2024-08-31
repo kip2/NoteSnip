@@ -113,6 +113,7 @@ import { j } from "codemirror-lang-j"
 import { janet } from "codemirror-lang-janet"
 import { liquidHTMLLanguage } from "codemirror-lang-liquid"
 import { nix } from "@replit/codemirror-lang-nix"
+import { solidity } from "@replit/codemirror-lang-solidity"
 
 type LanguageOption = 
     "apl" |
@@ -201,6 +202,7 @@ type LanguageOption =
     "shell" |
     "sieve" |
     "smalltalk" |
+    "solidiry" |
     "solr" |
     "sparql" |
     "spreadsheet" |
@@ -319,6 +321,7 @@ export const items: AutocompleteItem[] = [
     { label: "Shell", value: "shell" },
     { label: "Sieve", value: "sieve" },
     { label: "Smalltalk", value: "smalltalk" },
+    { label: "Solidity", value: "solidity" },
     { label: "Solr", value: "solr" },
     { label: "SPARQL", value: "sparql" },
     { label: "Spreadsheet", value: "spreadsheet" },
@@ -437,6 +440,7 @@ const languages =  {
     shell: StreamLanguage.define(shell),
     sieve: StreamLanguage.define(sieve),
     smalltalk: StreamLanguage.define(smalltalk),
+    solidity: solidity,
     solr: StreamLanguage.define(solr),
     sparql: StreamLanguage.define(sparql),
     spreadsheet: StreamLanguage.define(spreadsheet),
