@@ -116,6 +116,7 @@ import { nix } from "@replit/codemirror-lang-nix"
 import { solidity } from "@replit/codemirror-lang-solidity"
 import { wgsl } from "@iizukak/codemirror-lang-wgsl"
 import { c, scala, kotlin, shader, nesC, objectiveC, objectiveCpp, squirrel, dart } from "@codemirror/legacy-modes/mode/clike"
+import { oCaml, fSharp, sml} from "@codemirror/legacy-modes/mode/mllike"
 
 type LanguageOption = 
     "apl" |
@@ -149,6 +150,7 @@ type LanguageOption =
     "fcl" |
     "forth" |
     "fortran" |
+    "fsharp" |
     "gas" |
     "gherkin" |
     "go" |
@@ -190,6 +192,7 @@ type LanguageOption =
     "ntriples" |
     "objectiveC" |
     "objectiveCpp" |
+    "ocaml" |
     "octave" |
     "oz" |
     "pascal" |
@@ -212,6 +215,7 @@ type LanguageOption =
     "shell" |
     "sieve" |
     "smalltalk" |
+    "sml" |
     "solidity" |
     "solr" |
     "sparql" |
@@ -278,6 +282,7 @@ export const items: AutocompleteItem[] = [
     { label: "FCL", value: "fcl" },
     { label: "Forth", value: "forth" },
     { label: "Fortran", value: "fortran" },
+    { label: "F#", value: "fsharp" },
     { label: "Gas", value: "gas" },
     { label: "Gherkin", value: "gherkin" },
     { label: "Go", value: "go" },
@@ -319,6 +324,7 @@ export const items: AutocompleteItem[] = [
     { label: "N-Triples", value: "ntriples" },
     { label: "objectiveC", value: "objectiveC" },
     { label: "objectiveCpp", value: "objectiveCpp" },
+    { label: "OCaml", value: "ocaml" },
     { label: "Octave", value: "octave" },
     { label: "Oz", value: "oz" },
     { label: "Pascal", value: "pascal" },
@@ -341,6 +347,7 @@ export const items: AutocompleteItem[] = [
     { label: "Shell", value: "shell" },
     { label: "Sieve", value: "sieve" },
     { label: "Smalltalk", value: "smalltalk" },
+    { label: "SML", value: "sml" },
     { label: "Solidity", value: "solidity" },
     { label: "Solr", value: "solr" },
     { label: "SPARQL", value: "sparql" },
@@ -407,6 +414,7 @@ const languages =  {
     fcl: StreamLanguage.define(fcl),
     forth: StreamLanguage.define(forth),
     fortran: StreamLanguage.define(fortran),
+    fsharp: StreamLanguage.define(fSharp),
     gas: StreamLanguage.define(gas),
     gherkin: StreamLanguage.define(gherkin),
     go: StreamLanguage.define(go),
@@ -448,6 +456,7 @@ const languages =  {
     ntriples: StreamLanguage.define(ntriples),
     objectiveC: StreamLanguage.define(objectiveC),
     objectiveCpp: StreamLanguage.define(objectiveCpp),
+    ocaml: StreamLanguage.define(oCaml),
     octave: StreamLanguage.define(octave),
     oz: StreamLanguage.define(oz),
     pascal: StreamLanguage.define(pascal),
@@ -470,6 +479,7 @@ const languages =  {
     shell: StreamLanguage.define(shell),
     sieve: StreamLanguage.define(sieve),
     smalltalk: StreamLanguage.define(smalltalk),
+    sml: StreamLanguage.define(sml),
     solidity: solidity,
     solr: StreamLanguage.define(solr),
     sparql: StreamLanguage.define(sparql),
