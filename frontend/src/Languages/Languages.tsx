@@ -106,6 +106,7 @@ import { elixir} from "codemirror-lang-elixir"
 import { golfScript } from "codemirror-lang-golfscript"
 import { dot} from "cm-lang-dot"
 import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
+import { hcl } from "codemirror-lang-hcl"
 
 
 type LanguageOption = 
@@ -147,6 +148,7 @@ type LanguageOption =
     "handlebars" |
     "haskell" |
     "haxe" |
+    "hcl" |
     "html" |
     "http" |
     "idl" |
@@ -261,6 +263,7 @@ export const items: NativeSelectItem[] = [
     { label: "HandleBars", value: "handlebars" },
     { label: "Haskell", value: "haskell" },
     { label: "Haxe", value: "haxe" },
+    { label: "HCL", value: "hcl" },
     { label: "HTML", value: "html" },
     { label: "HTTP", value: "http" },
     { label: "IDL", value: "idl" },
@@ -374,6 +377,7 @@ const languages =  {
     handlebars: handlebarsLanguage,
     haskell: StreamLanguage.define(haskell),
     haxe: StreamLanguage.define(haxe),
+    hcl: hcl(),
     html: html(),
     http: StreamLanguage.define(http),
     idl: StreamLanguage.define(idl),
