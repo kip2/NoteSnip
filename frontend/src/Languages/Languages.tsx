@@ -117,6 +117,8 @@ import { solidity } from "@replit/codemirror-lang-solidity"
 import { wgsl } from "@iizukak/codemirror-lang-wgsl"
 import { c, scala, kotlin, shader, nesC, objectiveC, objectiveCpp, squirrel, dart } from "@codemirror/legacy-modes/mode/clike"
 import { oCaml, fSharp, sml} from "@codemirror/legacy-modes/mode/mllike"
+import { pegjs } from "@codemirror/legacy-modes/mode/pegjs"
+import { perl } from "@codemirror/legacy-modes/mode/perl"
 
 type LanguageOption = 
     "apl" |
@@ -196,6 +198,8 @@ type LanguageOption =
     "octave" |
     "oz" |
     "pascal" |
+    "pegjs" |
+    "perl" |
     "php" |
     "pig" |
     "powerShell" |
@@ -328,6 +332,8 @@ export const items: AutocompleteItem[] = [
     { label: "Octave", value: "octave" },
     { label: "Oz", value: "oz" },
     { label: "Pascal", value: "pascal" },
+    { label: "Peg.JS", value: "pegjs" },
+    { label: "Perl", value: "perl" },
     { label: "PHP", value: "php" },
     { label: "Pig", value: "pig" },
     { label: "PowerShell", value: "powerShell" },
@@ -460,6 +466,8 @@ const languages =  {
     octave: StreamLanguage.define(octave),
     oz: StreamLanguage.define(oz),
     pascal: StreamLanguage.define(pascal),
+    pegjs: StreamLanguage.define(pegjs),
+    perl: StreamLanguage.define(perl),
     php: php(),
     pig: StreamLanguage.define(pig),
     powerShell: StreamLanguage.define(powerShell),
