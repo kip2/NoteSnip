@@ -102,6 +102,7 @@ import { z80 } from "@codemirror/legacy-modes/mode/z80"
 import { d } from "@codemirror/legacy-modes/mode/d"
 import { elm } from "@codemirror/legacy-modes/mode/elm"
 import { svelte } from "@replit/codemirror-lang-svelte"
+import { elixir} from "codemirror-lang-elixir"
 
 
 type LanguageOption = 
@@ -127,6 +128,7 @@ type LanguageOption =
     "ebnf" |
     "ecl" |
     "eiffel" |
+    "elixir" |
     "elm" |
     "erlang" |
     "factor" |
@@ -237,6 +239,7 @@ export const items: NativeSelectItem[] = [
     { label: "EBNF", value: "ebnf" },
     { label: "ECL", value: "ecl" },
     { label: "Eiffel", value: "eiffel" },
+    { label: "Elixir", value: "elixir" },
     { label: "Elm", value: "elm" },
     { label: "Erlang", value: "erlang" },
     { label: "Factor", value: "factor" },
@@ -346,6 +349,7 @@ const languages =  {
     ebnf: StreamLanguage.define(ebnf),
     ecl: StreamLanguage.define(ecl),
     eiffel: StreamLanguage.define(eiffel),
+    elixir: elixir(),
     elm: StreamLanguage.define(elm),
     erlang: StreamLanguage.define(erlang),
     factor: StreamLanguage.define(factor),

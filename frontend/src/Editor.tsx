@@ -9,7 +9,6 @@ import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
 const Editor = () => {
     const [code, setCode] = useState(defaultSnippet)
     const onCodeChange = useCallback((val: string) => {
-        console.log('val', val)
         setCode(val)
     }, [])
 
