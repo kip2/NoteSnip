@@ -32,6 +32,7 @@
     "@replit/codemirror-lang-svelte": "^6.0.0",
     "@uiw/codemirror-themes-all": "^4.23.0",
     "@uiw/react-codemirror": "^4.23.0",
+    "@xiechao/codemirror-lang-handlebars": "^1.0.4",
     "@yamada-ui/lucide": "^1.4.0",
     "@yamada-ui/react": "^1.4.10",
     "cm-lang-dot": "^0.3.2",

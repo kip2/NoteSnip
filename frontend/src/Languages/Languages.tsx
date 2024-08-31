@@ -105,6 +105,7 @@ import { svelte } from "@replit/codemirror-lang-svelte"
 import { elixir} from "codemirror-lang-elixir"
 import { golfScript } from "codemirror-lang-golfscript"
 import { dot} from "cm-lang-dot"
+import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
 
 
 type LanguageOption = 
@@ -143,6 +144,7 @@ type LanguageOption =
     "golfscript" |
     "graphviz" |
     "groovy" |
+    "handlebars" |
     "haskell" |
     "haxe" |
     "html" |
@@ -256,6 +258,7 @@ export const items: NativeSelectItem[] = [
     { label: "GolfScript", value: "golfscript" },
     { label: "GraphViz", value: "graphviz" },
     { label: "Groovy", value: "groovy" },
+    { label: "HandleBars", value: "handlebars" },
     { label: "Haskell", value: "haskell" },
     { label: "Haxe", value: "haxe" },
     { label: "HTML", value: "html" },
@@ -368,6 +371,7 @@ const languages =  {
     golfscript: golfScript(),
     graphviz: dot(),
     groovy: StreamLanguage.define(groovy),
+    handlebars: handlebarsLanguage,
     haskell: StreamLanguage.define(haskell),
     haxe: StreamLanguage.define(haxe),
     html: html(),
