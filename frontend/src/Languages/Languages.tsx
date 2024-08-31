@@ -101,11 +101,11 @@ import { yaml } from "@codemirror/legacy-modes/mode/yaml"
 import { z80 } from "@codemirror/legacy-modes/mode/z80"
 import { d } from "@codemirror/legacy-modes/mode/d"
 import { elm } from "@codemirror/legacy-modes/mode/elm"
-import { angular } from "@codemirror/lang-angular"
+import { svelte } from "@replit/codemirror-lang-svelte"
+
 
 type LanguageOption = 
     "apl" |
-    "angular" |
     "asciiArmor" |
     "asterisk" |
     "brainfuck" |
@@ -188,6 +188,7 @@ type LanguageOption =
     "sql" |
     "stex" |
     "stylus" |
+    "svelte" |
     "swift" |
     "tcl" |
     "textile" |
@@ -215,7 +216,6 @@ import { NativeSelectItem } from "@yamada-ui/react";
 
 export const items: NativeSelectItem[] = [
     { label: "APL", value: "apl" },
-    { label: "Angular", value: "angular" },
     { label: "AsciiArmor", value: "asciiArmor" },
     { label: "Asterisk", value: "asterisk" },
     { label: "Brainfuck", value: "brainfuck" },
@@ -298,6 +298,7 @@ export const items: NativeSelectItem[] = [
     { label: "SQL", value: "sql" },
     { label: "STEX", value: "stex" },
     { label: "Stylus", value: "stylus" },
+    { label: "Svelte", value: "svelte" },
     { label: "Swift", value: "swift" },
     { label: "Tcl", value: "tcl" },
     { label: "Textile", value: "textile" },
@@ -324,7 +325,6 @@ export const items: NativeSelectItem[] = [
 
 const languages =  {
     apl: StreamLanguage.define(apl),
-    angular: angular(),
     asciiArmor: StreamLanguage.define(asciiArmor),
     asterisk: StreamLanguage.define(asterisk),
     brainfuck: StreamLanguage.define(brainfuck),
@@ -407,6 +407,7 @@ const languages =  {
     sql: sql(),
     stex: StreamLanguage.define(stex),
     stylus: StreamLanguage.define(stylus),
+    svelte: svelte(),
     swift: StreamLanguage.define(swift),
     tcl: StreamLanguage.define(tcl),
     textile: StreamLanguage.define(textile),
@@ -431,7 +432,9 @@ const languages =  {
     z80: StreamLanguage.define(z80),
 };
 const getLanguageExtension = (lang: string) => {
-    return languages[lang as LanguageOption] || [] 
+    const extension = languages[lang as LanguageOption]
+    return Array.isArray(extension) ? extension : [extension]
+    // return languages[lang as LanguageOption] || [] 
 }
 
 export default getLanguageExtension
