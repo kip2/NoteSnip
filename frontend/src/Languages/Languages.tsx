@@ -104,6 +104,7 @@ import { elm } from "@codemirror/legacy-modes/mode/elm"
 import { svelte } from "@replit/codemirror-lang-svelte"
 import { elixir} from "codemirror-lang-elixir"
 import { golfScript } from "codemirror-lang-golfscript"
+import { dot} from "cm-lang-dot"
 
 
 type LanguageOption = 
@@ -140,6 +141,7 @@ type LanguageOption =
     "gherkin" |
     "go" |
     "golfscript" |
+    "graphviz" |
     "groovy" |
     "haskell" |
     "haxe" |
@@ -252,6 +254,7 @@ export const items: NativeSelectItem[] = [
     { label: "Gherkin", value: "gherkin" },
     { label: "Go", value: "go" },
     { label: "GolfScript", value: "golfscript" },
+    { label: "GraphViz", value: "graphviz" },
     { label: "Groovy", value: "groovy" },
     { label: "Haskell", value: "haskell" },
     { label: "Haxe", value: "haxe" },
@@ -363,6 +366,7 @@ const languages =  {
     gherkin: StreamLanguage.define(gherkin),
     go: StreamLanguage.define(go),
     golfscript: golfScript(),
+    graphviz: dot(),
     groovy: StreamLanguage.define(groovy),
     haskell: StreamLanguage.define(haskell),
     haxe: StreamLanguage.define(haxe),
