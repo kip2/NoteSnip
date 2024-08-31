@@ -108,6 +108,7 @@ import { dot} from "cm-lang-dot"
 import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
 import { hcl } from "codemirror-lang-hcl"
 import { j } from "codemirror-lang-j"
+import { janet } from "codemirror-lang-janet"
 
 type LanguageOption = 
     "apl" |
@@ -153,6 +154,7 @@ type LanguageOption =
     "http" |
     "idl" |
     "j" |
+    "janet" |
     "java" |
     "javascript" |
     "jinja2" |
@@ -269,6 +271,7 @@ export const items: NativeSelectItem[] = [
     { label: "HTTP", value: "http" },
     { label: "IDL", value: "idl" },
     { label: "J", value: "j" },
+    { label: "Janet", value: "janet" },
     { label: "Java", value: "java" },
     { label: "JavaScript", value: "javascript" },
     { label: "Jinja2", value: "jinja2" },
@@ -384,6 +387,7 @@ const languages =  {
     http: StreamLanguage.define(http),
     idl: StreamLanguage.define(idl),
     j: j(),
+    janet: janet(),
     java: java(),
     javascript: javascript(),
     jinja2: StreamLanguage.define(jinja2),
