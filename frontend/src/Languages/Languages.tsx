@@ -107,7 +107,7 @@ import { golfScript } from "codemirror-lang-golfscript"
 import { dot} from "cm-lang-dot"
 import { handlebarsLanguage } from "@xiechao/codemirror-lang-handlebars"
 import { hcl } from "codemirror-lang-hcl"
-
+import { j } from "codemirror-lang-j"
 
 type LanguageOption = 
     "apl" |
@@ -152,6 +152,7 @@ type LanguageOption =
     "html" |
     "http" |
     "idl" |
+    "j" |
     "java" |
     "javascript" |
     "jinja2" |
@@ -267,6 +268,7 @@ export const items: NativeSelectItem[] = [
     { label: "HTML", value: "html" },
     { label: "HTTP", value: "http" },
     { label: "IDL", value: "idl" },
+    { label: "J", value: "j" },
     { label: "Java", value: "java" },
     { label: "JavaScript", value: "javascript" },
     { label: "Jinja2", value: "jinja2" },
@@ -381,6 +383,7 @@ const languages =  {
     html: html(),
     http: StreamLanguage.define(http),
     idl: StreamLanguage.define(idl),
+    j: j(),
     java: java(),
     javascript: javascript(),
     jinja2: StreamLanguage.define(jinja2),
