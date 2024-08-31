@@ -114,13 +114,15 @@ import { janet } from "codemirror-lang-janet"
 import { liquidHTMLLanguage } from "codemirror-lang-liquid"
 import { nix } from "@replit/codemirror-lang-nix"
 import { solidity } from "@replit/codemirror-lang-solidity"
-import { wgsl, WGSL } from "@iizukak/codemirror-lang-wgsl"
+import { wgsl } from "@iizukak/codemirror-lang-wgsl"
+import { c } from "@codemirror/legacy-modes/mode/clike"
 
 type LanguageOption = 
     "apl" |
     "asciiArmor" |
     "asterisk" |
     "brainfuck" |
+    "c" |
     "clojure" |
     "cmake" |
     "cobol" |
@@ -241,6 +243,7 @@ export const items: AutocompleteItem[] = [
     { label: "AsciiArmor", value: "asciiArmor" },
     { label: "Asterisk", value: "asterisk" },
     { label: "Brainfuck", value: "brainfuck" },
+    { label: "C", value: "c" },
     { label: "Clojure", value: "clojure" },
     { label: "CMake", value: "cmake" },
     { label: "COBOL", value: "cobol" },
@@ -361,6 +364,7 @@ const languages =  {
     asciiArmor: StreamLanguage.define(asciiArmor),
     asterisk: StreamLanguage.define(asterisk),
     brainfuck: StreamLanguage.define(brainfuck),
+    c: StreamLanguage.define(c),
     clojure: clojure(),
     cmake: StreamLanguage.define(cmake),
     cobol: StreamLanguage.define(cobol),
