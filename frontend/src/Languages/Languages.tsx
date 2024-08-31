@@ -549,7 +549,6 @@ const languages =  {
 const getLanguageExtension = (lang: string) => {
     const extension = languages[lang as LanguageOption]
     return Array.isArray(extension) ? extension : [extension]
-    // return languages[lang as LanguageOption] || [] 
 }
 
 export default getLanguageExtension
