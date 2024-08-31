@@ -110,6 +110,7 @@ import { hcl } from "codemirror-lang-hcl"
 import { j } from "codemirror-lang-j"
 import { janet } from "codemirror-lang-janet"
 import { AutocompleteItem } from "@yamada-ui/react";
+import { liquidHTMLLanguage } from "codemirror-lang-liquid"
 
 type LanguageOption = 
     "apl" |
@@ -165,6 +166,7 @@ type LanguageOption =
     "lezer" |
     "less" |
     "liveScript" |
+    "liquid" |
     "lua" |
     "markdown" |
     "mathematica" |
@@ -281,6 +283,7 @@ export const items: AutocompleteItem[] = [
     { label: "Lezer", value: "lezer" },
     { label: "Less", value: "less" },
     { label: "LiveScript", value: "liveScript" },
+    { label: "Liquid", value: "liquid" },
     { label: "Lua", value: "lua" },
     { label: "Markdown", value: "markdown" },
     { label: "Mathematica", value: "mathematica" },
@@ -397,6 +400,7 @@ const languages =  {
     lezer: lezer(),
     less: less(),
     liveScript: StreamLanguage.define(liveScript),
+    liquid: liquidHTMLLanguage,
     lua: StreamLanguage.define(lua),
     markdown: markdown(),
     mathematica: StreamLanguage.define(mathematica),
