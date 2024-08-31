@@ -119,6 +119,7 @@ import { c, scala, kotlin, shader, nesC, objectiveC, objectiveCpp, squirrel, dar
 import { oCaml, fSharp, sml} from "@codemirror/legacy-modes/mode/mllike"
 import { pegjs } from "@codemirror/legacy-modes/mode/pegjs"
 import { perl } from "@codemirror/legacy-modes/mode/perl"
+import { SQLite, Cassandra, MSSQL, MariaSQL, PLSQL, PostgreSQL,MySQL } from "@codemirror/lang-sql";
 
 type LanguageOption = 
     "apl" |
@@ -126,6 +127,7 @@ type LanguageOption =
     "asterisk" |
     "brainfuck" |
     "c" |
+    "cassandra" |
     "clojure" |
     "cmake" |
     "cobol" |
@@ -180,13 +182,16 @@ type LanguageOption =
     "liveScript" |
     "liquid" |
     "lua" |
+    "mariasql" |
     "markdown" |
     "mathematica" |
     "mbox" |
     "mirc" |
     "modelica" |
     "mscgen" |
+    "mssql" |
     "mumps" |
+    "mysql" |
     "nesC" |
     "nginx" |
     "nix" |
@@ -202,7 +207,9 @@ type LanguageOption =
     "perl" |
     "php" |
     "pig" |
+    "plsql" |
     "powerShell" |
+    "postgresql" |
     "properties" |
     "protobuf" |
     "puppet" |
@@ -223,6 +230,7 @@ type LanguageOption =
     "solidity" |
     "solr" |
     "sparql" |
+    "sqlite" |
     "spreadsheet" |
     "sql" |
     "squirrel" |
@@ -260,6 +268,7 @@ export const items: AutocompleteItem[] = [
     { label: "Asterisk", value: "asterisk" },
     { label: "Brainfuck", value: "brainfuck" },
     { label: "C", value: "c" },
+    { label: "Cassandra", value: "cassandra" },
     { label: "Clojure", value: "clojure" },
     { label: "CMake", value: "cmake" },
     { label: "COBOL", value: "cobol" },
@@ -314,13 +323,16 @@ export const items: AutocompleteItem[] = [
     { label: "LiveScript", value: "liveScript" },
     { label: "Liquid", value: "liquid" },
     { label: "Lua", value: "lua" },
+    { label: "MariaDB", value: "mariasql" },
     { label: "Markdown", value: "markdown" },
     { label: "Mathematica", value: "mathematica" },
     { label: "Mbox", value: "mbox" },
     { label: "mIRC", value: "mirc" },
     { label: "Modelica", value: "modelica" },
     { label: "Mscgen", value: "mscgen" },
+    { label: "Mircrosoft SQL Server", value: "mssql" },
     { label: "MUMPS", value: "mumps" },
+    { label: "MySQL", value: "mysql" },
     { label: "nesC", value: "nesC" },
     { label: "Nginx", value: "nginx" },
     { label: "Nix", value: "nix" },
@@ -336,7 +348,9 @@ export const items: AutocompleteItem[] = [
     { label: "Perl", value: "perl" },
     { label: "PHP", value: "php" },
     { label: "Pig", value: "pig" },
+    { label: "PLSQL", value: "plsql" },
     { label: "PowerShell", value: "powerShell" },
+    { label: "PostgreSQL", value: "postgresql" },
     { label: "Properties", value: "properties" },
     { label: "Protobuf", value: "protobuf" },
     { label: "Puppet", value: "puppet" },
@@ -359,6 +373,7 @@ export const items: AutocompleteItem[] = [
     { label: "SPARQL", value: "sparql" },
     { label: "Spreadsheet", value: "spreadsheet" },
     { label: "SQL", value: "sql" },
+    { label: "SQLite", value: "sqlite" },
     { label: "Squirrel", value: "squirrel" },
     { label: "STEX", value: "stex" },
     { label: "Stylus", value: "stylus" },
@@ -394,6 +409,7 @@ const languages =  {
     asterisk: StreamLanguage.define(asterisk),
     brainfuck: StreamLanguage.define(brainfuck),
     c: StreamLanguage.define(c),
+    cassandra: Cassandra,
     clojure: clojure(),
     cmake: StreamLanguage.define(cmake),
     cobol: StreamLanguage.define(cobol),
@@ -448,13 +464,16 @@ const languages =  {
     liveScript: StreamLanguage.define(liveScript),
     liquid: liquidHTMLLanguage,
     lua: StreamLanguage.define(lua),
+    mariasql: MariaSQL,
     markdown: markdown(),
     mathematica: StreamLanguage.define(mathematica),
     mbox: StreamLanguage.define(mbox),
     mirc: StreamLanguage.define(mirc),
     modelica: StreamLanguage.define(modelica),
     mscgen: StreamLanguage.define(mscgen),
+    mssql: MSSQL,
     mumps: StreamLanguage.define(mumps),
+    mysql: MySQL,
     nginx: StreamLanguage.define(nginx),
     nesC: StreamLanguage.define(nesC),
     nix: nix(),
@@ -470,7 +489,9 @@ const languages =  {
     perl: StreamLanguage.define(perl),
     php: php(),
     pig: StreamLanguage.define(pig),
+    plsql: PLSQL,
     powerShell: StreamLanguage.define(powerShell),
+    postgresql: PostgreSQL,
     properties: StreamLanguage.define(properties),
     protobuf: StreamLanguage.define(protobuf),
     puppet: StreamLanguage.define(puppet),
@@ -493,6 +514,7 @@ const languages =  {
     sparql: StreamLanguage.define(sparql),
     spreadsheet: StreamLanguage.define(spreadsheet),
     sql: sql(),
+    sqlite: SQLite,
     squirrel: StreamLanguage.define(squirrel),
     stex: StreamLanguage.define(stex),
     stylus: StreamLanguage.define(stylus),
