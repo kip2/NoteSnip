@@ -115,7 +115,7 @@ import { liquidHTMLLanguage } from "codemirror-lang-liquid"
 import { nix } from "@replit/codemirror-lang-nix"
 import { solidity } from "@replit/codemirror-lang-solidity"
 import { wgsl } from "@iizukak/codemirror-lang-wgsl"
-import { c } from "@codemirror/legacy-modes/mode/clike"
+import { c, scala, kotlin, shader, nesC, objectiveC, objectiveCpp, squirrel, dart } from "@codemirror/legacy-modes/mode/clike"
 
 type LanguageOption = 
     "apl" |
@@ -134,6 +134,7 @@ type LanguageOption =
     "csharp" |
     "cypher" |
     "d" |
+    "dart" |
     "diff" |
     "dockerFile" |
     "dtd" |
@@ -169,6 +170,7 @@ type LanguageOption =
     "json" |
     "jsx" |
     "julia" |
+    "kotlin" |
     "lezer" |
     "less" |
     "liveScript" |
@@ -181,10 +183,13 @@ type LanguageOption =
     "modelica" |
     "mscgen" |
     "mumps" |
+    "nesC" |
     "nginx" |
     "nix" |
     "nsis" |
     "ntriples" |
+    "objectiveC" |
+    "objectiveCpp" |
     "octave" |
     "oz" |
     "pascal" |
@@ -201,15 +206,18 @@ type LanguageOption =
     "rust" |
     "sas" |
     "sass" |
+    "scala" |
     "scheme" |
+    "shader" |
     "shell" |
     "sieve" |
     "smalltalk" |
-    "solidiry" |
+    "solidity" |
     "solr" |
     "sparql" |
     "spreadsheet" |
     "sql" |
+    "squirrel" |
     "stex" |
     "stylus" |
     "svelte" |
@@ -255,6 +263,7 @@ export const items: AutocompleteItem[] = [
     { label: "C#", value: "csharp" },
     { label: "Cypher", value: "cypher" },
     { label: "D", value: "d" },
+    { label: "Dart", value: "dart" },
     { label: "Diff", value: "diff" },
     { label: "Dockerfile", value: "dockerFile" },
     { label: "DTD", value: "dtd" },
@@ -290,6 +299,7 @@ export const items: AutocompleteItem[] = [
     { label: "JSON", value: "json" },
     { label: "JSX", value: "jsx" },
     { label: "Julia", value: "julia" },
+    { label: "Kotlin", value: "kotlin" },
     { label: "Lezer", value: "lezer" },
     { label: "Less", value: "less" },
     { label: "LiveScript", value: "liveScript" },
@@ -302,10 +312,13 @@ export const items: AutocompleteItem[] = [
     { label: "Modelica", value: "modelica" },
     { label: "Mscgen", value: "mscgen" },
     { label: "MUMPS", value: "mumps" },
+    { label: "nesC", value: "nesC" },
     { label: "Nginx", value: "nginx" },
     { label: "Nix", value: "nix" },
     { label: "NSIS", value: "nsis" },
     { label: "N-Triples", value: "ntriples" },
+    { label: "objectiveC", value: "objectiveC" },
+    { label: "objectiveCpp", value: "objectiveCpp" },
     { label: "Octave", value: "octave" },
     { label: "Oz", value: "oz" },
     { label: "Pascal", value: "pascal" },
@@ -322,7 +335,9 @@ export const items: AutocompleteItem[] = [
     { label: "Rust", value: "rust" },
     { label: "SAS", value: "sas" },
     { label: "SASS", value: "sass" },
+    { label: "Scala", value: "scala" },
     { label: "Scheme", value: "scheme" },
+    { label: "Shader", value: "shader" },
     { label: "Shell", value: "shell" },
     { label: "Sieve", value: "sieve" },
     { label: "Smalltalk", value: "smalltalk" },
@@ -331,6 +346,7 @@ export const items: AutocompleteItem[] = [
     { label: "SPARQL", value: "sparql" },
     { label: "Spreadsheet", value: "spreadsheet" },
     { label: "SQL", value: "sql" },
+    { label: "Squirrel", value: "squirrel" },
     { label: "STEX", value: "stex" },
     { label: "Stylus", value: "stylus" },
     { label: "Svelte", value: "svelte" },
@@ -376,6 +392,7 @@ const languages =  {
     csharp: csharp(),
     cypher: StreamLanguage.define(cypher),
     d: StreamLanguage.define(d),
+    dart: StreamLanguage.define(dart),
     diff: StreamLanguage.define(diff),
     dockerFile: StreamLanguage.define(dockerFile),
     dtd: StreamLanguage.define(dtd),
@@ -411,6 +428,7 @@ const languages =  {
     json: json(),
     jsx: javascript({jsx: true}),
     julia: StreamLanguage.define(julia),
+    kotlin: StreamLanguage.define(kotlin),
     lezer: lezer(),
     less: less(),
     liveScript: StreamLanguage.define(liveScript),
@@ -424,9 +442,12 @@ const languages =  {
     mscgen: StreamLanguage.define(mscgen),
     mumps: StreamLanguage.define(mumps),
     nginx: StreamLanguage.define(nginx),
+    nesC: StreamLanguage.define(nesC),
     nix: nix(),
     nsis: StreamLanguage.define(nsis),
     ntriples: StreamLanguage.define(ntriples),
+    objectiveC: StreamLanguage.define(objectiveC),
+    objectiveCpp: StreamLanguage.define(objectiveCpp),
     octave: StreamLanguage.define(octave),
     oz: StreamLanguage.define(oz),
     pascal: StreamLanguage.define(pascal),
@@ -443,7 +464,9 @@ const languages =  {
     rust: rust(),
     sas: StreamLanguage.define(sas),
     sass: sass(),
+    scala: StreamLanguage.define(scala),
     scheme: StreamLanguage.define(scheme),
+    shader: StreamLanguage.define(shader),
     shell: StreamLanguage.define(shell),
     sieve: StreamLanguage.define(sieve),
     smalltalk: StreamLanguage.define(smalltalk),
@@ -452,6 +475,7 @@ const languages =  {
     sparql: StreamLanguage.define(sparql),
     spreadsheet: StreamLanguage.define(spreadsheet),
     sql: sql(),
+    squirrel: StreamLanguage.define(squirrel),
     stex: StreamLanguage.define(stex),
     stylus: StreamLanguage.define(stylus),
     svelte: svelte(),
