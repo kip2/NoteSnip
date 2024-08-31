@@ -1,4 +1,4 @@
-import { Box, Button, Center, Container, Heading, Text, useColorMode, Wrap } from '@yamada-ui/react';
+import { Box, Button, Center, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
 import { NativeSelect, NativeOption, NativeOptionGroup } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
 import { useState } from 'react'

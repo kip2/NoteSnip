@@ -101,9 +101,11 @@ import { yaml } from "@codemirror/legacy-modes/mode/yaml"
 import { z80 } from "@codemirror/legacy-modes/mode/z80"
 import { d } from "@codemirror/legacy-modes/mode/d"
 import { elm } from "@codemirror/legacy-modes/mode/elm"
+import { angular } from "@codemirror/lang-angular"
 
 type LanguageOption = 
     "apl" |
+    "angular" |
     "asciiArmor" |
     "asterisk" |
     "brainfuck" |
@@ -144,6 +146,7 @@ type LanguageOption =
     "javascript" |
     "jinja2" |
     "json" |
+    "jsx" |
     "julia" |
     "lezer" |
     "less" |
@@ -191,8 +194,10 @@ type LanguageOption =
     "tiddlyWiki" |
     "tiki" |
     "toml" |
+    "tsx" |
     "ttcn" |
     "turtle" |
+    "typescript" |
     "vb" |
     "vbScript" |
     "velocity" |
@@ -210,6 +215,7 @@ import { NativeSelectItem } from "@yamada-ui/react";
 
 export const items: NativeSelectItem[] = [
     { label: "APL", value: "apl" },
+    { label: "Angular", value: "angular" },
     { label: "AsciiArmor", value: "asciiArmor" },
     { label: "Asterisk", value: "asterisk" },
     { label: "Brainfuck", value: "brainfuck" },
@@ -250,6 +256,7 @@ export const items: NativeSelectItem[] = [
     { label: "JavaScript", value: "javascript" },
     { label: "Jinja2", value: "jinja2" },
     { label: "JSON", value: "json" },
+    { label: "JSX", value: "jsx" },
     { label: "Julia", value: "julia" },
     { label: "Lezer", value: "lezer" },
     { label: "Less", value: "less" },
@@ -297,8 +304,10 @@ export const items: NativeSelectItem[] = [
     { label: "TiddlyWiki", value: "tiddlyWiki" },
     { label: "Tiki", value: "tiki" },
     { label: "TOML", value: "toml" },
+    { label: "TSX", value: "tsx" },
     { label: "TTCN", value: "ttcn" },
     { label: "Turtle", value: "turtle" },
+    { label: "TypeScript", value: "typescript" },
     { label: "VB", value: "vb" },
     { label: "VBScript", value: "vbscript" },
     { label: "Velocity", value: "velocity" },
@@ -315,6 +324,7 @@ export const items: NativeSelectItem[] = [
 
 const languages =  {
     apl: StreamLanguage.define(apl),
+    angular: angular(),
     asciiArmor: StreamLanguage.define(asciiArmor),
     asterisk: StreamLanguage.define(asterisk),
     brainfuck: StreamLanguage.define(brainfuck),
@@ -355,6 +365,7 @@ const languages =  {
     javascript: javascript(),
     jinja2: StreamLanguage.define(jinja2),
     json: json(),
+    jsx: javascript({jsx: true}),
     julia: StreamLanguage.define(julia),
     lezer: lezer(),
     less: less(),
@@ -402,8 +413,10 @@ const languages =  {
     tiddlyWiki: StreamLanguage.define(tiddlyWiki),
     tiki: StreamLanguage.define(tiki),
     toml: StreamLanguage.define(toml),
+    tsx: javascript({typescript: true, jsx:true}),
     ttcn: StreamLanguage.define(ttcn),
     turtle: StreamLanguage.define(turtle),
+    typescript: javascript({typescript: true}),
     vb: StreamLanguage.define(vb),
     vbScript: StreamLanguage.define(vbScript),
     velocity: StreamLanguage.define(velocity),
