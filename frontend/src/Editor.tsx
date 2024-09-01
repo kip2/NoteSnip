@@ -13,9 +13,17 @@ const Editor = () => {
     }, [])
 
     const [language, setLanguage] = useState(defaultLanguage)
+    const [previousValue, setPreviousValue] = useState("")
     const handleLanguageChange = (value: string) => {
-        setLanguage(value)
+        if (value.length >= previousValue.length) {
+            setLanguage(value)
+        }
+        setPreviousValue(value)
     }
+    // const handleLanguageChange = (value: string) => {
+    //     setLanguage(value)
+    // }
+
 
     return (
         <>
