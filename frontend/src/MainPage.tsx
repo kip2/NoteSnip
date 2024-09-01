@@ -1,10 +1,12 @@
-import { Box, Button, Center, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
+import { Box, Button, Center, ColorMode, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
 import { NativeSelect, NativeOption, NativeOptionGroup } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Editor from './Editor';
 import { Sun } from '@yamada-ui/lucide';
+import { getTheme } from './Themes/Themes';
+import { useCodeMirrorTheme } from './Themes/ThemeContext';
 
 const MainPage = () => {
     const [response, setResponse] = useState('');
@@ -43,6 +45,14 @@ const MainPage = () => {
 
     const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
+    // todo: システムの色に合わせて変更することがまだ
+    const { setTheme } = useCodeMirrorTheme()
+    const handleColorModeChange = (mode: ColorMode) => {
+        changeColorMode(mode)
+        const currentTheme = getTheme(mode as string)
+        setTheme(currentTheme)
+    }
+
     return (
         <>
             <Container size="ld">
@@ -64,8 +74,8 @@ const MainPage = () => {
                 </Center>
                 <Center>
                     <Box display="flex" gap="md">
-                        <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
-                        <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
+                        <Button onClick={()=>handleColorModeChange("light")}>ライトモード</Button>
+                        <Button onClick={() => handleColorModeChange("dark")}>ダークモード</Button>
                         <Button onClick={() => changeColorMode("system")}>システム</Button>
                         <IconButton icon={<Sun />} />
                     </Box>

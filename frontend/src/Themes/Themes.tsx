@@ -2,17 +2,17 @@ import { githubDark, basicDark, basicLight } from "@uiw/codemirror-themes-all";
 import { NativeSelectItem } from "@yamada-ui/react";
 
 export const themeItems: NativeSelectItem[] = [
-    { label: "dark", value: "basicDark"},
-    { label: "light", value: "basicLight"},
+    { label: "dark", value: "dark"},
+    { label: "light", value: "light"},
 ]
 
 type ThemeOption =
-    "basicDark" |
-    "basicLight"
+    "dark" |
+    "light"
 
 const themes = {
-    basicDark: basicDark,
-    basicLight: basicLight,
+    dark: basicDark,
+    light: basicLight,
 }
 
 export const getTheme = (themeName: string) => {

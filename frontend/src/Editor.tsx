@@ -6,6 +6,7 @@ import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
 import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
 import { getTheme, themeItems } from "./Themes/Themes";
+import { useCodeMirrorTheme } from "./Themes/ThemeContext";
 
 const Editor = () => {
     const [code, setCode] = useState(defaultSnippet)
@@ -24,13 +25,13 @@ const Editor = () => {
 
     // todo: デフォルトで渡すものは、darkとlightでテーマを切り替えて提供すること
     // todo: システムのテーマによって変えること
-    const [theme, setTheme] = useState(basicDark)
+    // const [theme, setTheme] = useState(basicDark)
+    const { theme, setTheme } = useCodeMirrorTheme()
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedTheme = event.target.value
-        setTheme(getTheme(selectedTheme))
+        const currentTheme = getTheme(selectedTheme)
+        setTheme(currentTheme)
     }
-
-
 
     return (
         <>
