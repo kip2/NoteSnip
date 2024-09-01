@@ -1,10 +1,11 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
-import { githubDark, basicDark, basicLight } from "@uiw/codemirror-themes-all";
-import { Container, Autocomplete, Center, NativeSelect, NativeSelectItem } from "@yamada-ui/react";
+import { basicDark} from "@uiw/codemirror-themes-all";
+import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
 import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
+import { getTheme, themeItems } from "./Themes/Themes";
 
 const Editor = () => {
     const [code, setCode] = useState(defaultSnippet)
@@ -29,23 +30,7 @@ const Editor = () => {
         setTheme(getTheme(selectedTheme))
     }
 
-    const themeItems: NativeSelectItem[] = [
-        { label: "dark", value: "basikDark"},
-        { label: "light", value: "basikLight"},
-    ]
 
-    type ThemeOption =
-        "dark" |
-        "light"
-
-    const themes = {
-        dark: basicDark,
-        light: basicLight,
-    }
-
-    const getTheme = (themeName: string) => {
-        return themes[themeName as ThemeOption]
-    }
 
     return (
         <>
