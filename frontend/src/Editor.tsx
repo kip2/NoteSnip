@@ -1,7 +1,7 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
-import { githubDark, basicDark } from "@uiw/codemirror-themes-all";
-import { Container, Autocomplete, Center } from "@yamada-ui/react";
+import { githubDark, basicDark, basicLight } from "@uiw/codemirror-themes-all";
+import { Container, Autocomplete, Center, NativeSelect, NativeSelectItem } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
 import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
@@ -21,13 +21,39 @@ const Editor = () => {
         setPreviousValue(value)
     }
 
+    // todo: デフォルトで渡すものは、darkとlightでテーマを切り替えて提供すること
+    // todo: システムのテーマによって変えること
+    const [theme, setTheme] = useState(basicDark)
+    const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedTheme = event.target.value
+        setTheme(getTheme(selectedTheme))
+    }
+
+    const themeItems: NativeSelectItem[] = [
+        { label: "dark", value: "basikDark"},
+        { label: "light", value: "basikLight"},
+    ]
+
+    type ThemeOption =
+        "dark" |
+        "light"
+
+    const themes = {
+        dark: basicDark,
+        light: basicLight,
+    }
+
+    const getTheme = (themeName: string) => {
+        return themes[themeName as ThemeOption]
+    }
+
     return (
         <>
             <CodeMirror
                 value={code}
                 height="700px"
                 extensions={[getLanguageExtension(language)]}
-                theme={basicDark}
+                theme={theme}
                 onChange={onCodeChange}
             />
             <Container>
@@ -42,6 +68,13 @@ const Editor = () => {
                     items={items}
                 >
                 </Autocomplete>
+                <NativeSelect
+                    placeholder="テーマを選択してください"
+                    items={themeItems}
+                    onChange={handleThemeChange}
+                />
+            </Container>
+            <Container>
             </Container>
         </>
 
