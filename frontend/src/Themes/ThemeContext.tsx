@@ -1,4 +1,4 @@
-import { basicDark, basicLight, githubDark } from "@uiw/codemirror-themes-all"
+import { basicDark, basicLight } from "@uiw/codemirror-themes-all"
 import { Extension } from "@uiw/react-codemirror"
 import { createContext, ReactNode, useContext, useState } from "react"
 

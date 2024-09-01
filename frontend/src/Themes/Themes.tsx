@@ -1,4 +1,4 @@
-import { githubDark, basicDark, basicLight } from "@uiw/codemirror-themes-all";
+import {  basicDark, basicLight } from "@uiw/codemirror-themes-all";
 import { NativeSelectItem } from "@yamada-ui/react";
 
 export const themeItems: NativeSelectItem[] = [
