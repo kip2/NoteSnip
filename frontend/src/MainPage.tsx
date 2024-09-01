@@ -45,7 +45,6 @@ const MainPage = () => {
 
     const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
-    // todo: システムの色に合わせて変更することがまだ
     const { setTheme } = useCodeMirrorTheme()
     const handleColorModeChange = (mode: ColorMode) => {
         changeColorMode(mode)
@@ -76,7 +75,6 @@ const MainPage = () => {
                     <Box display="flex" gap="md">
                         <Button onClick={()=>handleColorModeChange("light")}>ライトモード</Button>
                         <Button onClick={() => handleColorModeChange("dark")}>ダークモード</Button>
-                        <Button onClick={() => changeColorMode("system")}>システム</Button>
                         <IconButton icon={<Sun />} />
                     </Box>
                 </Center>

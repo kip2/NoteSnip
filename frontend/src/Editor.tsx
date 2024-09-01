@@ -1,6 +1,5 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
-import { basicDark} from "@uiw/codemirror-themes-all";
 import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
@@ -23,9 +22,6 @@ const Editor = () => {
         setPreviousValue(value)
     }
 
-    // todo: デフォルトで渡すものは、darkとlightでテーマを切り替えて提供すること
-    // todo: システムのテーマによって変えること
-    // const [theme, setTheme] = useState(basicDark)
     const { theme, setTheme } = useCodeMirrorTheme()
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedTheme = event.target.value

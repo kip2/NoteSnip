@@ -1,4 +1,4 @@
-import { githubDark } from "@uiw/codemirror-themes-all"
+import { basicDark, basicLight, githubDark } from "@uiw/codemirror-themes-all"
 import { Extension } from "@uiw/react-codemirror"
 import { createContext, ReactNode, useContext, useState } from "react"
 
@@ -9,8 +9,13 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
+const getSystemTheme = () => {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    return prefersDark ? basicDark : basicLight
+}
+
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme ] = useState(githubDark)
+    const [theme, setTheme ] = useState(getSystemTheme())
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme}}>
