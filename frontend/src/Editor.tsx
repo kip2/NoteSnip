@@ -20,10 +20,6 @@ const Editor = () => {
         }
         setPreviousValue(value)
     }
-    // const handleLanguageChange = (value: string) => {
-    //     setLanguage(value)
-    // }
-
 
     return (
         <>
