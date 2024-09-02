@@ -1,6 +1,6 @@
 import {  
     basicDark, githubLight , 
-    abcdef, abyss, androidstudio, andromeda, atomone, aura, bbedit, bespin, consoleDark, consoleLight, copilot, duotoneDark, duotoneLight, dracula, darcula, eclipse, githubDark,
+    abcdef, abyss, androidstudio, andromeda, atomone, aura, bbedit, bespin, consoleDark, consoleLight, copilot, duotoneDark, duotoneLight, dracula, darcula, eclipse, githubDark, gruvboxDark, gruvboxLight, kimbie, material, noctisLilac, nord, okaidia, quietlight,
 } from "@uiw/codemirror-themes-all";
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -25,6 +25,14 @@ export const themeItems: NativeSelectItem[] = [
     { label: "eclipse", value: "eclipse"},
     { label: "githubDark", value: "githubDark"},
     { label: "githubLight", value: "githubLight"},
+    { label: "gruvboxDark", value: "gruvboxDark"},
+    { label: "gruvboxLight", value: "gruvboxLight"},
+    { label: "kimbie", value: "kimbie"},
+    { label: "material", value: "material"},
+    { label: "noctisLilac", value: "noctisLilac"},
+    { label: "nord", value: "nord"},
+    { label: "okaidia", value: "okaidia"},
+    { label: "quietlight", value: "quietlight"},
 ]
 
 type ThemeOption =
@@ -47,7 +55,15 @@ type ThemeOption =
     "darcula" |
     "eclipse" |
     "githubDark" |
-    "githubLight" 
+    "githubLight" |
+    "gruvboxDark" |
+    "gruvboxLight"|
+    "kimbie" |
+    "material"|
+    "noctisLilac"|
+    "nord"|
+    "okaidia"|
+    "quietlight"
 
 
 const themes = {
@@ -71,6 +87,14 @@ const themes = {
     eclipse: eclipse,
     githubDark: githubDark,
     githubLight: githubLight,
+    gruvboxDark: gruvboxDark,
+    gruvboxLight: gruvboxLight,
+    kimbie: kimbie,
+    material: material,
+    noctisLilac: noctisLilac,
+    nord: nord,
+    okaidia: okaidia,
+    quietlight: quietlight,
 }
 
 export const getTheme = (themeName: string) => {
