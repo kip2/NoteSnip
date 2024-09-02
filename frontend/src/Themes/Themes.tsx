@@ -1,6 +1,6 @@
 import {  
     basicDark, githubLight , 
-    abcdef, abyss, androidstudio, andromeda, atomone, aura, bbedit, bespin, consoleDark, consoleLight, copilot, duotoneDark, duotoneLight, dracula, darcula, eclipse, githubDark, gruvboxDark, gruvboxLight, kimbie, material, noctisLilac, nord, okaidia, quietlight,
+    abcdef, abyss, androidstudio, andromeda, atomone, aura, bbedit, bespin, consoleDark, consoleLight, copilot, duotoneDark, duotoneLight, dracula, darcula, eclipse, githubDark, gruvboxDark, gruvboxLight, kimbie, material, noctisLilac, nord, okaidia, quietlight, red, solarizedDark, solarizedLight, sublime, tokyoNight, tokyoNightDay, tokyoNightStorm, tomorrowNightBlue, vscodeDark, vscodeLight, whiteDark, whiteLight, xcodeDark, xcodeLight
 } from "@uiw/codemirror-themes-all";
 import { NativeSelectItem } from "@yamada-ui/react";
 
@@ -33,6 +33,20 @@ export const themeItems: NativeSelectItem[] = [
     { label: "nord", value: "nord"},
     { label: "okaidia", value: "okaidia"},
     { label: "quietlight", value: "quietlight"},
+    { label: "red", value: "red"},
+    { label: "solarizedDark", value: "solarizedDark"},
+    { label: "solarizedLight", value: "solarizedLight"},
+    { label: "sublime", value: "sublime"},
+    { label: "tokyoNight", value: "tokyoNight"},
+    { label: "tokyoNightDay", value: "tokyoNightDay"},
+    { label: "tokyoNightStorm", value: "tokyoNightStorm"},
+    { label: "tomorrowNightBlue", value: "tomorrowNightBlue"},
+    { label: "vscodeDark", value: "vscodeDark"},
+    { label: "vscodeLight", value: "vscodeLight"},
+    { label: "whiteDark", value: "whiteDark"},
+    { label: "whiteLight", value: "whiteLight"},
+    { label: "xcodeDark", value: "xcodeDark"},
+    { label: "xcodeLight", value: "xcodeLight"},
 ]
 
 type ThemeOption =
@@ -63,7 +77,21 @@ type ThemeOption =
     "noctisLilac"|
     "nord"|
     "okaidia"|
-    "quietlight"
+    "quietlight"|
+    "red"|
+    "solarizedLight"|
+    "solarizedDark"|
+    "sublime"|
+    "tokyoNight"|
+    "tokyoNightDay"|
+    "tokyoNightStorm"|
+    "tomorrowNightBlue"|
+    "vscodeDrak"|
+    "vscodeLight"|
+    "whiteDark"|
+    "whiteLight"|
+    "xcodeDark"|
+    "xcodeLight"
 
 
 const themes = {
@@ -95,6 +123,20 @@ const themes = {
     nord: nord,
     okaidia: okaidia,
     quietlight: quietlight,
+    red: red,
+    solarizedDark: solarizedDark,
+    solarizedLight: solarizedLight,
+    sublime: sublime,
+    tokyoNight: tokyoNight,
+    tokyoNightDay: tokyoNightDay,
+    tokyoNightStorm: tokyoNightStorm,
+    tomorrowNightBlue: tomorrowNightBlue,
+    vscodeDark: vscodeDark,
+    vscodeLight: vscodeLight,
+    whiteDark: whiteDark,
+    whiteLight: whiteLight,
+    xcodeDark: xcodeDark,
+    xcodeLight: xcodeLight,
 }
 
 export const getTheme = (themeName: string) => {
