@@ -1,7 +1,7 @@
 import { Box, Button, Center, ColorMode, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
 import { NativeSelect  } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Editor from './Editor';
 import { Sun } from '@yamada-ui/lucide';
@@ -51,6 +51,11 @@ const MainPage = () => {
         const currentTheme = getTheme(mode as string)
         setTheme(currentTheme)
     }
+
+    useEffect(() => {
+        const currentTheme = getTheme(colorMode as string)
+        setTheme(currentTheme)
+    }, [colorMode, setTheme])
 
     return (
         <>
