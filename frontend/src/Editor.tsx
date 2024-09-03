@@ -41,6 +41,7 @@ const Editor = () => {
             <Container>
                 <Autocomplete 
                     placeholder="言語を選択してください"
+                    value={language}
                     header={
                         <Center pt="2" px="3">
                             "言語を選択してください"
