@@ -7,6 +7,7 @@ import Editor from './Editor';
 import { Sun } from '@yamada-ui/lucide';
 import { getTheme } from './Themes/Themes';
 import { useCodeMirrorTheme } from './Themes/ThemeContext';
+import { useSelectedThemeContext } from './Themes/ThemeProvider';
 
 const MainPage = () => {
     const [response, setResponse] = useState('');
@@ -52,10 +53,13 @@ const MainPage = () => {
         setTheme(currentTheme)
     }
 
+    const { setSelectedTheme } = useSelectedThemeContext()
+
     useEffect(() => {
         const currentTheme = getTheme(colorMode as string)
+        setSelectedTheme(colorMode as string)
         setTheme(currentTheme)
-    }, [colorMode, setTheme])
+    }, [colorMode, setSelectedTheme, setTheme])
 
     return (
         <>

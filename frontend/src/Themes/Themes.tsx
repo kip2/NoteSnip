@@ -24,7 +24,6 @@ export const themeItems: NativeSelectItem[] = [
     { label: "darcula", value: "darcula"},
     { label: "eclipse", value: "eclipse"},
     { label: "githubDark", value: "githubDark"},
-    { label: "githubLight", value: "githubLight"},
     { label: "gruvboxDark", value: "gruvboxDark"},
     { label: "gruvboxLight", value: "gruvboxLight"},
     { label: "kimbie", value: "kimbie"},
@@ -52,6 +51,7 @@ export const themeItems: NativeSelectItem[] = [
 type ThemeOption =
     "dark" |
     "light" |
+    "githubLight" |
     "abcdef" |
     "abyss" |
     "androidstudio" |
@@ -69,7 +69,6 @@ type ThemeOption =
     "darcula" |
     "eclipse" |
     "githubDark" |
-    "githubLight" |
     "gruvboxDark" |
     "gruvboxLight"|
     "kimbie" |
@@ -97,6 +96,7 @@ type ThemeOption =
 const themes = {
     dark: basicDark,
     light: githubLight,
+    githubLight: githubLight,
     abcdef: abcdef,
     abyss: abyss,
     androidstudio: androidstudio,
@@ -114,7 +114,6 @@ const themes = {
     darcula: darcula,
     eclipse: eclipse,
     githubDark: githubDark,
-    githubLight: githubLight,
     gruvboxDark: gruvboxDark,
     gruvboxLight: gruvboxLight,
     kimbie: kimbie,
@@ -138,6 +137,7 @@ const themes = {
     xcodeDark: xcodeDark,
     xcodeLight: xcodeLight,
 }
+
 
 export const getTheme = (themeName: string) => {
     return themes[themeName as ThemeOption]
