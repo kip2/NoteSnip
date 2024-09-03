@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface SelectedThemeContextType {
     selectedTheme: string;
@@ -6,15 +6,12 @@ interface SelectedThemeContextType {
 }
 
 const SelectedThemeContext = createContext<SelectedThemeContextType>({
-    selectedTheme: "dark",
+    selectedTheme: "",
     setSelectedTheme: () => {},
 });
 
 export const SelectedThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [selectedTheme, setSelectedTheme] = useState<string>("dark");
-    useEffect(() => {
-        console.log("ThemeProvider selectedTheme:", selectedTheme);
-    }, [selectedTheme]);
+    const [selectedTheme, setSelectedTheme] = useState<string>("");
 
     return (
         <SelectedThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>

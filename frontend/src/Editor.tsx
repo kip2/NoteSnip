@@ -26,10 +26,6 @@ const Editor = () => {
     const { theme, setTheme } = useCodeMirrorTheme()
     const { selectedTheme, setSelectedTheme } = useSelectedThemeContext()
 
-    useEffect(() => {
-        console.log("selectedTheme effect:", selectedTheme)
-    }, [selectedTheme])
-
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = event.target.value
         const currentTheme = getTheme(theme)
