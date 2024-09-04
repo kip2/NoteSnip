@@ -8,6 +8,7 @@ import { getTheme, themeItems } from "./Themes/Themes";
 import { useCodeMirrorTheme } from "./Themes/ThemeContext";
 import { useSelectedThemeContext } from "./Themes/ThemeProvider";
 import { useCodeContext } from "./Code/CodeProvider";
+import { useLanguageContext } from "./Languages/LanguageProvider";
 
 const Editor = () => {
     const {code, setCode} = useCodeContext()
@@ -15,7 +16,7 @@ const Editor = () => {
         setCode(val)
     }, [])
 
-    const [language, setLanguage] = useState(defaultLanguage)
+    const { language, setLanguage } = useLanguageContext()
     const [previousValue, setPreviousValue] = useState("")
     const handleLanguageChange = (value: string) => {
         if (value.length >= previousValue.length) {
