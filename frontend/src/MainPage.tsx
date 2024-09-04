@@ -9,7 +9,6 @@ import { getTheme } from './Themes/Themes';
 import { useCodeMirrorTheme } from './Themes/ThemeContext';
 import { useSelectedThemeContext } from './Themes/ThemeProvider';
 import { useCodeContext } from './Code/CodeProvider';
-import { snippets } from '@codemirror/lang-javascript';
 import { useLanguageContext } from './Languages/LanguageProvider';
 
 const MainPage = () => {
@@ -18,25 +17,35 @@ const MainPage = () => {
     const params = useParams<{ hash?: string}>()
     const hash = params.hash
 
-    const handleClick = () => {
-        // todo: 画面ができたら、画面からデータを受け渡すこと
-        const requestData = {
-            snippet: "Example Snippet",
-            expiration_stat: "eternal"
+    const { code } = useCodeContext()
+    const { language } = useLanguageContext()
+
+    const handleButton = () => {
+        const requestJsonData = {
+            snippet: code,
+            snippet_language: language,
+            expiration_stat: selectedExpirationValue,
         }
 
-    fetch('http://127.0.0.1:8000/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-    })
-        .then(response => response.json())
-        .then(data => {
-            setResponse(data)
+        fetch('http://127.0.0.1:8000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestJsonData)
         })
-        .catch(error => console.error('Error fetching data:', error))
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        console.error("Response text:", text)
+                    })
+                }
+                return response.json()
+            })
+            .then(data => {
+                setResponse(data)
+            })
+            .catch(error => console.error('Error fetching data:', error))
     }
 
     const items: NativeSelectItem[] = [
@@ -70,17 +79,6 @@ const MainPage = () => {
         setSelectedExpirationValue(event.target.value)
     }
 
-    const { code } = useCodeContext()
-    const { language } = useLanguageContext()
-
-    const handleButton = () => {
-        const requestJsonData = {
-            snippet: code,
-            language: language,
-            expiration_stat: selectedExpirationValue,
-        }
-        console.log(requestJsonData)
-    }
 
     return (
         <>
