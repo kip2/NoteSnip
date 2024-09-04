@@ -74,12 +74,12 @@ const MainPage = () => {
     const { language } = useLanguageContext()
 
     const handleButton = () => {
-        const jsonData = {
+        const requestJsonData = {
             snippet: code,
             language: language,
             expiration_stat: selectedExpirationValue,
         }
-        console.log(jsonData)
+        console.log(requestJsonData)
     }
 
     return (
