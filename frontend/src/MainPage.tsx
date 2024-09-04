@@ -81,6 +81,13 @@ const MainPage = () => {
                     </Box>
                 </Center>
                 <Center>
+                    <Box>
+                        <Center>
+                            <Button onClick={()=> console.log("test")}>送信</Button>
+                        </Center>
+                    </Box>
+                </Center>
+                <Center>
                     <Box display="flex" gap="md">
                         <Button onClick={()=>handleColorModeChange("light")}>ライトモード</Button>
                         <Button onClick={() => handleColorModeChange("dark")}>ダークモード</Button>
