@@ -1,4 +1,4 @@
-import { Box, Button, Center, ColorMode, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
+import { Box, Button, Center, ColorMode, Container, Heading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, NativeSelectItem, useColorMode, useDisclosure } from '@yamada-ui/react';
 import { NativeSelect  } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
 import React, { useEffect, useState } from 'react'
@@ -12,7 +12,6 @@ import { useCodeContext } from './Code/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
 
 const MainPage = () => {
-    const [response, setResponse] = useState('');
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
     const hash = params.hash
@@ -20,7 +19,8 @@ const MainPage = () => {
     const { code } = useCodeContext()
     const { language } = useLanguageContext()
 
-    
+    const [ responseData, setResponseData ] = useState<string | null>(null)
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const handleSubmitButton = () => {
         const requestJsonData = {
@@ -45,21 +45,21 @@ const MainPage = () => {
                 return response.json()
             })
             .then(data => {
-                console.log("response:",data)
-                setResponse(data)
+                setResponseData(JSON.stringify(data, null, 2))
+                onOpen()
             })
             .catch(error => console.error('Error fetching data:', error))
     }
 
     const items: NativeSelectItem[] = [
-        { label: "1min", value: "1min"},
         { label: "10min", value: "10min"},
+        { label: "1hour", value: "1hour"},
         { label: "1day", value: "1day" },
         { label: "1week", value: "1week" },
         { label: "eternal", value: "eternal" },
     ]
 
-    const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+    const { colorMode, changeColorMode } = useColorMode()
 
     const { setTheme } = useCodeMirrorTheme()
     const handleColorModeChange = (mode: ColorMode) => {
@@ -92,6 +92,24 @@ const MainPage = () => {
                 <Box gap="ms">
                     <Editor></Editor>
                 </Box>
+
+                <Modal isOpen={isOpen} onClose={onClose} size="xl">
+                    <ModalOverlay />
+                    <Center>
+                        <ModalHeader>
+                            レスポンス
+                        </ModalHeader>
+                    </Center>
+                    <ModalBody>
+                        <pre>{responseData}</pre>
+                    </ModalBody>
+                    <Center>
+                        <ModalFooter>
+                            <Button onClick={onClose}>閉じる</Button>
+                        </ModalFooter>
+                    </Center>
+
+                </Modal>
                 
                 <Center>
                     <Box>

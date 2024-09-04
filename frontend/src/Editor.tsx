@@ -3,7 +3,6 @@ import { useCallback,  useState } from "react";
 import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
-import { defaultLanguage } from "./Languages/DefaultSnippet";
 import { getTheme, themeItems } from "./Themes/Themes";
 import { useCodeMirrorTheme } from "./Themes/ThemeContext";
 import { useSelectedThemeContext } from "./Themes/ThemeProvider";
