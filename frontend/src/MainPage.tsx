@@ -1,7 +1,7 @@
 import { Box, Button, Center, ColorMode, Container, Heading, NativeSelectItem, useColorMode } from '@yamada-ui/react';
 import { NativeSelect  } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Editor from './Editor';
 import { Sun } from '@yamada-ui/lucide';
@@ -61,6 +61,16 @@ const MainPage = () => {
         setTheme(currentTheme)
     }, [colorMode, setSelectedTheme, setTheme])
 
+    const [selectedExpirationValue, setSelectedExpirationValue] = useState("")
+
+    const handleExpirationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedExpirationValue(event.target.value)
+    }
+
+    const handleButton = () => {
+        console.log(selectedExpirationValue)
+    }
+
     return (
         <>
             <Container size="ld">
@@ -77,13 +87,14 @@ const MainPage = () => {
                             focusBorderColor='green.500'
                             maxW="xs"
                             placeholder='有効期限を選択' 
+                            onChange={handleExpirationChange}
                             items={items} />
                     </Box>
                 </Center>
                 <Center>
                     <Box>
                         <Center>
-                            <Button onClick={()=> console.log("test")}>送信</Button>
+                            <Button onClick={handleButton}>送信</Button>
                         </Center>
                     </Box>
                 </Center>
