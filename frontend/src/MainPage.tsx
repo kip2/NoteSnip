@@ -10,6 +10,7 @@ import { useCodeMirrorTheme } from './Themes/ThemeContext';
 import { useSelectedThemeContext } from './Themes/ThemeProvider';
 import { useCodeContext } from './Code/CodeProvider';
 import { snippets } from '@codemirror/lang-javascript';
+import { useLanguageContext } from './Languages/LanguageProvider';
 
 const MainPage = () => {
     const [response, setResponse] = useState('');
@@ -70,10 +71,12 @@ const MainPage = () => {
     }
 
     const { code } = useCodeContext()
+    const { language } = useLanguageContext()
 
     const handleButton = () => {
         const jsonData = {
             snippet: code,
+            language: language,
             expiration_stat: selectedExpirationValue,
         }
         console.log(jsonData)
