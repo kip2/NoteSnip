@@ -20,7 +20,9 @@ const MainPage = () => {
     const { code } = useCodeContext()
     const { language } = useLanguageContext()
 
-    const handleButton = () => {
+    
+
+    const handleSubmitButton = () => {
         const requestJsonData = {
             snippet: code,
             snippet_language: language,
@@ -43,6 +45,7 @@ const MainPage = () => {
                 return response.json()
             })
             .then(data => {
+                console.log("response:",data)
                 setResponse(data)
             })
             .catch(error => console.error('Error fetching data:', error))
@@ -103,7 +106,7 @@ const MainPage = () => {
                 <Center>
                     <Box>
                         <Center>
-                            <Button onClick={handleButton}>送信</Button>
+                            <Button onClick={handleSubmitButton}>送信</Button>
                         </Center>
                     </Box>
                 </Center>
