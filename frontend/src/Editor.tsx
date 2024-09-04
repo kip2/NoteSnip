@@ -1,15 +1,16 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback,  useState } from "react";
 import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
 import getLanguageExtension from "./Languages/Languages";
 import { items } from "./Languages/Languages";
-import { defaultLanguage, defaultSnippet } from "./Languages/DefaultSnippet";
+import { defaultLanguage } from "./Languages/DefaultSnippet";
 import { getTheme, themeItems } from "./Themes/Themes";
 import { useCodeMirrorTheme } from "./Themes/ThemeContext";
 import { useSelectedThemeContext } from "./Themes/ThemeProvider";
+import { useCodeContext } from "./Code/CodeProvider";
 
 const Editor = () => {
-    const [code, setCode] = useState(defaultSnippet)
+    const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
     }, [])

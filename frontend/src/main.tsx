@@ -4,6 +4,7 @@ import App from './App.tsx'
 import {  UIProvider} from '@yamada-ui/react'
 import { ThemeProvider } from './Themes/ThemeContext.tsx'
 import { SelectedThemeProvider } from './Themes/ThemeProvider.tsx'
+import { CodeProvider } from './Code/CodeProvider.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -11,7 +12,9 @@ createRoot(document.getElementById('root')!).render(
     <UIProvider>
       <ThemeProvider>
         <SelectedThemeProvider>
-        <App />
+          <CodeProvider>
+            <App />
+          </CodeProvider>
         </SelectedThemeProvider>
       </ThemeProvider>
     </UIProvider>

@@ -8,6 +8,8 @@ import { Sun } from '@yamada-ui/lucide';
 import { getTheme } from './Themes/Themes';
 import { useCodeMirrorTheme } from './Themes/ThemeContext';
 import { useSelectedThemeContext } from './Themes/ThemeProvider';
+import { useCodeContext } from './Code/CodeProvider';
+import { snippets } from '@codemirror/lang-javascript';
 
 const MainPage = () => {
     const [response, setResponse] = useState('');
@@ -67,8 +69,14 @@ const MainPage = () => {
         setSelectedExpirationValue(event.target.value)
     }
 
+    const { code } = useCodeContext()
+
     const handleButton = () => {
-        console.log(selectedExpirationValue)
+        const jsonData = {
+            snippet: code,
+            expiration_stat: selectedExpirationValue,
+        }
+        console.log(jsonData)
     }
 
     return (
