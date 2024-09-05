@@ -6,7 +6,7 @@ import { items } from "./Languages/Languages";
 import { getTheme, themeItems } from "./Themes/Themes";
 import { useCodeMirrorTheme } from "./Themes/ThemeContext";
 import { useSelectedThemeContext } from "./Themes/ThemeProvider";
-import { useCodeContext } from "./Code/CodeProvider";
+import { useCodeContext } from "./EditorCode/CodeProvider";
 import { useLanguageContext } from "./Languages/LanguageProvider";
 
 const Editor = () => {

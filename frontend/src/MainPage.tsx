@@ -7,7 +7,7 @@ import { Sun } from '@yamada-ui/lucide';
 import { getTheme } from './Themes/Themes';
 import { useCodeMirrorTheme } from './Themes/ThemeContext';
 import { useSelectedThemeContext } from './Themes/ThemeProvider';
-import { useCodeContext } from './Code/CodeProvider';
+import { useCodeContext } from './EditorCode/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
 import { ExpirationPulldown } from './Pulldown/Expiration';
 import { useExpirationContext } from './Pulldown/ExpirationProvider';
