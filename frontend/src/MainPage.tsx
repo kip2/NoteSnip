@@ -2,7 +2,7 @@ import { Box, Button, Center, ColorMode, Container, Heading, Modal, ModalBody, M
 import { IconButton } from '@yamada-ui/react';
 import { useEffect, } from 'react'
 import { useParams } from 'react-router-dom';
-import Editor from './Editor';
+import Editor from './Editor/Editor';
 import { Sun } from '@yamada-ui/lucide';
 import { getTheme } from './Themes/Themes';
 import { useCodeMirrorTheme } from './Themes/ThemeContext';

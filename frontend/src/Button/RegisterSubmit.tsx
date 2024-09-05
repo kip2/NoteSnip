@@ -2,7 +2,7 @@ import { Box, Button, Center, Modal, ModalBody, ModalFooter, ModalHeader, ModalO
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
-import { useCodeContext } from "../EditorCode/CodeProvider"
+import { useCodeContext } from "../Editor/CodeProvider"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
