@@ -63,8 +63,6 @@ const Editor = () => {
                     onChange={handleThemeChange}
                 />
             </Container>
-            <Container>
-            </Container>
         </>
 
     )
