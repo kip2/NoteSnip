@@ -1,7 +1,6 @@
-import { Box, Button, Center, ColorMode, Container, Heading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, NativeSelectItem, useColorMode, useDisclosure } from '@yamada-ui/react';
-import { NativeSelect  } from '@yamada-ui/react';
+import { Box, Button, Center, ColorMode, Container, Heading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay,  useColorMode, useDisclosure } from '@yamada-ui/react';
 import { IconButton } from '@yamada-ui/react';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Editor from './Editor';
 import { Sun } from '@yamada-ui/lucide';
@@ -10,6 +9,8 @@ import { useCodeMirrorTheme } from './Themes/ThemeContext';
 import { useSelectedThemeContext } from './Themes/ThemeProvider';
 import { useCodeContext } from './Code/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
+import { ExpirationPulldown } from './Pulldown/Expiration';
+import { useExpirationContext } from './Pulldown/ExpirationProvider';
 
 const MainPage = () => {
     // URLパラメータからハッシュ値を取得
@@ -22,11 +23,13 @@ const MainPage = () => {
     const [ responseData, setResponseData ] = useState<string | null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const { expiration } = useExpirationContext()
+
     const handleSubmitButton = () => {
         const requestJsonData = {
             snippet: code,
             snippet_language: language,
-            expiration_stat: selectedExpirationValue,
+            expiration_stat: expiration,
         }
 
         fetch('http://127.0.0.1:8000/register', {
@@ -51,14 +54,6 @@ const MainPage = () => {
             .catch(error => console.error('Error fetching data:', error))
     }
 
-    const items: NativeSelectItem[] = [
-        { label: "10min", value: "10min"},
-        { label: "1hour", value: "1hour"},
-        { label: "1day", value: "1day" },
-        { label: "1week", value: "1week" },
-        { label: "eternal", value: "eternal" },
-    ]
-
     const { colorMode, changeColorMode } = useColorMode()
 
     const { setTheme } = useCodeMirrorTheme()
@@ -75,13 +70,6 @@ const MainPage = () => {
         setSelectedTheme(colorMode as string)
         setTheme(currentTheme)
     }, [colorMode, setSelectedTheme, setTheme])
-
-    const [selectedExpirationValue, setSelectedExpirationValue] = useState("")
-
-    const handleExpirationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedExpirationValue(event.target.value)
-    }
-
 
     return (
         <>
@@ -110,17 +98,9 @@ const MainPage = () => {
                     </Center>
 
                 </Modal>
+
+                <ExpirationPulldown/>
                 
-                <Center>
-                    <Box>
-                        <NativeSelect
-                            focusBorderColor='green.500'
-                            maxW="xs"
-                            placeholder='有効期限を選択' 
-                            onChange={handleExpirationChange}
-                            items={items} />
-                    </Box>
-                </Center>
                 <Center>
                     <Box>
                         <Center>

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { SelectedThemeProvider } from "./Themes/ThemeProvider";
 import { LanguageProvider } from "./Languages/LanguageProvider";
 import { ThemeProvider } from "./Themes/ThemeContext";
+import { ExpirationProvider } from "./Pulldown/ExpirationProvider";
 
 interface ProvidersProps {
     children: ReactNode
@@ -14,7 +15,9 @@ const Providers = ({ children }: ProvidersProps) => {
             <ThemeProvider>
                 <SelectedThemeProvider>
                     <LanguageProvider>
-                        {children}
+                        <ExpirationProvider>
+                            {children}
+                        </ExpirationProvider>
                     </LanguageProvider>
                 </SelectedThemeProvider>
             </ThemeProvider>
