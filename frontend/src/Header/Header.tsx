@@ -1,4 +1,5 @@
-import { Box, Flex, Text, Button, useColorModeValue } from'@yamada-ui/react';
+import { Box, Flex, Text, useColorModeValue } from'@yamada-ui/react';
+import { ColorModeButton } from '../Button/ColorModeButton';
  
 const Header = () => {
   const headerBg = useColorModeValue("neutral.200", "fuchsia.900")
@@ -10,15 +11,7 @@ const Header = () => {
           Snippet Sharing Service
         </Text>
         <Flex gap={4}>
-          <Button colorScheme="teal" variant="outline">
-            Home
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            About
-          </Button>
-          <Button colorScheme="teal" variant="outline">
-            Contact
-          </Button>
+          <ColorModeButton/>
         </Flex>
       </Flex>
     </Box>
