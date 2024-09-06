@@ -2,7 +2,7 @@ import { Box, Flex, Text, useColorModeValue } from'@yamada-ui/react';
 import { ColorModeButton } from '../Button/ColorModeButton';
  
 const Header = () => {
-  const headerBg = useColorModeValue("neutral.200", "violet.950")
+  const headerBg = useColorModeValue("amber.200", "sky.800")
   const textColor = useColorModeValue("gray.700", "white")
   return (
     <Box as="header" bg={headerBg} p={3} pl={4}>

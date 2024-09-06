@@ -23,7 +23,7 @@ export const ColorModeButton = () => {
         setTheme(currentTheme)
     }
 
-    const ColorModeButtunColorSchema = useColorModeValue("blue", "indigo")
+    const ColorModeButtunColorSchema = useColorModeValue("sky", "indigo")
 
     return(
         <>
