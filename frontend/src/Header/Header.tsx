@@ -4,8 +4,8 @@ const Header = () => {
   return (
     <Box as="header" bg="brack.500" p={4}>
       <Flex align="center" justify="space-between">
-        <Text fontSize="xl" fontWeight="bold" color="white">
-          My App
+        <Text fontSize="xl" fontWeight="bold" color="white" className='dancing-script-regular'>
+          Snippet Sharing Service
         </Text>
         <Flex gap={4}>
           <Button colorScheme="teal" variant="outline">

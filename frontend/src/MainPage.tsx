@@ -13,10 +13,10 @@ const MainPage = () => {
 
     return (
         <>
-        <Header></Header>
+            <Header></Header>
             <Container size="ld">
                 <Center>
-                    <Heading>Snippet Sharing Service(SSS(仮))</Heading>
+                    <Heading >Snippet Sharing Service(SSS(仮))</Heading>
                 </Center>
                 <Box gap="ms">
                     <Editor></Editor>
