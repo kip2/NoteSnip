@@ -1,4 +1,4 @@
-import { Box,  Center,  Container, Heading} from '@yamada-ui/react';
+import { Box,  Center,  Container, Heading, useColorModeValue} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import { ExpirationPulldown } from './Pulldown/Expiration';
@@ -10,14 +10,12 @@ const MainPage = () => {
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
     const hash = params.hash
+    const bg = useColorModeValue("white", "neutral.900")
 
     return (
-        <>
+        <Box bg={bg}>
             <Header></Header>
             <Container size="ld">
-                <Center>
-                    <Heading >Snippet Sharing Service(SSS(仮))</Heading>
-                </Center>
                 <Box gap="ms">
                     <Editor></Editor>
                 </Box>
@@ -26,7 +24,7 @@ const MainPage = () => {
                 <RegisterSubmit/>
                 <ColorModeButton/>
             </Container>
-        </>
+        </Box>
     )
 }
 
