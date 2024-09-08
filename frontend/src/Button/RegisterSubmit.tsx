@@ -1,4 +1,4 @@
-import { Box, Button, Center, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@yamada-ui/react"
+import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
@@ -40,6 +40,12 @@ export const RegisterSubmit = () => {
             .catch(error => console.error('Error fetching data:', error))
     }
 
+    const getUrlFromResponse = () => {
+        if (!responseData) return ""
+        const parseData = JSON.parse(responseData)
+        return parseData.url || ""
+    }
+
     return(
         <>
             <Center>
@@ -53,11 +59,20 @@ export const RegisterSubmit = () => {
                 <ModalOverlay />
                 <Center>
                     <ModalHeader>
-                        レスポンス
+                        Snippet URL
                     </ModalHeader>
                 </Center>
                 <ModalBody>
-                    <pre>{responseData}</pre>
+                    <FormControl
+                        isReadOnly
+                        label="Copy your snippet URL."
+                    >
+                        <Input
+                            type="text" 
+                            placeholder="Your snippet URL."
+                            value={getUrlFromResponse()}
+                        />
+                    </FormControl>
                 </ModalBody>
                 <Center>
                     <ModalFooter>

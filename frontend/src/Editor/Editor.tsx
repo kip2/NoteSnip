@@ -13,7 +13,7 @@ const Editor = () => {
     const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
-    }, [])
+    }, [setCode])
 
     const { language, setLanguage } = useLanguageContext()
     const [previousValue, setPreviousValue] = useState("")
