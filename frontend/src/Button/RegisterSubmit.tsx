@@ -1,4 +1,4 @@
-import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton } from "@yamada-ui/react"
+import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton, Popover, PopoverTrigger, PopoverContent, PopoverBody, Motion } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
@@ -54,13 +54,20 @@ export const RegisterSubmit = () => {
         }
     }, [responseData])
 
+    const [ isCopied, setIsCopied ] = useState(false)
+    const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
+
     const handleCopyButton = () => {
         navigator.clipboard.writeText(snippetURL)
             .then(() => {
-                console.log("クリップボードにコピーされました")
+                setIsCopied(true)
+                setIsPopoverOpen(true)
+                setTimeout(() => setIsPopoverOpen(false), 3000)
             })
-            .catch((error) => {
-                console.error("クリップボードへのコピーに失敗しました:", error)
+            .catch(() => {
+                setIsCopied(false)
+                setIsPopoverOpen(true)
+                setTimeout(() => setIsPopoverOpen(false), 3000)
             }) 
     }
 
@@ -94,12 +101,35 @@ export const RegisterSubmit = () => {
                             isReadOnly
                             label="Copy your snippet URL."
                         >
-                            <Center>
+                            <Center position={"relative"}>
                                 <Input
                                     type="text" 
                                     placeholder="Your snippet URL."
                                     value={snippetURL}
                                 />
+                                <Popover isOpen={isPopoverOpen} closeOnButton={false}>
+                                    <PopoverTrigger>
+                                        <Box />
+                                    </PopoverTrigger>
+                                    <Motion
+                                        initial={{ opacity: 0, y: -20 }}
+                                        animate={{ opacity: 1, y: 0}}
+                                        exit={{ opacity: 0, y: -20}}
+                                        transition={{ duration: 0.3}}
+                                        style={{ 
+                                            position: "absolute",
+                                            top: "-50px",
+                                            left: "-30px",
+                                            zIndex: 1000
+                                        }}
+                                    >
+                                        <PopoverContent>
+                                            <PopoverBody fontSize={10}>
+                                                {isCopied ? "クリップボードにコピーされました" : "コピーに失敗しました。"}
+                                            </PopoverBody>
+                                        </PopoverContent>
+                                    </Motion>
+                                </Popover>
                                 <IconButton 
                                     ml={3} 
                                     icon={<CopyIcon />}
