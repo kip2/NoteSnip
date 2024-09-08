@@ -1,8 +1,9 @@
-import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text } from "@yamada-ui/react"
+import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
+import { CopyIcon } from "@yamada-ui/lucide"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
@@ -11,6 +12,7 @@ export const RegisterSubmit = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { expiration } = useExpirationContext()
     const [ isResponseError, setIsResponseError ] = useState(false)
+    const [ snippetURL, setSnippetURL ] = useState("")
 
     const handleSubmitButton = () => {
         const requestJsonData = {
@@ -45,10 +47,21 @@ export const RegisterSubmit = () => {
             })
     }
 
-    const getUrlFromResponse = () => {
-        if (!responseData) return ""
-        const parseData = JSON.parse(responseData)
-        return parseData.url || ""
+    useEffect(() => {
+        if (responseData) {
+            const parseData = JSON.parse(responseData)
+            setSnippetURL(parseData.url || "")
+        }
+    }, [responseData])
+
+    const handleCopyButton = () => {
+        navigator.clipboard.writeText(snippetURL)
+            .then(() => {
+                console.log("クリップボードにコピーされました")
+            })
+            .catch((error) => {
+                console.error("クリップボードへのコピーに失敗しました:", error)
+            }) 
     }
 
     return(
@@ -71,21 +84,28 @@ export const RegisterSubmit = () => {
 
                     { isResponseError ?
                         <>
-                            <Box height="10px"/>
+                            <Box height="1px"/>
                             <Text pl={4}>スニペットの作成に失敗しました。</Text>
                             <Text pl={4}>時間をおいて、再度実行してください。</Text>
-                            <Box height="10px"/>
+                            <Box height="1px"/>
                         </>
                     :
                         <FormControl
                             isReadOnly
                             label="Copy your snippet URL."
                         >
-                            <Input
-                                type="text" 
-                                placeholder="Your snippet URL."
-                                value={getUrlFromResponse()}
-                            />
+                            <Center>
+                                <Input
+                                    type="text" 
+                                    placeholder="Your snippet URL."
+                                    value={snippetURL}
+                                />
+                                <IconButton 
+                                    ml={3} 
+                                    icon={<CopyIcon />}
+                                    onClick={handleCopyButton}
+                                />
+                            </Center>
                         </FormControl>
                     }
                 </ModalBody>
