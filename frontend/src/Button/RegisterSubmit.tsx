@@ -1,4 +1,4 @@
-import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@yamada-ui/react"
+import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
@@ -10,6 +10,7 @@ export const RegisterSubmit = () => {
     const [ responseData, setResponseData ] = useState<string | null>(null)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { expiration } = useExpirationContext()
+    const [ isResponseError, setIsResponseError ] = useState(false)
 
     const handleSubmitButton = () => {
         const requestJsonData = {
@@ -17,6 +18,7 @@ export const RegisterSubmit = () => {
             snippet_language: language,
             expiration_stat: expiration,
         }
+
 
         fetch('http://127.0.0.1:8000/register', {
             method: 'POST',
@@ -26,18 +28,21 @@ export const RegisterSubmit = () => {
             body: JSON.stringify(requestJsonData)
         })
             .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        console.error("Response text:", text)
-                    })
-                }
                 return response.json()
             })
             .then(data => {
                 setResponseData(JSON.stringify(data, null, 2))
+                if (data.error) {
+                    setIsResponseError(true)
+                } else {
+                    setIsResponseError(false)
+                }
                 onOpen()
             })
-            .catch(error => console.error('Error fetching data:', error))
+            .catch(() => {
+                setIsResponseError(true)
+                onOpen()
+            })
     }
 
     const getUrlFromResponse = () => {
@@ -59,20 +64,30 @@ export const RegisterSubmit = () => {
                 <ModalOverlay />
                 <Center>
                     <ModalHeader>
-                        Snippet URL
+                        {isResponseError ? "Snippet URL create Error" : "Snippet URL"}
                     </ModalHeader>
                 </Center>
                 <ModalBody>
-                    <FormControl
-                        isReadOnly
-                        label="Copy your snippet URL."
-                    >
-                        <Input
-                            type="text" 
-                            placeholder="Your snippet URL."
-                            value={getUrlFromResponse()}
-                        />
-                    </FormControl>
+
+                    { isResponseError ?
+                        <>
+                            <Box height="10px"/>
+                            <Text pl={4}>スニペットの作成に失敗しました。</Text>
+                            <Text pl={4}>時間をおいて、再度実行してください。</Text>
+                            <Box height="10px"/>
+                        </>
+                    :
+                        <FormControl
+                            isReadOnly
+                            label="Copy your snippet URL."
+                        >
+                            <Input
+                                type="text" 
+                                placeholder="Your snippet URL."
+                                value={getUrlFromResponse()}
+                            />
+                        </FormControl>
+                    }
                 </ModalBody>
                 <Center>
                     <ModalFooter>
