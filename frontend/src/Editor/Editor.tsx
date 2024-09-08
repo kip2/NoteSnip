@@ -42,6 +42,7 @@ const Editor = () => {
                 extensions={[getLanguageExtension(language)]}
                 theme={theme}
                 onChange={onCodeChange}
+                style={{ border: "1px solid #ccc" }}
             />
             <Container>
                 <Autocomplete 
