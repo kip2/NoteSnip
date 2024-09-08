@@ -1,4 +1,4 @@
-import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton, Popover, PopoverTrigger, PopoverContent, PopoverBody, Motion } from "@yamada-ui/react"
+import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton, Popover, PopoverTrigger, PopoverContent, PopoverBody, Motion, useColorModeValue } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
@@ -34,7 +34,7 @@ export const RegisterSubmit = () => {
             })
             .then(data => {
                 setResponseData(JSON.stringify(data, null, 2))
-                if (data.error) {
+                if (!data.url) {
                     setIsResponseError(true)
                 } else {
                     setIsResponseError(false)
@@ -62,21 +62,25 @@ export const RegisterSubmit = () => {
             .then(() => {
                 setIsCopied(true)
                 setIsPopoverOpen(true)
-                setTimeout(() => setIsPopoverOpen(false), 3000)
+                setTimeout(() => setIsPopoverOpen(false), 2000)
             })
             .catch(() => {
                 setIsCopied(false)
                 setIsPopoverOpen(true)
-                setTimeout(() => setIsPopoverOpen(false), 3000)
+                setTimeout(() => setIsPopoverOpen(false), 2000)
             }) 
     }
+
+    const SubmitButtonColorScheme = useColorModeValue("sky", "purple")
 
     return(
         <>
             <Center>
                 <Box>
                     <Center>
-                        <Button onClick={handleSubmitButton}>送信</Button>
+                        <Button 
+                            colorScheme={SubmitButtonColorScheme}
+                            onClick={handleSubmitButton}>共有URL作成</Button>
                     </Center>
                 </Box>
             </Center>
@@ -99,7 +103,7 @@ export const RegisterSubmit = () => {
                     :
                         <FormControl
                             isReadOnly
-                            label="Copy your snippet URL."
+                            label="スニペット共有用のリンクが生成されました。"
                         >
                             <Center position={"relative"}>
                                 <Input
