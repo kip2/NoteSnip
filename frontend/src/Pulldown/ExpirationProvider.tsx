@@ -6,12 +6,12 @@ interface ExpirationContextType {
 }
 
 const ExpirationContext = createContext<ExpirationContextType>({
-    expiration: "",
+    expiration: "10min",
     setExpiration: () => {},
 });
 
 export const ExpirationProvider = ({ children }: { children: ReactNode }) => {
-    const [expiration, setExpiration] = useState<string>("");
+    const [expiration, setExpiration] = useState<string>("10min");
 
     return (
         <ExpirationContext.Provider value={{ expiration, setExpiration }}>
