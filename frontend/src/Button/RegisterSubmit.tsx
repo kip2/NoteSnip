@@ -7,6 +7,16 @@ import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
 import ResultModal from "../Modal/ResultModal"
 
+interface SuccessResponse {
+    url: string
+}
+
+interface ErrorResponse {
+    error: string
+}
+
+type SnippetResponse = SuccessResponse | ErrorResponse
+
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
     const { language } = useLanguageContext()
@@ -54,9 +64,13 @@ export const RegisterSubmit = () => {
         onResultModalOpen()
     }
 
-    const handleResponse = (data) => {
+    const handleResponse = (data: SnippetResponse) => {
         setResponseData(JSON.stringify(data, null, 2))
-        setIsResponseError(!data.url)
+        if ("url" in data) {
+            setIsResponseError(false)
+        } else {
+            setIsResponseError(true)
+        }
         onResultModalOpen()
     }
 
