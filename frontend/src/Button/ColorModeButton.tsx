@@ -1,9 +1,10 @@
-import { Box, Button, Center, useColorMode, ColorMode, useColorModeValue} from "@yamada-ui/react"
+import { Box, Button, Center, useColorMode, ColorMode} from "@yamada-ui/react"
 import { useCodeMirrorTheme } from "../Themes/ThemeContext"
 import { getTheme } from "../Themes/Themes"
 import { useSelectedThemeContext } from "../Themes/ThemeProvider"
 import { useEffect } from "react"
 import { MoonIcon, SunMoonIcon } from "@yamada-ui/lucide"
+import { useButtonColorSchema } from "./ButtonColorSchema"
 
 
 export const ColorModeButton = () => {
@@ -23,7 +24,7 @@ export const ColorModeButton = () => {
         setTheme(currentTheme)
     }
 
-    const ColorModeButtunColorSchema = useColorModeValue("sky", "purple")
+    const ColorModeButtunColorSchema = useButtonColorSchema()
 
     return(
         <>

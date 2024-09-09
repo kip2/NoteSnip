@@ -6,6 +6,7 @@ import { useCodeContext } from "../Editor/CodeProvider"
 import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
 import ResultModal from "../Modal/ResultModal"
+import { useButtonColorSchema } from "./ButtonColorSchema"
 
 interface SuccessResponse {
     url: string
@@ -29,7 +30,7 @@ export const RegisterSubmitButton = () => {
     const [ isCopied, setIsCopied ] = useState(false)
     const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
 
-    const SubmitButtonColorScheme = useColorModeValue("sky", "purple")
+    const SubmitButtonColorScheme = useButtonColorSchema()
 
     useEffect(() => {
         if (responseData) {
