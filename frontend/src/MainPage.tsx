@@ -1,8 +1,7 @@
 import { Box,  Container, useColorModeValue} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
-import { ExpirationPulldown } from './Pulldown/Expiration';
-import { RegisterSubmit } from './Button/RegisterSubmit';
+import { RegisterSubmitButton } from './Button/RegisterSubmit';
 import Header from './Header/Header';
 
 const MainPage = () => {
@@ -18,9 +17,7 @@ const MainPage = () => {
                 <Box gap="ms">
                     <Editor></Editor>
                 </Box>
-
-                {/* <ExpirationPulldown/> */}
-                <RegisterSubmit/>
+                <RegisterSubmitButton/>
             </Container>
         </Box>
     )
