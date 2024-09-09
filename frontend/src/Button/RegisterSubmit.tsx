@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
 import { CopyIcon } from "@yamada-ui/lucide"
-import { ExpirationPulldown } from "../Pulldown/Expiration"
+import { defaultExpirationValue, ExpirationPulldown } from "../Pulldown/Expiration"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
@@ -19,7 +19,6 @@ export const RegisterSubmit = () => {
     const handleSubmitButton = () => {
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
-        console.log("expiration_stat:", expiration)
         
         const requestJsonData = {
             snippet: code,
@@ -28,9 +27,13 @@ export const RegisterSubmit = () => {
         }
 
         // 有効期限を初期化する
-        setExpiration("")
+        setExpiration(defaultExpirationValue)
 
+        fetchSnippetURL(requestJsonData)
+    }
 
+    const fetchSnippetURL = (requestJsonData: object) => {
+        // todo: fetchURLを変更する
         fetch('http://127.0.0.1:8000/register', {
             method: 'POST',
             headers: {
@@ -38,23 +41,25 @@ export const RegisterSubmit = () => {
             },
             body: JSON.stringify(requestJsonData)
         })
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                setResponseData(JSON.stringify(data, null, 2))
-                if (!data.url) {
-                    setIsResponseError(true)
-                } else {
-                    setIsResponseError(false)
-                }
-                onResultModalOpen()
-            })
+            .then(response => response.json())
+            .then(handleResponse)
             .catch(() => {
-                setIsResponseError(true)
-                onResultModalOpen()
+                handleFetchError()
             })
     }
+
+    const handleFetchError = () => {
+        setIsResponseError(true)
+        onResultModalOpen()
+    }
+
+    // todo: any type
+    const handleResponse = (data: any) => {
+        setResponseData(JSON.stringify(data, null, 2))
+        setIsResponseError(!data.url)
+        onResultModalOpen()
+    }
+
 
     useEffect(() => {
         if (responseData) {
@@ -69,15 +74,26 @@ export const RegisterSubmit = () => {
     const handleCopyButton = () => {
         navigator.clipboard.writeText(snippetURL)
             .then(() => {
-                setIsCopied(true)
-                setIsPopoverOpen(true)
-                setTimeout(() => setIsPopoverOpen(false), 2000)
+                handleCopySuccess()
             })
             .catch(() => {
-                setIsCopied(false)
-                setIsPopoverOpen(true)
-                setTimeout(() => setIsPopoverOpen(false), 2000)
+                handleCopyFailure()
             }) 
+    }
+
+    const handleCopySuccess = () => {
+        setIsCopied(true)
+        togglePopover()
+    }
+
+    const handleCopyFailure = () => {
+        setIsCopied(false)
+        togglePopover()
+    }
+
+    const togglePopover = () => {
+        setIsPopoverOpen(true)
+        setTimeout(() => setIsPopoverOpen(false), 2000)
     }
 
     const SubmitButtonColorScheme = useColorModeValue("sky", "purple")
