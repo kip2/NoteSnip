@@ -1,6 +1,7 @@
 import { Box, Button, Center, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, Text } from "@yamada-ui/react"
 import { ExpirationPulldown } from "../Pulldown/Expiration"
 import { FC } from "react"
+import { useButtonColorSchema } from "../Button/ButtonColorSchema"
 
 interface SubmitSettingModalProps {
     isOpen: boolean
@@ -9,6 +10,9 @@ interface SubmitSettingModalProps {
 }
 
 const SubmitSettingModal: FC<SubmitSettingModalProps> = ({ isOpen, onClose, onSubmit}) => {
+
+    const buttonColor = useButtonColorSchema()
+
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay></ModalOverlay>
@@ -27,8 +31,15 @@ const SubmitSettingModal: FC<SubmitSettingModalProps> = ({ isOpen, onClose, onSu
             </ModalBody>
             <Center>
                 <ModalFooter>
-                    <Button onClick={onSubmit}>送信</Button>
-                    <Button onClick={onClose}>閉じる</Button>
+                    <Button 
+                        colorScheme={buttonColor}
+                        onClick={onSubmit}
+                    >送信
+                    </Button>
+                    <Button
+                        colorScheme={buttonColor}
+                        onClick={onClose}
+                    >閉じる</Button>
                 </ModalFooter>
             </Center>
         </Modal>
