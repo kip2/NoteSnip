@@ -6,6 +6,7 @@ import { useCodeContext } from "../Editor/CodeProvider"
 import { CopyIcon } from "@yamada-ui/lucide"
 import { defaultExpirationValue, ExpirationPulldown } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
+import ResultModal from "../Modal/ResultModal"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
@@ -117,73 +118,16 @@ export const RegisterSubmit = () => {
                 onSubmit={handleSubmitButton}
             />
 
-            {/* Result Modal */}
-            <Modal isOpen={isResultModalOpen} onClose={onResultModalClose} size="xl">
-                <ModalOverlay />
-                <Center>
-                    <ModalHeader>
-                        {isResponseError ? "Snippet URL create Error" : "Snippet URL"}
-                    </ModalHeader>
-                </Center>
-                <ModalBody>
+            <ResultModal 
+                isOpen={isResultModalOpen}
+                onClose={onResultModalClose}
+                isError={isResponseError}
+                snippetURL={snippetURL}
+                isCopied={isCopied}
+                isPopoverOpen={isPopoverOpen}
+                onCopy={handleCopyButton}
+            />
 
-                    { isResponseError ?
-                        <>
-                            <Box height="1px"/>
-                            <Text pl={4}>スニペットの作成に失敗しました。</Text>
-                            <Text pl={4}>時間をおいて、再度実行してください。</Text>
-                            <Box height="1px"/>
-                        </>
-                    :
-                        <FormControl
-                            isReadOnly
-                            label="スニペット共有用のリンクが生成されました。"
-                        >
-                            <Center position={"relative"}>
-                                <Input
-                                    type="text" 
-                                    placeholder="Your snippet URL."
-                                    value={snippetURL}
-                                />
-                                <Popover isOpen={isPopoverOpen} closeOnButton={false}>
-                                    <PopoverTrigger>
-                                        <Box />
-                                    </PopoverTrigger>
-                                    <Motion
-                                        initial={{ opacity: 0, y: -20 }}
-                                        animate={{ opacity: 1, y: 0}}
-                                        exit={{ opacity: 0, y: -20}}
-                                        transition={{ duration: 0.3}}
-                                        style={{ 
-                                            position: "absolute",
-                                            top: "-50px",
-                                            left: "-30px",
-                                            zIndex: 1000
-                                        }}
-                                    >
-                                        <PopoverContent>
-                                            <PopoverBody fontSize={10}>
-                                                {isCopied ? "クリップボードにコピーされました" : "コピーに失敗しました。"}
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Motion>
-                                </Popover>
-                                <IconButton 
-                                    ml={3} 
-                                    icon={<CopyIcon />}
-                                    onClick={handleCopyButton}
-                                />
-                            </Center>
-                        </FormControl>
-                    }
-                </ModalBody>
-                <Center>
-                    <ModalFooter>
-                        <Button onClick={onResultModalClose}>閉じる</Button>
-                    </ModalFooter>
-                </Center>
-
-            </Modal>
         </>
     )
 }
