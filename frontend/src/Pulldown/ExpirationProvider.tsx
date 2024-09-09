@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { defaultExpirationValue } from "./Expiration";
 
 interface ExpirationContextType {
     expiration: string;
@@ -6,12 +7,12 @@ interface ExpirationContextType {
 }
 
 const ExpirationContext = createContext<ExpirationContextType>({
-    expiration: "10min",
+    expiration: defaultExpirationValue,
     setExpiration: () => {},
 });
 
 export const ExpirationProvider = ({ children }: { children: ReactNode }) => {
-    const [expiration, setExpiration] = useState<string>("10min");
+    const [expiration, setExpiration] = useState<string>(defaultExpirationValue);
 
     return (
         <ExpirationContext.Provider value={{ expiration, setExpiration }}>

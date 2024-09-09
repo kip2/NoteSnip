@@ -1,6 +1,8 @@
 import { Box, Center, NativeSelect, NativeSelectItem } from "@yamada-ui/react"
 import { useExpirationContext } from "./ExpirationProvider"
 
+export const defaultExpirationValue = "10min"
+
 export const ExpirationPulldown = () => {
 
     const items: NativeSelectItem[] = [
