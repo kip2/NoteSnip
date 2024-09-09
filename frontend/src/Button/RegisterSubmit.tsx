@@ -26,6 +26,18 @@ export const RegisterSubmit = () => {
     const { expiration, setExpiration } = useExpirationContext()
     const [ isResponseError, setIsResponseError ] = useState(false)
     const [ snippetURL, setSnippetURL ] = useState("")
+    const [ isCopied, setIsCopied ] = useState(false)
+    const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
+
+    const SubmitButtonColorScheme = useColorModeValue("sky", "purple")
+
+    useEffect(() => {
+        if (responseData) {
+            const parseData = JSON.parse(responseData)
+            setSnippetURL(parseData.url || "")
+        }
+    }, [responseData])
+
 
     const handleSubmitButton = () => {
         // 1つ目のモーダルを閉じる
@@ -75,15 +87,6 @@ export const RegisterSubmit = () => {
     }
 
 
-    useEffect(() => {
-        if (responseData) {
-            const parseData = JSON.parse(responseData)
-            setSnippetURL(parseData.url || "")
-        }
-    }, [responseData])
-
-    const [ isCopied, setIsCopied ] = useState(false)
-    const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
 
     const handleCopyButton = () => {
         navigator.clipboard.writeText(snippetURL)
@@ -109,8 +112,6 @@ export const RegisterSubmit = () => {
         setIsPopoverOpen(true)
         setTimeout(() => setIsPopoverOpen(false), 2000)
     }
-
-    const SubmitButtonColorScheme = useColorModeValue("sky", "purple")
 
     return(
         <>
