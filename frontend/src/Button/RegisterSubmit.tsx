@@ -17,7 +17,7 @@ interface ErrorResponse {
 
 type SnippetResponse = SuccessResponse | ErrorResponse
 
-export const RegisterSubmit = () => {
+export const RegisterSubmitButton = () => {
     const { code } = useCodeContext()
     const { language } = useLanguageContext()
     const [ responseData, setResponseData ] = useState<string | null>(null)
