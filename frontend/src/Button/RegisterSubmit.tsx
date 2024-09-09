@@ -1,10 +1,9 @@
-import { Box, Button, Center, FormControl, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Text, IconButton, Popover, PopoverTrigger, PopoverContent, PopoverBody, Motion, useColorModeValue } from "@yamada-ui/react"
+import { Box, Button, Center,  useDisclosure, useColorModeValue } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
-import { CopyIcon } from "@yamada-ui/lucide"
-import { defaultExpirationValue, ExpirationPulldown } from "../Pulldown/Expiration"
+import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
 import ResultModal from "../Modal/ResultModal"
 
@@ -55,8 +54,7 @@ export const RegisterSubmit = () => {
         onResultModalOpen()
     }
 
-    // todo: any type
-    const handleResponse = (data: any) => {
+    const handleResponse = (data) => {
         setResponseData(JSON.stringify(data, null, 2))
         setIsResponseError(!data.url)
         onResultModalOpen()
