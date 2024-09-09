@@ -17,9 +17,6 @@ export const RegisterSubmit = () => {
     const [ snippetURL, setSnippetURL ] = useState("")
 
     const handleSubmitButton = () => {
-
-        // todo: 有効期限を設定していない場合はエラー
-
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
         console.log("expiration_stat:", expiration)
