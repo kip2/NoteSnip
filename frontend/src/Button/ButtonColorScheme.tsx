@@ -1,5 +1,5 @@
 import { useColorModeValue } from "@yamada-ui/react";
 
-export const useButtonColorSchema = () => {
+export const useButtonColorScheme = () => {
     return useColorModeValue("sky", "purple")
 } 

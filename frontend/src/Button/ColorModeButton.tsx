@@ -4,7 +4,7 @@ import { getTheme } from "../Themes/Themes"
 import { useSelectedThemeContext } from "../Themes/ThemeProvider"
 import { useEffect } from "react"
 import { MoonIcon, SunMoonIcon } from "@yamada-ui/lucide"
-import { useButtonColorSchema } from "./ButtonColorSchema"
+import { useButtonColorScheme } from "./ButtonColorScheme"
 
 
 export const ColorModeButton = () => {
@@ -24,20 +24,20 @@ export const ColorModeButton = () => {
         setTheme(currentTheme)
     }
 
-    const ColorModeButtunColorSchema = useButtonColorSchema()
+    const ColorModeButtunColorScheme = useButtonColorScheme()
 
     return(
         <>
             <Center>
                 <Box display="flex" gap="md">
                     <Button 
-                        colorScheme={ColorModeButtunColorSchema}
+                        colorScheme={ColorModeButtunColorScheme}
                         leftIcon={<SunMoonIcon/>}
                         onClick={()=>handleColorModeChange("light")} >
                             light
                     </Button>
                     <Button 
-                        colorScheme={ColorModeButtunColorSchema}
+                        colorScheme={ColorModeButtunColorScheme}
                         leftIcon={<MoonIcon/>}
                         onClick={() => handleColorModeChange("dark")}>
                             dark
