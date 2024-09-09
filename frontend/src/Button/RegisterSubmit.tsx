@@ -5,6 +5,7 @@ import { useLanguageContext } from "../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
 import { CopyIcon } from "@yamada-ui/lucide"
 import { defaultExpirationValue, ExpirationPulldown } from "../Pulldown/Expiration"
+import SubmitSettingModal from "../Modal/SubmitSettingModal"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
@@ -109,28 +110,12 @@ export const RegisterSubmit = () => {
                     </Center>
                 </Box>
             </Center>
-            <Modal isOpen={isSubmitSettingOpen} onClose={onSubmitSettingClose} size="xl">
-                <ModalOverlay></ModalOverlay>
-                <Center>
-                    <ModalHeader>
-                        スニペットの送信設定
-                    </ModalHeader>
-                </Center>
-                <ModalBody display="flex" flexDirection="column" alignItems="center">
-                    <Box height="5px" />
-                    <Text>1. 送信するスニペットの保存期間を選択してください。</Text>
-                    <ExpirationPulldown/>
-                    <Box height="5px" />
-                    <Text>2. 送信ボタンを押すと、スニペット共有用のURLが作成されます。</Text>
-                    <Box height="5px" />
-                </ModalBody>
-                <Center>
-                    <ModalFooter>
-                        <Button onClick={handleSubmitButton}>送信</Button>
-                        <Button onClick={onSubmitSettingClose}>閉じる</Button>
-                    </ModalFooter>
-                </Center>
-            </Modal>
+
+            <SubmitSettingModal
+                isOpen={isSubmitSettingOpen}
+                onClose={onSubmitSettingClose}
+                onSubmit={handleSubmitButton}
+            />
 
             {/* Result Modal */}
             <Modal isOpen={isResultModalOpen} onClose={onResultModalClose} size="xl">
