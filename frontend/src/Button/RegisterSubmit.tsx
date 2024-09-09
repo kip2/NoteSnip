@@ -4,22 +4,34 @@ import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
 import { CopyIcon } from "@yamada-ui/lucide"
+import { ExpirationPulldown } from "../Pulldown/Expiration"
 
 export const RegisterSubmit = () => {
     const { code } = useCodeContext()
     const { language } = useLanguageContext()
     const [ responseData, setResponseData ] = useState<string | null>(null)
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const { expiration } = useExpirationContext()
+    const { isOpen: isSubmitSettingOpen, onOpen: onSubmitSettingOpen, onClose: onSubmitSettingClose } = useDisclosure()
+    const { isOpen: isResultModalOpen, onOpen: onResultModalOpen, onClose: onResultModalClose} = useDisclosure()
+    const { expiration, setExpiration } = useExpirationContext()
     const [ isResponseError, setIsResponseError ] = useState(false)
     const [ snippetURL, setSnippetURL ] = useState("")
 
     const handleSubmitButton = () => {
+
+        // todo: 有効期限を設定していない場合はエラー
+
+        // 1つ目のモーダルを閉じる
+        onSubmitSettingClose()
+        console.log("expiration_stat:", expiration)
+        
         const requestJsonData = {
             snippet: code,
             snippet_language: language,
             expiration_stat: expiration,
         }
+
+        // 有効期限を初期化する
+        setExpiration("")
 
 
         fetch('http://127.0.0.1:8000/register', {
@@ -39,11 +51,11 @@ export const RegisterSubmit = () => {
                 } else {
                     setIsResponseError(false)
                 }
-                onOpen()
+                onResultModalOpen()
             })
             .catch(() => {
                 setIsResponseError(true)
-                onOpen()
+                onResultModalOpen()
             })
     }
 
@@ -80,11 +92,35 @@ export const RegisterSubmit = () => {
                     <Center>
                         <Button 
                             colorScheme={SubmitButtonColorScheme}
-                            onClick={handleSubmitButton}>共有URL作成</Button>
+                            onClick={onSubmitSettingOpen}>共有URL作成</Button>
                     </Center>
                 </Box>
             </Center>
-            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+            <Modal isOpen={isSubmitSettingOpen} onClose={onSubmitSettingClose} size="xl">
+                <ModalOverlay></ModalOverlay>
+                <Center>
+                    <ModalHeader>
+                        スニペットの送信設定
+                    </ModalHeader>
+                </Center>
+                <ModalBody display="flex" flexDirection="column" alignItems="center">
+                    <Box height="5px" />
+                    <Text>1. 送信するスニペットの保存期間を選択してください。</Text>
+                    <ExpirationPulldown/>
+                    <Box height="5px" />
+                    <Text>2. 送信ボタンを押すと、スニペット共有用のURLが作成されます。</Text>
+                    <Box height="5px" />
+                </ModalBody>
+                <Center>
+                    <ModalFooter>
+                        <Button onClick={handleSubmitButton}>送信</Button>
+                        <Button onClick={onSubmitSettingClose}>閉じる</Button>
+                    </ModalFooter>
+                </Center>
+            </Modal>
+
+            {/* Result Modal */}
+            <Modal isOpen={isResultModalOpen} onClose={onResultModalClose} size="xl">
                 <ModalOverlay />
                 <Center>
                     <ModalHeader>
@@ -145,7 +181,7 @@ export const RegisterSubmit = () => {
                 </ModalBody>
                 <Center>
                     <ModalFooter>
-                        <Button onClick={onClose}>閉じる</Button>
+                        <Button onClick={onResultModalClose}>閉じる</Button>
                     </ModalFooter>
                 </Center>
 

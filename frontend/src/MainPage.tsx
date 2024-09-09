@@ -19,7 +19,7 @@ const MainPage = () => {
                     <Editor></Editor>
                 </Box>
 
-                <ExpirationPulldown/>
+                {/* <ExpirationPulldown/> */}
                 <RegisterSubmit/>
             </Container>
         </Box>
