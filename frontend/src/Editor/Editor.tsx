@@ -50,7 +50,7 @@ const Editor = () => {
                     value={language}
                     header={
                         <Center pt="2" px="3">
-                            "言語を選択してください"
+                            言語を選択してください
                         </Center>
                     }
                     onChange={handleLanguageChange} 
