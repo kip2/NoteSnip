@@ -8,15 +8,22 @@ import { useEffect, useRef } from 'react';
 const MainPage = () => {
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
-    const hash = params.hash
+    const pathHash = params.hash
 
     const bg = useColorModeValue("white", "neutral.900")
 
     const isFirstRender = useRef(true)
 
-    const fetchDataByHash = async () => {
-        if (!hash) return
+    useEffect(() => {
+        if (isFirstRender.current && pathHash) {
+            fetchDataByHash(pathHash)
+        }
 
+        // 初回のみの動作にするため、useRefを更新する
+        isFirstRender.current = false
+    }, [pathHash])
+
+    const fetchDataByHash = async (hash: string) => {
         const response = await fetch(`http://127.0.0.1:8000/get/${hash}`, {
             method: "GET",
         })
@@ -30,20 +37,12 @@ const MainPage = () => {
         console.log(data)
     }
 
-    useEffect(() => {
-        if (isFirstRender.current && hash) {
-            fetchDataByHash()
-            console.log("test")
-        }
-
-        // 初回のみの動作にするため、useRefを更新する
-        isFirstRender.current = false
-    }, [])
 
 
     const handleClick = () => {
-        console.log("hash:",hash)
+        console.log("hash:",pathHash)
     }
+
     return (
         <Box bg={bg}>
             <Header></Header>
