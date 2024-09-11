@@ -11,10 +11,10 @@ import { useLanguageContext } from "../Languages/LanguageProvider";
 
 interface EditorProps {
     fetchedCode: string
-
+    fetchedLanguage: string
 }
 
-const Editor: FC<EditorProps> = ({ fetchedCode } ) => {
+const Editor: FC<EditorProps> = ({ fetchedCode, fetchedLanguage } ) => {
     const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
@@ -52,7 +52,7 @@ const Editor: FC<EditorProps> = ({ fetchedCode } ) => {
             <Container>
                 <Autocomplete 
                     placeholder="言語を選択してください"
-                    value={language}
+                    value={fetchedLanguage ? fetchedLanguage : language}
                     header={
                         <Center pt="2" px="3">
                             言語を選択してください

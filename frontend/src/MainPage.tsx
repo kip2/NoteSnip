@@ -29,6 +29,7 @@ const MainPage = () => {
     const [errorReponse, setErrorReponse] = useState("")
 
     const [ fetchedCode, setFetchedCode] = useState("")
+    const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
     const fetchDataByHash = async (hash: string) => {
         try {
@@ -53,7 +54,7 @@ const MainPage = () => {
                 console.log("Data:", data)
                 // todo: 正常の場合の処理を追加する
                 setFetchedCode(data.snippet)
-                console.log("language:",data.snippet_language)
+                setFectchedLanguage(data.snippet_language)
                 console.log("expiration:", data.expiration_stat)
             }
         } catch(error) {
@@ -74,6 +75,7 @@ const MainPage = () => {
                 <Box gap="ms">
                     <Editor
                         fetchedCode={fetchedCode}
+                        fetchedLanguage={fetchedLanguage}
                     ></Editor>
                 </Box>
                 <RegisterSubmitButton/>
