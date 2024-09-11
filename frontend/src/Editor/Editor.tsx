@@ -9,7 +9,7 @@ import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 
-const Editor = () => {
+const Editor = ({ inputCode }: { inputCode: string} ) => {
     const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
@@ -37,7 +37,7 @@ const Editor = () => {
     return (
         <>
             <CodeMirror
-                value={code}
+                value={inputCode ? inputCode :code}
                 height="700px"
                 extensions={[getLanguageExtension(language)]}
                 theme={theme}

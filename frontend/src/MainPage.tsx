@@ -1,9 +1,9 @@
-import { Box,  Button,  Container, useColorModeValue} from '@yamada-ui/react';
+import { Box,  Button,  Center,  Container, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import { RegisterSubmitButton } from './Button/RegisterSubmit';
 import Header from './Header/Header';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MainPage = () => {
     // URLパラメータからハッシュ値を取得
@@ -14,6 +14,9 @@ const MainPage = () => {
 
     const isFirstRender = useRef(true)
 
+    // todo: pathの読み込みは別ファイルに設定したい
+    const path = "http://127.0.0.1:8000/get/"
+
     useEffect(() => {
         if (isFirstRender.current && pathHash) {
             fetchDataByHash(pathHash)
@@ -23,36 +26,78 @@ const MainPage = () => {
         isFirstRender.current = false
     }, [pathHash])
 
+    const [errorReponse, setErrorReponse] = useState("")
+
+    const [ inputCode, setInputCode] = useState("")
+
     const fetchDataByHash = async (hash: string) => {
-        const response = await fetch(`http://127.0.0.1:8000/get/${hash}`, {
-            method: "GET",
-        })
+        try {
+            const response = await fetch(`${path}${hash}`, {
+                method: "GET",
+            })
 
-        if (!response.ok) {
-            console.error("Error fetching data:", response.statusText)
-            return
+            if (!response.ok) {
+                // todo: 200以外のレスポンスの場合の処理
+                console.error("Error fetching data:", response.statusText)
+                setErrorReponse(response.statusText)
+                return
+            }
+
+            const data = await response.json()
+
+            if (data.error) {
+                // todo: errorがno dataである場合にはデータが存在しませんと表示する
+                setErrorReponse(data.error)
+                onOpen()
+            } else {
+                console.log("Data:", data)
+                // todo: 正常の場合の処理を追加する
+                setInputCode(data.snippet)
+                console.log("language:",data.snippet_language)
+                console.log("expiration:", data.expiration_stat)
+            }
+        } catch(error) {
+            console.error("Error occured while fetching:", error)
         }
-
-        const data = await response.json()
-        console.log(data)
     }
-
-
 
     const handleClick = () => {
         console.log("hash:",pathHash)
     }
+
+    const {isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <Box bg={bg}>
             <Header></Header>
             <Container size="ld">
                 <Box gap="ms">
-                    <Editor></Editor>
+                    <Editor
+                        inputCode={inputCode}
+                    ></Editor>
                 </Box>
                 <RegisterSubmitButton/>
                 <Button onClick={handleClick} >テスト</Button>
             </Container>
+
+            <Modal
+                isOpen={isOpen}
+            >
+                <ModalOverlay/>
+                <Center>
+                    <ModalHeader>
+                        データが取得できませんでした
+                    </ModalHeader>
+                </Center>
+                <ModalBody>
+                    {errorReponse}
+                </ModalBody>
+                <Center>
+                    <ModalFooter>
+                        <Button onClick={onClose}>閉じる</Button>
+                    </ModalFooter>
+                </Center>
+            </Modal>
         </Box>
     )
 }
