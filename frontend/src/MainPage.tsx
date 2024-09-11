@@ -69,7 +69,6 @@ const MainPage = () => {
                         fetchedLanguage={fetchedLanguage}
                     ></Editor>
                 </Box>
-                <RegisterSubmitButton/>
             </Container>
 
             <Modal
@@ -82,7 +81,7 @@ const MainPage = () => {
                     </ModalHeader>
                 </Center>
                 <ModalBody>
-                    {errorReponse}
+                    Error: {errorReponse}
                 </ModalBody>
                 <Center>
                     <ModalFooter>

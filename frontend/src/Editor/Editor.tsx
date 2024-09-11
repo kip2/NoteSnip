@@ -8,6 +8,7 @@ import { useCodeMirrorTheme } from "../Themes/ThemeContext";
 import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
+import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 
 interface EditorProps {
     fetchedCode: string
@@ -68,6 +69,7 @@ const Editor: FC<EditorProps> = ({ fetchedCode, fetchedLanguage } ) => {
                     items={themeItems}
                     onChange={handleThemeChange}
                 />
+                <RegisterSubmitButton/>
             </Container>
         </>
 
