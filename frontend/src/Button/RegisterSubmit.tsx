@@ -32,6 +32,9 @@ export const RegisterSubmitButton = () => {
 
     const SubmitButtonColorScheme = useButtonColorScheme()
 
+    // dotenvからの読み込み
+    const path = import.meta.env.VITE_REGISTER_API_PATH
+
     useEffect(() => {
         if (responseData) {
             const parseData = JSON.parse(responseData)
@@ -56,7 +59,6 @@ export const RegisterSubmitButton = () => {
         fetchSnippetURL(requestJsonData)
     }
     
-    const path = import.meta.env.VITE_REGISTER_API_PATH
 
     const fetchSnippetURL = (requestJsonData: object) => {
         fetch(path, {
