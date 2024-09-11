@@ -57,10 +57,6 @@ const MainPage = () => {
         }
     }
 
-    const handleClick = () => {
-        console.log("hash:",pathHash)
-    }
-
     const {isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -74,7 +70,6 @@ const MainPage = () => {
                     ></Editor>
                 </Box>
                 <RegisterSubmitButton/>
-                <Button onClick={handleClick} >テスト</Button>
             </Container>
 
             <Modal
