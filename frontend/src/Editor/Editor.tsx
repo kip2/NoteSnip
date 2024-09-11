@@ -1,5 +1,5 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { useCallback,  useState } from "react";
+import { FC, useCallback,  useState } from "react";
 import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
@@ -9,7 +9,12 @@ import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 
-const Editor = ({ inputCode }: { inputCode: string} ) => {
+interface EditorProps {
+    fetchedCode: string
+
+}
+
+const Editor: FC<EditorProps> = ({ fetchedCode } ) => {
     const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
@@ -37,7 +42,7 @@ const Editor = ({ inputCode }: { inputCode: string} ) => {
     return (
         <>
             <CodeMirror
-                value={inputCode ? inputCode :code}
+                value={fetchedCode ? fetchedCode :code}
                 height="700px"
                 extensions={[getLanguageExtension(language)]}
                 theme={theme}

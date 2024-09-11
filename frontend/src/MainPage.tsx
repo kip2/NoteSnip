@@ -28,7 +28,7 @@ const MainPage = () => {
 
     const [errorReponse, setErrorReponse] = useState("")
 
-    const [ inputCode, setInputCode] = useState("")
+    const [ fetchedCode, setFetchedCode] = useState("")
 
     const fetchDataByHash = async (hash: string) => {
         try {
@@ -52,7 +52,7 @@ const MainPage = () => {
             } else {
                 console.log("Data:", data)
                 // todo: 正常の場合の処理を追加する
-                setInputCode(data.snippet)
+                setFetchedCode(data.snippet)
                 console.log("language:",data.snippet_language)
                 console.log("expiration:", data.expiration_stat)
             }
@@ -73,7 +73,7 @@ const MainPage = () => {
             <Container size="ld">
                 <Box gap="ms">
                     <Editor
-                        inputCode={inputCode}
+                        fetchedCode={fetchedCode}
                     ></Editor>
                 </Box>
                 <RegisterSubmitButton/>
