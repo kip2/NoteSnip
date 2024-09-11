@@ -55,10 +55,11 @@ export const RegisterSubmitButton = () => {
 
         fetchSnippetURL(requestJsonData)
     }
+    
+    const path = import.meta.env.VITE_REGISTER_API_PATH
 
     const fetchSnippetURL = (requestJsonData: object) => {
-        // todo: fetchURLを変更する
-        fetch('http://127.0.0.1:8000/register', {
+        fetch(path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

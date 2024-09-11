@@ -6,16 +6,19 @@ import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 
 const MainPage = () => {
+    const [errorReponse, setErrorReponse] = useState("")
+    const [ fetchedCode, setFetchedCode] = useState("")
+    const [ fetchedLanguage, setFectchedLanguage] = useState("")
+
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
     const pathHash = params.hash
+    const isFirstRender = useRef(true)
 
     const bg = useColorModeValue("white", "neutral.900")
 
-    const isFirstRender = useRef(true)
-
-    // todo: pathの読み込みは別ファイルに設定したい
-    const path = "http://127.0.0.1:8000/get/"
+    // dotenvからの読み込み
+    const path = import.meta.env.VITE_GET_API_PATH
 
     useEffect(() => {
         if (isFirstRender.current && pathHash) {
@@ -25,11 +28,6 @@ const MainPage = () => {
         // 初回のみの動作にするため、useRefを更新する
         isFirstRender.current = false
     }, [pathHash])
-
-    const [errorReponse, setErrorReponse] = useState("")
-
-    const [ fetchedCode, setFetchedCode] = useState("")
-    const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
     const fetchDataByHash = async (hash: string) => {
         try {
@@ -51,11 +49,8 @@ const MainPage = () => {
                 setErrorReponse(data.error)
                 onOpen()
             } else {
-                console.log("Data:", data)
-                // todo: 正常の場合の処理を追加する
                 setFetchedCode(data.snippet)
                 setFectchedLanguage(data.snippet_language)
-                console.log("expiration:", data.expiration_stat)
             }
         } catch(error) {
             console.error("Error occured while fetching:", error)
