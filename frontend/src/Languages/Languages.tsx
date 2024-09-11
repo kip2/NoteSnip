@@ -547,6 +547,9 @@ const languages =  {
     z80: StreamLanguage.define(z80),
 };
 const getLanguageExtension = (lang: string) => {
+    if (!lang || !languages[lang as LanguageOption]) {
+        return []
+    }
     const extension = languages[lang as LanguageOption]
     return Array.isArray(extension) ? extension : [extension]
 }
