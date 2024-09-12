@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
+import { useButtonColorScheme } from './Button/ButtonColorScheme';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -10,12 +11,18 @@ const MainPage = () => {
     const [ fetchedCode, setFetchedCode] = useState("")
     const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
+    const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
+    const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
+
+
+
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
     const pathHash = params.hash
     const isFirstRender = useRef(true)
 
     const bg = useColorModeValue("white", "neutral.900")
+    const buttonColorScheme = useButtonColorScheme()
 
     // dotenvからの読み込み
     const path = import.meta.env.VITE_GET_API_PATH
@@ -83,11 +90,6 @@ const MainPage = () => {
             onLoadingModalClose()
         }
     }
-
-    const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
-    const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
-
-
     return (
         <Box bg={bg}>
             <Header></Header>
@@ -130,7 +132,11 @@ const MainPage = () => {
                 </ModalBody>
                 <Center>
                     <ModalFooter>
-                        <Button onClick={onErrorModalClose}>閉じる</Button>
+                        <Button 
+                            colorScheme={buttonColorScheme}
+                            onClick={onErrorModalClose}>
+                            閉じる
+                        </Button>
                     </ModalFooter>
                 </Center>
             </Modal>
