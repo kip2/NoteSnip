@@ -36,6 +36,8 @@ const MainPage = () => {
                 method: "GET",
             })
 
+            console.log("response:", response)
+
             if (!response.ok) {
                 console.error("Error fetching data:", response.statusText)
                 const title = "サーバーエラー"
@@ -47,6 +49,7 @@ const MainPage = () => {
             }
 
             const data = await response.json()
+            console.log(data)
 
             if (data.error) {
                 if (data.error === "No data found") {
@@ -57,6 +60,11 @@ const MainPage = () => {
                 } else if (data.error === "Data is expired") {
                     const title = "有効期限切れ"
                     const message = "データの有効期限が切れています。無効なURLです。"
+                    setErrorTitle(title)
+                    setErrorReponse(message)
+                } else if (data.error === "Internal server error") {
+                    const title = "サーバーエラー"
+                    const message = "サーバー側でエラーが起きています。時間をおいて試してください。"
                     setErrorTitle(title)
                     setErrorReponse(message)
                 }
