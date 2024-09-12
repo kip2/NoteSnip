@@ -42,8 +42,7 @@ const MainPage = () => {
                 const message = "サーバー側でエラーが起きています。時間をおいて試してください。"
                 setErrorTitle(title)
                 setErrorReponse(message)
-                onOpen()
-                onLoadingModalClose()
+                onErrorModalOpen()
                 return
             }
 
@@ -61,19 +60,23 @@ const MainPage = () => {
                     setErrorTitle(title)
                     setErrorReponse(message)
                 }
-                onOpen()
+                onErrorModalOpen()
             } else {
                 setFetchedCode(data.snippet)
                 setFectchedLanguage(data.snippet_language)
             }
         } catch(error) {
             console.error("Error occured while fetching:", error)
+            const title = "ネットワークエラー"
+            const message = "データの取得中にネットワークエラーが発生しました"
+            setErrorTitle(title)
+            setErrorReponse(message)
         } finally {
             onLoadingModalClose()
         }
     }
 
-    const {isOpen, onOpen, onClose } = useDisclosure()
+    const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
     const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
 
 
@@ -102,7 +105,7 @@ const MainPage = () => {
             </Modal>
 
             <Modal
-                isOpen={isOpen}
+                isOpen={isErrorModalOpen}
             >
                 <ModalOverlay/>
                 <Center>
@@ -119,7 +122,7 @@ const MainPage = () => {
                 </ModalBody>
                 <Center>
                     <ModalFooter>
-                        <Button onClick={onClose}>閉じる</Button>
+                        <Button onClick={onErrorModalClose}>閉じる</Button>
                     </ModalFooter>
                 </Center>
             </Modal>
