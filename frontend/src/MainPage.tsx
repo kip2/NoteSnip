@@ -1,4 +1,4 @@
-import { Box,  Button,  Center,  Container, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure} from '@yamada-ui/react';
+import { Box,  Button,  Center,  Container, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, Text, useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import { RegisterSubmitButton } from './Button/RegisterSubmit';
@@ -77,11 +77,18 @@ const MainPage = () => {
                 <ModalOverlay/>
                 <Center>
                     <ModalHeader>
-                        データが取得できませんでした
+                        Fetch Error
                     </ModalHeader>
                 </Center>
-                <ModalBody>
-                    Error: {errorReponse}
+                <ModalBody display="flex" flexDirection="column" alignItems="center">
+                    <Box>
+                        <Text>
+                            データが取得できませんでした。
+                        </Text>
+                        <Text>
+                            時間を空けて再度試してください
+                        </Text>
+                    </Box>
                 </ModalBody>
                 <Center>
                     <ModalFooter>
