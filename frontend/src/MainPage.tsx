@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 
 const MainPage = () => {
+    const [ errorTitle, setErrorTitle ] = useState("")
     const [errorReponse, setErrorReponse] = useState("")
     const [ fetchedCode, setFetchedCode] = useState("")
     const [ fetchedLanguage, setFectchedLanguage] = useState("")
@@ -45,8 +46,17 @@ const MainPage = () => {
             const data = await response.json()
 
             if (data.error) {
-                // todo: errorがno dataである場合にはデータが存在しませんと表示する
-                setErrorReponse(data.error)
+                if (data.error === "No data found") {
+                    const title = "データ取得エラー"
+                    const message = "データが見つかりませんでした。URLが間違っている可能性があります"
+                    setErrorTitle(title)
+                    setErrorReponse(message)
+                } else if (data.error === "Data is expired") {
+                    const title = "有効期限切れ"
+                    const message = "データの有効期限が切れています。無効なURLです。"
+                    setErrorTitle(title)
+                    setErrorReponse(message)
+                }
                 onOpen()
             } else {
                 setFetchedCode(data.snippet)
@@ -77,16 +87,13 @@ const MainPage = () => {
                 <ModalOverlay/>
                 <Center>
                     <ModalHeader>
-                        Fetch Error
+                        {errorTitle}
                     </ModalHeader>
                 </Center>
                 <ModalBody display="flex" flexDirection="column" alignItems="center">
                     <Box>
                         <Text>
-                            データが取得できませんでした。
-                        </Text>
-                        <Text>
-                            時間を空けて再度試してください
+                            {errorReponse}
                         </Text>
                     </Box>
                 </ModalBody>
