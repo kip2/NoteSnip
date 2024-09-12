@@ -1,7 +1,6 @@
-import { Box,  Button,  Center,  Container, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, Text, useColorModeValue, useDisclosure} from '@yamada-ui/react';
+import { Box,  Button,  Center,  Container, Loading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, Text, useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
-import { RegisterSubmitButton } from './Button/RegisterSubmit';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 
@@ -31,15 +30,20 @@ const MainPage = () => {
     }, [pathHash])
 
     const fetchDataByHash = async (hash: string) => {
+        onLoadingModalOpen()
         try {
             const response = await fetch(`${path}${hash}`, {
                 method: "GET",
             })
 
             if (!response.ok) {
-                // todo: 200以外のレスポンスの場合の処理
                 console.error("Error fetching data:", response.statusText)
-                setErrorReponse(response.statusText)
+                const title = "サーバーエラー"
+                const message = "サーバー側でエラーが起きています。時間をおいて試してください。"
+                setErrorTitle(title)
+                setErrorReponse(message)
+                onOpen()
+                onLoadingModalClose()
                 return
             }
 
@@ -64,10 +68,14 @@ const MainPage = () => {
             }
         } catch(error) {
             console.error("Error occured while fetching:", error)
+        } finally {
+            onLoadingModalClose()
         }
     }
 
     const {isOpen, onOpen, onClose } = useDisclosure()
+    const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
+
 
     return (
         <Box bg={bg}>
@@ -80,6 +88,18 @@ const MainPage = () => {
                     ></Editor>
                 </Box>
             </Container>
+
+            <Modal isOpen={isLoadingModalOpen}>
+                <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)"/>
+                <Center>
+                    <ModalHeader>
+                        Now Loading...
+                    </ModalHeader>
+                </Center>
+                <ModalBody display="flex" flexDirection="column" alignItems="center">
+                    <Loading fontSize="3xl" color="blue"/>
+                </ModalBody>
+            </Modal>
 
             <Modal
                 isOpen={isOpen}
