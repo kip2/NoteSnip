@@ -36,11 +36,24 @@ const MainPage = () => {
         isFirstRender.current = false
     }, [pathHash])
 
+    const [ abortController, setAbortController] = useState<AbortController | null>()
+
+    const cancelFetch = () => {
+        if (abortController) {
+            abortController.abort()
+        }
+    }
+
     const fetchDataByHash = async (hash: string) => {
+        const controller = new AbortController()
+        setAbortController(controller)
+
         onLoadingModalOpen()
+
         try {
             const response = await fetch(`${path}${hash}`, {
                 method: "GET",
+                signal: controller.signal
             })
 
             console.log("response:", response)
@@ -110,8 +123,17 @@ const MainPage = () => {
                     </ModalHeader>
                 </Center>
                 <ModalBody display="flex" flexDirection="column" alignItems="center">
+                    <Box height="5px"/>
                     <Loading fontSize="3xl" color="blue"/>
+                    <Box height="5px"/>
                 </ModalBody>
+                <ModalFooter display="flex" flexDirection="column" alignItems="center">
+                    <Button 
+                        colorScheme={buttonColorScheme}
+                        onClick={cancelFetch}>
+                        中断
+                    </Button>
+                </ModalFooter>
             </Modal>
 
             <Modal
