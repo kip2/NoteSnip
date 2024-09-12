@@ -123,9 +123,9 @@ const MainPage = () => {
                     </ModalHeader>
                 </Center>
                 <ModalBody display="flex" flexDirection="column" alignItems="center">
-                    <Box height="5px"/>
-                    <Loading fontSize="3xl" color="blue"/>
-                    <Box height="5px"/>
+                    <Box height="15px"/>
+                    <Loading fontSize="6xl" color="blue"/>
+                    <Box height="15px"/>
                 </ModalBody>
                 <ModalFooter display="flex" flexDirection="column" alignItems="center">
                     <Button 
