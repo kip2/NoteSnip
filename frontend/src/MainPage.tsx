@@ -1,10 +1,11 @@
-import { Box,  Button,  Center,  Container, Loading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, Text, useColorModeValue, useDisclosure} from '@yamada-ui/react';
+import { Box, Container,  useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 import { useButtonColorScheme } from './Button/ButtonColorScheme';
 import ErrorReponseModal from './Modal/ErrorResponseModal';
+import LoadingModal from './Modal/LoadingModal';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -23,7 +24,6 @@ const MainPage = () => {
     const isFirstRender = useRef(true)
 
     const bg = useColorModeValue("white", "neutral.900")
-    const buttonColorScheme = useButtonColorScheme()
 
     // dotenvからの読み込み
     const path = import.meta.env.VITE_GET_API_PATH
@@ -115,26 +115,10 @@ const MainPage = () => {
                 </Box>
             </Container>
 
-            <Modal isOpen={isLoadingModalOpen}>
-                <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)"/>
-                <Center>
-                    <ModalHeader>
-                        Now Loading...
-                    </ModalHeader>
-                </Center>
-                <ModalBody display="flex" flexDirection="column" alignItems="center">
-                    <Box height="15px"/>
-                    <Loading fontSize="6xl" color="blue"/>
-                    <Box height="15px"/>
-                </ModalBody>
-                <ModalFooter display="flex" flexDirection="column" alignItems="center">
-                    <Button 
-                        colorScheme={buttonColorScheme}
-                        onClick={cancelFetch}>
-                        中断
-                    </Button>
-                </ModalFooter>
-            </Modal>
+            <LoadingModal
+                isOpen={isLoadingModalOpen}
+                onClick={cancelFetch}
+            />
 
             <ErrorReponseModal
                 isOpen={isErrorModalOpen}
