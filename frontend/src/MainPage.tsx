@@ -4,6 +4,7 @@ import Editor from './Editor/Editor';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 import { useButtonColorScheme } from './Button/ButtonColorScheme';
+import ErrorReponseModal from './Modal/ErrorResponseModal';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -14,7 +15,7 @@ const MainPage = () => {
     const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
     const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
 
-
+    const [ abortController, setAbortController] = useState<AbortController | null>()
 
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
@@ -36,7 +37,6 @@ const MainPage = () => {
         isFirstRender.current = false
     }, [pathHash])
 
-    const [ abortController, setAbortController] = useState<AbortController | null>()
 
     const cancelFetch = () => {
         if (abortController) {
@@ -136,32 +136,12 @@ const MainPage = () => {
                 </ModalFooter>
             </Modal>
 
-            <Modal
+            <ErrorReponseModal
                 isOpen={isErrorModalOpen}
-            >
-                <ModalOverlay/>
-                <Center>
-                    <ModalHeader>
-                        {errorTitle}
-                    </ModalHeader>
-                </Center>
-                <ModalBody display="flex" flexDirection="column" alignItems="center">
-                    <Box>
-                        <Text>
-                            {errorReponse}
-                        </Text>
-                    </Box>
-                </ModalBody>
-                <Center>
-                    <ModalFooter>
-                        <Button 
-                            colorScheme={buttonColorScheme}
-                            onClick={onErrorModalClose}>
-                            閉じる
-                        </Button>
-                    </ModalFooter>
-                </Center>
-            </Modal>
+                onClose={onErrorModalClose}
+                errorTitle={errorTitle}
+                errorResponse={errorReponse}
+            />
         </Box>
     )
 }
