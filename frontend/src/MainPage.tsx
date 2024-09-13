@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
-import { useButtonColorScheme } from './Button/ButtonColorScheme';
 import ErrorReponseModal from './Modal/ErrorResponseModal';
 import LoadingModal from './Modal/LoadingModal';
 
