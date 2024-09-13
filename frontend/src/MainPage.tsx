@@ -8,7 +8,7 @@ import LoadingModal from './Modal/LoadingModal';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
-    const [errorReponse, setErrorReponse] = useState("")
+    const [errorResponse, setErrorReponse] = useState("")
     const [ fetchedCode, setFetchedCode] = useState("")
     const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
@@ -26,16 +26,6 @@ const MainPage = () => {
 
     // dotenvからの読み込み
     const path = import.meta.env.VITE_GET_API_PATH
-
-    useEffect(() => {
-        if (isFirstRender.current && pathHash) {
-            fetchDataByHash(pathHash)
-        }
-
-        // 初回のみの動作にするため、useRefを更新する
-        isFirstRender.current = false
-    }, [pathHash])
-
 
     const cancelFetch = () => {
         if (abortController) {
@@ -104,6 +94,16 @@ const MainPage = () => {
             onLoadingModalClose()
         }
     }
+
+    useEffect(() => {
+        if (isFirstRender.current && pathHash) {
+            fetchDataByHash(pathHash)
+        }
+
+        // 初回のみの動作にするため、useRefを更新する
+        isFirstRender.current = false
+    }, [pathHash])
+
     return (
         <Box bg={bg}>
             <Header></Header>
@@ -125,7 +125,7 @@ const MainPage = () => {
                 isOpen={isErrorModalOpen}
                 onClose={onErrorModalClose}
                 errorTitle={errorTitle}
-                errorResponse={errorReponse}
+                errorResponse={errorResponse}
             />
         </Box>
     )
