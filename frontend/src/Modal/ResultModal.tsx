@@ -2,6 +2,7 @@ import { CopyIcon } from "@yamada-ui/lucide"
 import { Box, Button, Center, FormControl, IconButton, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay , Text } from "@yamada-ui/react"
 import CopyPopover from "../Popover/CopyPopover"
 import { FC } from "react"
+import { useButtonColorScheme } from "../Button/ButtonColorScheme"
 
 interface ResultModalProps {
     isOpen: boolean
@@ -14,6 +15,7 @@ interface ResultModalProps {
 }
 
 const ResultModal: FC<ResultModalProps> = ({ isOpen, onClose, isError, snippetURL, isCopied, isPopoverOpen, onCopy}) => {
+    const colorScheme =  useButtonColorScheme()
     return (
         <>
             <Modal isOpen={isOpen} onClose={onClose} size
@@ -56,7 +58,12 @@ const ResultModal: FC<ResultModalProps> = ({ isOpen, onClose, isError, snippetUR
                 </ModalBody>
                 <Center>
                     <ModalFooter>
-                        <Button onClick={onClose}>閉じる</Button>
+                        <Button 
+                            colorScheme={colorScheme}
+                            onClick={onClose}
+                        >
+                            閉じる
+                        </Button>
                     </ModalFooter>
                 </Center>
 
