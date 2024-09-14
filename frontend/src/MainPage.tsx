@@ -4,7 +4,7 @@ import Editor from './Editor/Editor';
 import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 import ErrorReponseModal from './Modal/ErrorResponseModal';
-import LoadingModal from './Modal/LoadingModal';
+import GetLoadingModal from './Modal/GetLoadingModal';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -116,7 +116,7 @@ const MainPage = () => {
                 </Box>
             </Container>
 
-            <LoadingModal
+            <GetLoadingModal
                 isOpen={isLoadingModalOpen}
                 onClick={cancelFetch}
             />

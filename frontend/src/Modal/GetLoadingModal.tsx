@@ -2,12 +2,12 @@ import { FC } from "react"
 import { useButtonColorScheme } from "../Button/ButtonColorScheme"
 import { Box, Button, Center, Loading, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay } from "@yamada-ui/react"
 
-interface LoadingModalProps {
+interface GetLoadingModalProps {
     isOpen: boolean,
     onClick: () => void,
 }
 
-const LoadingModal: FC<LoadingModalProps> = ({ isOpen, onClick }) => {
+const GetLoadingModal: FC<GetLoadingModalProps> = ({ isOpen, onClick }) => {
     const buttonColorScheme = useButtonColorScheme()
 
     return (
@@ -36,4 +36,4 @@ const LoadingModal: FC<LoadingModalProps> = ({ isOpen, onClick }) => {
     )
 }
 
-export default LoadingModal
+export default GetLoadingModal
