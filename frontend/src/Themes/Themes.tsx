@@ -85,7 +85,7 @@ type ThemeOption =
     "tokyoNightDay"|
     "tokyoNightStorm"|
     "tomorrowNightBlue"|
-    "vscodeDrak"|
+    "vscodeDark"|
     "vscodeLight"|
     "whiteDark"|
     "whiteLight"|
