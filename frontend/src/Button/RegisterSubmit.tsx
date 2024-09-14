@@ -7,6 +7,7 @@ import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
 import ResultModal from "../Modal/ResultModal"
 import { useButtonColorScheme } from "./ButtonColorScheme"
+import RegisterLoadingModal from "../Modal/RegisterLoadingModal"
 
 interface SuccessResponse {
     url: string
@@ -43,7 +44,7 @@ export const RegisterSubmitButton = () => {
     }, [responseData])
 
 
-    const handleSubmitButton = () => {
+    const handleSubmitButton = async () => {
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
         
@@ -56,28 +57,39 @@ export const RegisterSubmitButton = () => {
         // 有効期限を初期化する
         setExpiration(defaultExpirationValue)
 
-        fetchSnippetURL(requestJsonData)
+        setLoadingOpen(true)
+
+        try { 
+            await fetchSnippetURL(requestJsonData)
+        } catch  {
+            handleFetchError()
+        } finally {
+            setLoadingOpen(false)
+        }
     }
     
 
-    const fetchSnippetURL = (requestJsonData: object) => {
-        fetch(path, {
+    const fetchSnippetURL = async (requestJsonData: object) => {
+        const response = await fetch(path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(requestJsonData)
         })
-            .then(response => response.json())
-            .then(handleResponse)
-            .catch(() => {
-                handleFetchError()
-            })
+
+        if (!response.ok) {
+            throw new Error("Fetch failed")
+        }
+
+        const data = await response.json()
+        handleResponse(data)
     }
 
     const handleFetchError = () => {
         setIsResponseError(true)
         onResultModalOpen()
+        setLoadingOpen(false)
     }
 
     const handleResponse = (data: SnippetResponse) => {
@@ -117,6 +129,8 @@ export const RegisterSubmitButton = () => {
         setTimeout(() => setIsPopoverOpen(false), 2000)
     }
 
+    const [ loadingOpen, setLoadingOpen ] = useState(false)
+
     return(
         <>
             <Center>
@@ -133,6 +147,10 @@ export const RegisterSubmitButton = () => {
                 isOpen={isSubmitSettingOpen}
                 onClose={onSubmitSettingClose}
                 onSubmit={handleSubmitButton}
+            />
+
+            <RegisterLoadingModal
+                isOpen={loadingOpen}
             />
 
             <ResultModal 
