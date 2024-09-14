@@ -23,7 +23,6 @@ export const ExpirationPulldown = () => {
             <Center>
                 <Box>
                     <NativeSelect
-                        focusBorderColor='green.500'
                         maxW="xs"
                         onChange={handleExpirationChange}
                         items={items} />
