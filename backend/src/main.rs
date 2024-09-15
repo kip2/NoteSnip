@@ -1,13 +1,14 @@
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use env::read_env_value;
 use hash::RequestHash;
 use register::RegisterRequest;
 
 mod db;
 mod env;
+mod error;
 mod hash;
 mod register;
-mod error;
 
 #[get("/get/{hash}")]
 async fn get_snippet(path: web::Path<String>) -> impl Responder {
@@ -37,20 +38,22 @@ async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Resp
 }
 
 async fn run() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    let allowed_origin = read_env_value("ALLOWED_ORIGIN").unwrap();
+    let bind_address = read_env_value("BIND_ADDRESS").unwrap();
+    let bind_port = read_env_value("BIND_PORT").unwrap();
+
+    HttpServer::new(move || {
         App::new()
-            // todo: Corsは暫定で追加しているため、本番環境で不要であれば削除する
             .wrap(
                 Cors::default()
-                    .allow_any_origin()
+                    .allowed_origin(&allowed_origin)
                     .allowed_methods(vec!["GET", "POST"])
                     .allowed_headers(vec!["Content-Type"]),
             )
             .service(get_snippet)
             .service(register_snippet)
     })
-    // todo: bindしているURLを最後に変更すること
-    .bind(("127.0.0.1", 8000))?
+    .bind((bind_address.as_str(), bind_port.parse::<u16>().unwrap()))?
     .run()
     .await
 }
