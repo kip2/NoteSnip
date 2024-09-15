@@ -13,6 +13,12 @@ export const ColorModeButton = () => {
     const { setSelectedTheme } = useSelectedThemeContext()
 
     useEffect(() => {
+        const systemPreferDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const defaultMode = systemPreferDark ? "dark" : "light"
+        changeColorMode(defaultMode)
+    }, [changeColorMode])
+
+    useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
         const handleSystemColorModeChange = (e: MediaQueryListEvent) => {
