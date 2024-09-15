@@ -5,6 +5,9 @@ import GithubButton from '../Button/GithubButton';
 const Header = () => {
   const headerBg = useColorModeValue("amber.200", "sky.800")
   const textColor = useColorModeValue("gray.700", "white")
+  
+  const githubURL = "https://github.com/kip2/NoteSnip"
+
   return (
     <Box as="header" bg={headerBg} p={3} pl={4}>
       <Flex align="center" justify="space-between">
@@ -23,7 +26,9 @@ const Header = () => {
         </Box>
         <Box>
           {/* <ColorModeButton/> */}
-          <GithubButton/>
+          <GithubButton
+            url={githubURL}
+          />
         </Box>
       </Flex>
     </Box>
