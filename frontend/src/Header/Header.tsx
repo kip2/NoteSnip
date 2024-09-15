@@ -1,5 +1,6 @@
 import { Box, Flex, Text, useColorModeValue } from'@yamada-ui/react';
 import { ColorModeButton } from '../Button/ColorModeButton';
+import GithubButton from '../Button/GithubButton';
  
 const Header = () => {
   const headerBg = useColorModeValue("amber.200", "sky.800")
@@ -21,7 +22,8 @@ const Header = () => {
           </Text>
         </Box>
         <Box>
-          <ColorModeButton/>
+          {/* <ColorModeButton/> */}
+          <GithubButton/>
         </Box>
       </Flex>
     </Box>
