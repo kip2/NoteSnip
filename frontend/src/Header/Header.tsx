@@ -8,7 +8,7 @@ const Header = () => {
     <Box as="header" bg={headerBg} p={3} pl={4}>
       <Flex align="center" justify="space-between">
         <Text fontSize="xl" fontWeight="bold" color={textColor} className='dancing-script-regular'>
-          Snippet Sharing Service
+          NoteSnip
         </Text>
         <Flex gap={4}>
           <ColorModeButton/>
