@@ -1,4 +1,4 @@
-import { Box, Container,  useColorModeValue, useDisclosure} from '@yamada-ui/react';
+import { Box, Center, Container,  useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
 import Editor from './Editor/Editor';
 import Header from './Header/Header';
@@ -107,7 +107,8 @@ const MainPage = () => {
     return (
         <Box bg={bg}>
             <Header></Header>
-            <Container size="ld">
+            <Center>
+            <Container size="ld" maxWidth="1200px" >
                 <Box gap="ms">
                     <Editor
                         fetchedCode={fetchedCode}
@@ -115,6 +116,8 @@ const MainPage = () => {
                     ></Editor>
                 </Box>
             </Container>
+
+            </Center>
 
             <GetLoadingModal
                 isOpen={isLoadingModalOpen}

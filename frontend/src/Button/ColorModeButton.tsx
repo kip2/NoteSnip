@@ -3,7 +3,7 @@ import { useCodeMirrorTheme } from "../Themes/ThemeContext"
 import { getTheme } from "../Themes/Themes"
 import { useSelectedThemeContext } from "../Themes/ThemeProvider"
 import { useEffect } from "react"
-import { MoonIcon, SunMoonIcon } from "@yamada-ui/lucide"
+import { MoonIcon, SunIcon } from "@yamada-ui/lucide"
 import { useButtonColorScheme } from "./ButtonColorScheme"
 
 
@@ -39,9 +39,10 @@ export const ColorModeButton = () => {
         setTheme(currentTheme)
     }, [colorMode, setSelectedTheme, setTheme ])
 
-    const handleColorModeChange = (mode: ColorMode) => {
-        changeColorMode(mode)
-        const currentTheme = getTheme(mode as string)
+    const toggleColorMode = () => {
+        const newMode = colorMode === "light" ? "dark" : "light"
+        changeColorMode(newMode as ColorMode)
+        const currentTheme = getTheme(newMode as string)
         setTheme(currentTheme)
     }
 
@@ -53,15 +54,8 @@ export const ColorModeButton = () => {
                 <Box display="flex" gap="md">
                     <Button 
                         colorScheme={ColorModeButtunColorScheme}
-                        leftIcon={<SunMoonIcon/>}
-                        onClick={()=>handleColorModeChange("light")} >
-                            light
-                    </Button>
-                    <Button 
-                        colorScheme={ColorModeButtunColorScheme}
-                        leftIcon={<MoonIcon/>}
-                        onClick={() => handleColorModeChange("dark")}>
-                            dark
+                        leftIcon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
+                        onClick={toggleColorMode} >
                     </Button>
                 </Box>
             </Center>

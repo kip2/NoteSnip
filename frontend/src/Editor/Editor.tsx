@@ -1,6 +1,6 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { FC, useCallback,  useState } from "react";
-import { Container, Autocomplete, Center, NativeSelect } from "@yamada-ui/react";
+import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
 import { getTheme, themeItems } from "../Themes/Themes";
@@ -50,25 +50,45 @@ const Editor: FC<EditorProps> = ({ fetchedCode, fetchedLanguage } ) => {
                 onChange={onCodeChange}
                 style={{ border: "1px solid #ccc" }}
             />
-            <Container>
-                <Autocomplete 
-                    placeholder="言語を選択してください"
-                    value={fetchedLanguage ? fetchedLanguage : language}
-                    header={
-                        <Center pt="2" px="3">
-                            言語を選択してください
-                        </Center>
-                    }
-                    onChange={handleLanguageChange} 
-                    items={items}
+            <Container >
+                <Grid 
+                    templateColumns={{ base: "1fr 1fr", md:"1fr"}}
+                    gap={4}
                 >
-                </Autocomplete>
-                <NativeSelect
-                    placeholder="テーマを選択してください"
-                    value={selectedTheme}
-                    items={themeItems}
-                    onChange={handleThemeChange}
-                />
+                    <GridItem>
+                        <Flex alignItems="center" flexWrap="nowrap" minWidth="100%">
+                            <Text  fontWeight="bold" whiteSpace="nowrap">
+                                言語 ：
+                            </Text>
+                            <Autocomplete 
+                                placeholder="言語を選択してください"
+                                value={fetchedLanguage ? fetchedLanguage : language}
+                                header={
+                                    <Center pt="2" px="3">
+                                        言語を選択してください
+                                    </Center>
+                                }
+                                onChange={handleLanguageChange} 
+                                items={items}
+                            >
+                            </Autocomplete>
+                        </Flex>
+                    </GridItem>
+                    <GridItem>
+                        <Flex alignItems="center" flexWrap="nowrap" minWidth="100%">
+                            <Text fontWeight="bold" whiteSpace="nowrap">
+                                テーマ ： 
+                            </Text>
+                            <NativeSelect
+                                placeholder="テーマを選択してください"
+                                value={selectedTheme}
+                                items={themeItems}
+                                onChange={handleThemeChange}
+                            />
+                        </Flex>
+
+                    </GridItem>
+                </Grid>
                 <RegisterSubmitButton/>
             </Container>
         </>
