@@ -7,12 +7,22 @@ const Header = () => {
   return (
     <Box as="header" bg={headerBg} p={3} pl={4}>
       <Flex align="center" justify="space-between">
-        <Text fontSize="xl" fontWeight="bold" color={textColor} className='dancing-script-regular'>
-          NoteSnip
-        </Text>
-        <Flex gap={4}>
+        <Box>
           <ColorModeButton/>
-        </Flex>
+        </Box>
+        <Box>
+          <Flex direction="column" align="center" maxWidth="100%">
+            <Text fontSize="4xl" fontWeight="bold" color={textColor} className='dancing-script-regular'>
+              NoteSnip
+            </Text>
+          </Flex>
+          <Text fontSize="md" className='dancing-script-regular'>
+            The website for sharing code snippets.
+          </Text>
+        </Box>
+        <Box>
+          <ColorModeButton/>
+        </Box>
       </Flex>
     </Box>
   );
