@@ -1,11 +1,9 @@
-import { Box, Button, Center, useColorMode, ColorMode} from "@yamada-ui/react"
+import { Box,  Center, useColorMode, ColorMode, useColorModeValue} from "@yamada-ui/react"
 import { useCodeMirrorTheme } from "../Themes/ThemeContext"
 import { getTheme } from "../Themes/Themes"
 import { useSelectedThemeContext } from "../Themes/ThemeProvider"
 import { useEffect } from "react"
-import { MoonIcon, SunIcon } from "@yamada-ui/lucide"
-import { useButtonColorScheme } from "./ButtonColorScheme"
-
+import "./ColorModeButton.css"
 
 export const ColorModeButton = () => {
     const { setTheme } = useCodeMirrorTheme()
@@ -46,17 +44,17 @@ export const ColorModeButton = () => {
         setTheme(currentTheme)
     }
 
-    const ColorModeButtunColorScheme = useButtonColorScheme()
-
     return(
         <>
             <Center>
                 <Box display="flex" gap="md">
-                    <Button 
-                        colorScheme={ColorModeButtunColorScheme}
-                        leftIcon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
-                        onClick={toggleColorMode} >
-                    </Button>
+                    <button 
+                        className={`toggle-btn ${colorMode === 'dark' ? 'toggled' : ''}`}
+                        onClick={toggleColorMode}
+                    >
+                        <div className="sun-rays"/>
+                        <div className="main-circle"/>
+                    </button>
                 </Box>
             </Center>
         </>
