@@ -1,1 +1,1 @@
-# Text-Snippet-Sharing-Service
+# NoteSnip
