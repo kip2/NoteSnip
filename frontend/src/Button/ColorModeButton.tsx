@@ -49,7 +49,7 @@ export const ColorModeButton = () => {
             <Center>
                 <Box display="flex" gap="md">
                     <button 
-                        className={`toggle-btn ${colorMode === 'dark' ? 'toggled' : ''}`}
+                        className={`toggle-btn ${colorMode === 'light' ? 'toggled' : ''}`}
                         onClick={toggleColorMode}
                     >
                         <div className="sun-rays"/>
