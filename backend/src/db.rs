@@ -21,7 +21,7 @@ impl SnippetData {
 
         let created_at_utc = self.created_at.with_timezone(&Utc);
 
-        match self.expiration_stat.as_str() {
+        match self.expiration_stat.as_str().trim() {
             "10min" => {
                 let expiration_time = created_at_utc + Duration::minutes(10);
                 now < expiration_time
