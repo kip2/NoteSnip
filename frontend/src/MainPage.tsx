@@ -10,7 +10,7 @@ import { useCodeContext } from './Editor/CodeProvider';
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
     const [errorResponse, setErrorReponse] = useState("")
-    const { code, setCode } = useCodeContext()
+    const { setCode } = useCodeContext()
     const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
     const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
