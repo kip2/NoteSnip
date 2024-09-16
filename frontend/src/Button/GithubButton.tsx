@@ -20,7 +20,7 @@ const GithubButton: FC<GithubButtonProps> = ({ url }) => {
         <a href={url} className="button flex-center">
           <svg
             viewBox="0 0 20 20"
-            width="22px"
+            width="33px"
             className="btn-svg"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +76,8 @@ const StyledWrapper = styled.div`
   cursor: pointer;
   text-decoration: none;
   color: #ffff;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: #2d2e32;
   border: 2px solid #2d2e32;
