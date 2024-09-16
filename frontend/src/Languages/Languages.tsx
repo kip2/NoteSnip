@@ -533,7 +533,7 @@ const languages =  {
     turtle: StreamLanguage.define(turtle),
     typescript: javascript({typescript: true}),
     vb: StreamLanguage.define(vb),
-    vbScript: StreamLanguage.define(vbScript),
+    vbscript: StreamLanguage.define(vbScript),
     velocity: StreamLanguage.define(velocity),
     verilog: StreamLanguage.define(verilog),
     vhdl: StreamLanguage.define(vhdl),
