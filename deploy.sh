@@ -10,5 +10,3 @@ fi
 rm -rf frontend
 rm -rf testing_env
 rm README.md
-
-bash ./backend/build.sh
