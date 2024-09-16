@@ -20,7 +20,7 @@ interface ErrorResponse {
 type SnippetResponse = SuccessResponse | ErrorResponse
 
 export const RegisterSubmitButton = () => {
-    const { code } = useCodeContext()
+    const { codeRef } = useCodeContext()
     const { language } = useLanguageContext()
     const [ responseData, setResponseData ] = useState<string | null>(null)
     const { isOpen: isSubmitSettingOpen, onOpen: onSubmitSettingOpen, onClose: onSubmitSettingClose } = useDisclosure()
@@ -48,8 +48,10 @@ export const RegisterSubmitButton = () => {
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
 
+        console.log("codeRef:", codeRef.current)
+
         const requestJsonData = {
-            snippet: code,
+            snippet: codeRef.current,
             snippet_language: language,
             expiration_stat: expiration,
         }

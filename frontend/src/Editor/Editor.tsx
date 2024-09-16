@@ -1,5 +1,5 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { FC, useCallback,  useState } from "react";
+import { FC, useCallback,   useState } from "react";
 import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
@@ -15,10 +15,11 @@ interface EditorProps {
 }
 
 const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
-    const {code, setCode} = useCodeContext()
+    const {code, codeRef} = useCodeContext()
+
     const onCodeChange = useCallback((val: string) => {
-        setCode(val)
-    }, [setCode])
+        codeRef.current = val
+    }, [codeRef])
 
     const { language, setLanguage } = useLanguageContext()
     const [previousValue, setPreviousValue] = useState("")
