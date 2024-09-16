@@ -54,7 +54,7 @@ export const RegisterSubmitButton = () => {
             expiration_stat: expiration,
         }
 
-        // 有効期限を初期化する
+        // 有効期限プルダウンの値を初期化する
         setExpiration(defaultExpirationValue)
 
         setLoadingOpen(true)
