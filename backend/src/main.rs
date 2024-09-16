@@ -46,7 +46,8 @@ async fn run() -> std::io::Result<()> {
         App::new()
             .wrap(
                 Cors::default()
-                    .allowed_origin(&allowed_origin)
+                    // .allowed_origin(&allowed_origin)
+                    .allow_any_origin()
                     .allowed_methods(vec!["GET", "POST"])
                     .allowed_headers(vec!["Content-Type"]),
             )
