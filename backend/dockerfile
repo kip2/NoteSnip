@@ -1,0 +1,12 @@
+FROM rust:1.76.0
+
+WORKDIR /usr/src/app
+
+# 必要なパッケージをインストール
+RUN apt-get update && apt-get install -y libssl-dev pkg-config
+
+ENV OPENSSL_DIR=/usr/lib/ssl
+
+COPY . . 
+
+RUN rustup target add x86_64-unknown-linux-gnu

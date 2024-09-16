@@ -1,0 +1,8 @@
+version: '3'
+services:
+  notesnip-api-server:
+    build:
+      context: .
+    volumes:
+      - ./target:/usr/src/app/target
+    command: cargo build --release --target=x86_64-unknown-linux-gnu
