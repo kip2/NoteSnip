@@ -16,3 +16,4 @@ sudo chmod +x ./target/x86_64-unknown-linux-gnu/release/notesnip-api-server
 sudo systemctl daemon-reload
 sudo systemctl enable notesnip-api-server
 sudo systemctl start notesnip-api-server
+sudo systemctl restart notesnip-api-server
