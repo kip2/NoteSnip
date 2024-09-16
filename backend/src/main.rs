@@ -38,7 +38,7 @@ async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Resp
 }
 
 async fn run() -> std::io::Result<()> {
-    // let allowed_origin = read_env_value("ALLOWED_ORIGIN").unwrap();
+    let allowed_origin = read_env_value("ALLOWED_ORIGIN").unwrap();
     let bind_address = read_env_value("BIND_ADDRESS").unwrap();
     let bind_port = read_env_value("BIND_PORT").unwrap();
 
@@ -46,8 +46,7 @@ async fn run() -> std::io::Result<()> {
         App::new()
             .wrap(
                 Cors::default()
-                    // .allowed_origin(&allowed_origin)
-                    .allow_any_origin()
+                    .allowed_origin(&allowed_origin)
                     .allowed_methods(vec!["GET", "POST"])
                     .allowed_headers(vec!["Content-Type"]),
             )
