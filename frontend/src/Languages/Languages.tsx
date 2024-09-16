@@ -123,7 +123,7 @@ import { SQLite, Cassandra, MSSQL, MariaSQL, PLSQL, PostgreSQL,MySQL } from "@co
 
 type LanguageOption = 
     "apl" |
-    "asciiArmor" |
+    "asciiarmor" |
     "asterisk" |
     "brainfuck" |
     "c" |
@@ -131,8 +131,8 @@ type LanguageOption =
     "clojure" |
     "cmake" |
     "cobol" |
-    "coffeeScript" |
-    "commonLisp" |
+    "coffeescript" |
+    "commonlisp" |
     "cpp" |
     "crystal" |
     "css" |
@@ -141,7 +141,7 @@ type LanguageOption =
     "d" |
     "dart" |
     "diff" |
-    "dockerFile" |
+    "dockerfile" |
     "dtd" |
     "dylan" |
     "ebnf" |
@@ -179,7 +179,7 @@ type LanguageOption =
     "kotlin" |
     "lezer" |
     "less" |
-    "liveScript" |
+    "livescript" |
     "liquid" |
     "lua" |
     "mariasql" |
@@ -192,13 +192,13 @@ type LanguageOption =
     "mssql" |
     "mumps" |
     "mysql" |
-    "nesC" |
+    "nesc" |
     "nginx" |
     "nix" |
     "nsis" |
     "ntriples" |
-    "objectiveC" |
-    "objectiveCpp" |
+    "objectivec" |
+    "objectivecpp" |
     "ocaml" |
     "octave" |
     "oz" |
@@ -209,7 +209,7 @@ type LanguageOption =
     "pig" |
     "plsql" |
     "plaintext" |
-    "powerShell" |
+    "powershell" |
     "postgresql" |
     "properties" |
     "protobuf" |
@@ -241,7 +241,7 @@ type LanguageOption =
     "swift" |
     "tcl" |
     "textile" |
-    "tiddlyWiki" |
+    "tiddlywiki" |
     "tiki" |
     "toml" |
     "tsx" |
@@ -249,15 +249,15 @@ type LanguageOption =
     "turtle" |
     "typescript" |
     "vb" |
-    "vbScript" |
+    "vbscript" |
     "velocity" |
     "verilog" |
     "vhdl" |
     "wast" |
-    "webIDL" |
+    "webidl" |
     "wgsl" |
     "xml" |
-    "xQuery" |
+    "xquery" |
     "yacas" |
     "yaml" |
     "z80"
