@@ -5,7 +5,9 @@ WORKDIR /usr/src/app
 # 必要なパッケージをインストール
 RUN apt-get update && apt-get install -y libssl-dev pkg-config
 
-ENV OPENSSL_DIR=/usr/lib/ssl
+ENV OPENSSL_DIR=/usr
+ENV OPENSSL_INCLUDE_DIR=/usr/include
+ENV OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu
 
 COPY . . 
 
