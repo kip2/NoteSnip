@@ -7,6 +7,7 @@ import ErrorReponseModal from './Modal/ErrorResponseModal';
 import GetLoadingModal from './Modal/GetLoadingModal';
 import { useCodeContext } from './Editor/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
+import Footer from './Footer/Footer';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -105,7 +106,7 @@ const MainPage = () => {
 
     return (
         <Box bg={bg}>
-            <Header></Header>
+            <Header/>
             <Center>
             <Container size="ld" maxWidth="1200px" >
                 <Box gap="ms">
@@ -126,6 +127,7 @@ const MainPage = () => {
                 errorTitle={errorTitle}
                 errorResponse={errorResponse}
             />
+            <Footer/>
         </Box>
     )
 }
