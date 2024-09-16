@@ -19,22 +19,24 @@ impl SnippetData {
     pub fn is_not_expired(&self) -> bool {
         let now: DateTime<Utc> = Utc::now();
 
+        let created_at_utc = self.created_at.with_timezone(&Utc);
+
         match self.expiration_stat.as_str() {
             "10min" => {
-                let expiration_time = self.created_at + Duration::minutes(10);
-                now <= expiration_time
+                let expiration_time = created_at_utc + Duration::minutes(10);
+                now < expiration_time
             }
             "1hour" => {
-                let expiration_time = self.created_at + Duration::hours(1);
-                now <= expiration_time
+                let expiration_time = created_at_utc + Duration::hours(1);
+                now < expiration_time
             }
             "1day" => {
-                let expiration_time = self.created_at + Duration::days(1);
-                now <= expiration_time
+                let expiration_time = created_at_utc + Duration::days(1);
+                now < expiration_time
             }
             "1week" => {
-                let expiration_time = self.created_at + Duration::weeks(1);
-                now <= expiration_time
+                let expiration_time = created_at_utc + Duration::weeks(1);
+                now < expiration_time
             }
             "eternal" => true,
             _ => false,
