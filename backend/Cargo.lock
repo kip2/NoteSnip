@@ -1344,6 +1344,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "notesnip-api-server"
+version = "0.1.0"
+dependencies = [
+ "actix-cors",
+ "actix-web",
+ "chrono",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "sqids",
+ "sqlx",
+ "thiserror",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
 name = "num-bigint-dig"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2349,24 +2367,6 @@ dependencies = [
  "once_cell",
  "rustix",
  "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "text-snippet-sharing-service"
-version = "0.1.0"
-dependencies = [
- "actix-cors",
- "actix-web",
- "chrono",
- "dotenv",
- "reqwest",
- "serde",
- "serde_json",
- "sqids",
- "sqlx",
- "thiserror",
- "tokio",
- "uuid",
 ]
 
 [[package]]
