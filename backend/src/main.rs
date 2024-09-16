@@ -38,7 +38,7 @@ async fn register_snippet(request_data: web::Json<RegisterRequest>) -> impl Resp
 }
 
 async fn run() -> std::io::Result<()> {
-    let allowed_origin = read_env_value("ALLOWED_ORIGIN").unwrap();
+    // let allowed_origin = read_env_value("ALLOWED_ORIGIN").unwrap();
     let bind_address = read_env_value("BIND_ADDRESS").unwrap();
     let bind_port = read_env_value("BIND_PORT").unwrap();
 
