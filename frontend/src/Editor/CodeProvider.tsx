@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode  } from "react";
 import { defaultSnippet } from "../Languages/DefaultSnippet";
 
 interface CodeContextType {
@@ -13,9 +13,9 @@ const CodeContext = createContext<CodeContextType>({
 
 export const CodeProvider = ({ children }: { children: ReactNode }) => {
     const [code, setCode] = useState<string>(defaultSnippet);
-
+    
     return (
-        <CodeContext.Provider value={{ code, setCode }}>
+        <CodeContext.Provider value={{ code, setCode}}>
             {children}
         </CodeContext.Provider>
     );

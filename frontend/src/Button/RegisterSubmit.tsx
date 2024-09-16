@@ -47,7 +47,7 @@ export const RegisterSubmitButton = () => {
     const handleSubmitButton = async () => {
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
-        
+
         const requestJsonData = {
             snippet: code,
             snippet_language: language,

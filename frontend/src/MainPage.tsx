@@ -5,11 +5,12 @@ import Header from './Header/Header';
 import { useEffect, useRef, useState } from 'react';
 import ErrorReponseModal from './Modal/ErrorResponseModal';
 import GetLoadingModal from './Modal/GetLoadingModal';
+import { useCodeContext } from './Editor/CodeProvider';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
     const [errorResponse, setErrorReponse] = useState("")
-    const [ fetchedCode, setFetchedCode] = useState("")
+    const { code, setCode } = useCodeContext()
     const [ fetchedLanguage, setFectchedLanguage] = useState("")
 
     const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
@@ -71,21 +72,17 @@ const MainPage = () => {
                 signal: controller.signal
             })
 
-            console.log("response:", response)
-
             if (!response.ok) {
-                console.error("Error fetching data:", response.statusText)
                 handleError("")
                 return
             }
 
             const data = await response.json()
-            console.log(data)
 
             if (data.error) {
                 handleError(data.error)
             } else {
-                setFetchedCode(data.snippet)
+                setCode(data.snippet)
                 setFectchedLanguage(data.snippet_language)
             }
         } catch {
@@ -111,7 +108,6 @@ const MainPage = () => {
             <Container size="ld" maxWidth="1200px" >
                 <Box gap="ms">
                     <Editor
-                        fetchedCode={fetchedCode}
                         fetchedLanguage={fetchedLanguage}
                     ></Editor>
                 </Box>

@@ -11,11 +11,10 @@ import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 
 interface EditorProps {
-    fetchedCode: string
     fetchedLanguage: string
 }
 
-const Editor: FC<EditorProps> = ({ fetchedCode, fetchedLanguage } ) => {
+const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
     const {code, setCode} = useCodeContext()
     const onCodeChange = useCallback((val: string) => {
         setCode(val)
@@ -43,7 +42,7 @@ const Editor: FC<EditorProps> = ({ fetchedCode, fetchedLanguage } ) => {
     return (
         <>
             <CodeMirror
-                value={fetchedCode ? fetchedCode :code}
+                value={code}
                 height="700px"
                 extensions={[getLanguageExtension(language)]}
                 theme={theme}
