@@ -1,5 +1,5 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { FC, useCallback,   useState } from "react";
+import { useCallback,   useState } from "react";
 import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
@@ -10,11 +10,7 @@ import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 
-interface EditorProps {
-    fetchedLanguage: string
-}
-
-const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
+const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()
 
     const onCodeChange = useCallback((val: string) => {
@@ -70,7 +66,7 @@ const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
                             </Text>
                             <Autocomplete 
                                 placeholder="言語を選択してください"
-                                value={fetchedLanguage ? fetchedLanguage : language}
+                                value={language}
                                 header={
                                     <Center pt="2" px="3">
                                         言語を選択してください

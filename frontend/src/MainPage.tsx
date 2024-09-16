@@ -6,12 +6,13 @@ import { useEffect, useRef, useState } from 'react';
 import ErrorReponseModal from './Modal/ErrorResponseModal';
 import GetLoadingModal from './Modal/GetLoadingModal';
 import { useCodeContext } from './Editor/CodeProvider';
+import { useLanguageContext } from './Languages/LanguageProvider';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
     const [errorResponse, setErrorReponse] = useState("")
-    const { setCode } = useCodeContext()
-    const [ fetchedLanguage, setFectchedLanguage] = useState("")
+    const { setCode, codeRef } = useCodeContext()
+    const { setLanguage } = useLanguageContext()
 
     const {isOpen: isErrorModalOpen, onOpen: onErrorModalOpen, onClose: onErrorModalClose } = useDisclosure()
     const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
@@ -83,7 +84,8 @@ const MainPage = () => {
                 handleError(data.error)
             } else {
                 setCode(data.snippet)
-                setFectchedLanguage(data.snippet_language)
+                codeRef.current = data.snippet
+                setLanguage(data.snippet_language)
             }
         } catch {
             handleError("")
@@ -107,9 +109,7 @@ const MainPage = () => {
             <Center>
             <Container size="ld" maxWidth="1200px" >
                 <Box gap="ms">
-                    <Editor
-                        fetchedLanguage={fetchedLanguage}
-                    ></Editor>
+                    <Editor/>
                 </Box>
             </Container>
 
