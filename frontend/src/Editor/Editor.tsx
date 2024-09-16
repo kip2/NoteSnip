@@ -15,15 +15,21 @@ interface EditorProps {
 }
 
 const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
-    const {code, codeRef} = useCodeContext()
+    const {code, setCode, codeRef} = useCodeContext()
 
     const onCodeChange = useCallback((val: string) => {
         codeRef.current = val
     }, [codeRef])
 
+    const updateCodeChange = () => {
+        setCode(codeRef.current)
+    }
+
     const { language, setLanguage } = useLanguageContext()
     const [previousValue, setPreviousValue] = useState("")
     const handleLanguageChange = (value: string) => {
+        updateCodeChange()
+
         if (value.length >= previousValue.length) {
             setLanguage(value)
         }
@@ -36,6 +42,8 @@ const Editor: FC<EditorProps> = ({ fetchedLanguage } ) => {
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = event.target.value
         const currentTheme = getTheme(theme)
+
+        updateCodeChange()
         setSelectedTheme(theme)
         setTheme(currentTheme)
     }
