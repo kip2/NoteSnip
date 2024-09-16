@@ -10,11 +10,12 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     --bg: #e8e8e8;
     --fg: #212121;
     background-color: var(--bg);
-    border-radius: 10px;
+    border-radius: 50%;
     --dimensions: 50px;
     width: var(--dimensions);
     height: var(--dimensions);
-    border: none;
+    border: 2px solid;
+    border-color: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +23,30 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     padding: 0;
     cursor: pointer;
     position: relative;
+    transition: transform 0.45s ease, background-color 0.4s ease, border-color 0.6s ease ;
+}
+
+.toggle-btn:hover {
+    transform: rotate(360deg);
+    background-color: var(--fg);
+    border-color: var(--bg);
+    color: var(--bg);
+}
+
+.toggle-btn:hover .main-circle::after{
+    background-color: var(--fg);
+}
+
+.toggle-btn:hover .main-circle
+{
+    background-color: var(--bg);
+}
+
+.toggle-btn:hover .sun-rays,
+.toggle-btn:hover .sun-rays::after,
+.toggle-btn:hover .sun-rays::before {
+    background-color: var(--bg);
+    box-shadow: 0 16px 0 var(--bg), 0 -16px 0 var(--bg);
 }
 
 .toggle-btn .main-circle {

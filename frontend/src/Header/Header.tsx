@@ -25,7 +25,6 @@ const Header = () => {
           </Text>
         </Box>
         <Box>
-          {/* <ColorModeButton/> */}
           <GithubButton
             url={githubURL}
           />
