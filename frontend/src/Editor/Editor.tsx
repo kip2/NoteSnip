@@ -9,7 +9,6 @@ import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
-import SubmitButton from "../Button/SubmitButton";
 
 const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()
