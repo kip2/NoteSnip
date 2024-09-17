@@ -5,24 +5,27 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+import { useColorMode } from "@yamada-ui/react";
 import styled from "styled-components";
 
 const SubmitButton = () => {
+    const { colorMode } = useColorMode()
+
   return (
-    <StyledWrapper>
+    <StyledWrapper >
       <div className="button-container">
-        <button className="brutalist-button sharebutton">
+        <button className={`brutalist-button sharebutton ${colorMode}`}>
           <div className="sharebutton-logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
                 <rect width="256" height="256" fill="none"/>
-                <circle cx="64" cy="128" r="32" fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-                <circle cx="176" cy="200" r="32" fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-                <circle cx="176" cy="56" r="32" fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-                <line x1="149.09" y1="73.3" x2="90.91" y2="110.7" fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-                <line x1="90.91" y1="145.3" x2="149.09" y2="182.7" fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+                <circle cx="64" cy="128" r="32" fill="none" stroke="#10A37F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <circle cx="176" cy="200" r="32" fill="none" stroke="#10A37F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <circle cx="176" cy="56" r="32" fill="none" stroke="#10A37F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="149.09" y1="73.3" x2="90.91" y2="110.7" fill="none" stroke="#10A37F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="90.91" y1="145.3" x2="149.09" y2="182.7" fill="none" stroke="#10A37F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
             </svg>
           </div>
-          <div className="button-text">
+          <div className={`button-text ${colorMode}`}>
             <span>Create Share URL</span>
             <span>PUSH ME</span>
           </div>
@@ -60,8 +63,12 @@ const StyledWrapper = styled.div`
   cursor: pointer;
 }
 
-.brutalist-button.sharebutton {
-  background-color: #356854;
+.brutalist-button.sharebutton.dark{
+   background-color: #356854;
+}
+
+.brutalist-button.sharebutton.light {
+   background-color: #cc9b7a;
 }
 
 .brutalist-button::before {
@@ -77,12 +84,18 @@ const StyledWrapper = styled.div`
   z-index: 1;
 }
 
-.brutalist-button.sharebutton::before {
+.brutalist-button.sharebutton.dark::before{
   background-color: #316b58;
 }
+.brutalist-button.sharebutton.light::before {
+  background-color: #cc9b7a;
+}
 
-.brutalist-button.claude::before {
+.brutalist-button.claude.dark::before {
   background-color: #e3d19c;
+}
+.brutalist-button.claude.light::before {
+  background-color: #cc9b7a;
 }
 
 .brutalist-button:hover::before {
@@ -184,12 +197,18 @@ const StyledWrapper = styled.div`
   transform: translateY(0);
 }
 
-.brutalist-button.sharebutton:hover .button-text {
+.brutalist-button.sharebutton:hover .button-text.dark {
   color: #d3d3d3;
 }
+.brutalist-button.sharebutton:hover .button-text.light {
+  color: #000000;
+}
 
-.brutalist-button.sharebutton:hover .button-text span:last-child {
+.brutalist-button.sharebutton:hover .button-text.dark span:last-child {
   color: #d6cbbf;
+}
+.brutalist-button.sharebutton:hover .button-text.light span:last-child {
+  color: #ffffff;
 }
 
 @media (hover: hover) and (pointer: fine) {
