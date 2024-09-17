@@ -24,7 +24,7 @@ const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
             <span className="minimize"></span>
             <span className="maximize"></span>
           </div>
-          <div className="title">Editor</div>
+          <div className="title">Code Editor</div>
         </div>
         <div className="terminal-body">{children}</div>
       </div>
