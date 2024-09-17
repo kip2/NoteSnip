@@ -84,7 +84,7 @@ const StyledWrapper = styled.div`
 
   /* Terminal Body */
   .terminal-body {
-    padding: 10px;
+    padding: 5px;
     color: #0f0;
     min-height: 100px; /* コンテンツが少ない場合の高さ */
   }
