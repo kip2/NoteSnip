@@ -1,68 +1,93 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import { useLanguageContext } from '../Languages/LanguageProvider';
+// Copyright - 2024 jeremyssocial (nr.bln) 
 
-interface CodeEditorWrapperProps {
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+import React, { FC } from "react";
+import styled from "styled-components";
+
+interface TerminalWrapperProps {
   children: React.ReactNode;
 }
 
-const CodeEditorWrapper: FC<CodeEditorWrapperProps> = ({ children }) => {
-  const { language } = useLanguageContext()
+const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
   return (
     <StyledWrapper>
-      <div className="header">
-        <span className="title">{language}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="icon">
-          <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
-          <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g>
-          <g id="SVGRepo_iconCarrier">
-            <path strokeLinecap="round" strokeWidth="2" stroke="#4C4F5A" d="M6 6L18 18"></path>
-            <path strokeLinecap="round" strokeWidth="2" stroke="#4C4F5A" d="M18 6L6 18"></path>
-          </g>
-        </svg>
+      <div className="terminal">
+        <div className="terminal-header">
+          <div className="buttons">
+            <span className="close"></span>
+            <span className="minimize"></span>
+            <span className="maximize"></span>
+          </div>
+          <div className="title">Editor</div>
+        </div>
+        <div className="terminal-body">{children}</div>
       </div>
-      <div className="editor-content">{children}</div>
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
-  background-color: #1d1e22;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  padding: 2px;
+  /* Terminal Window */
+  .terminal {
+    background-color: #000;
+    color: #0f0;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  }
 
-  .header {
+  /* Terminal Header */
+  .terminal-header {
+    background-color: #333;
+    padding: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 10px;
+    color: #fff;
+  }
+
+  .buttons {
+    display: flex;
+    margin-right: 15px;
+  }
+
+  .buttons span {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .close {
+    background-color: #ff605c;
+  }
+
+  .minimize {
+    background-color: #ffbd44;
+  }
+
+  .maximize {
+    background-color: #00ca4e;
   }
 
   .title {
-    font-family: Lato, sans-serif;
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 1.57px;
-    color: rgb(212, 212, 212);
+    flex-grow: 1;
+    text-align: center;
   }
 
-  .icon {
-    width: 20px;
-    transition: 0.2s ease;
-  }
-
-  .icon:hover {
-    cursor: pointer;
-    border-radius: 50px;
-    background-color: #6e7281;
-  }
-
-  .editor-content {
-    margin: 0 10px 10px;
-    color: white;
+  /* Terminal Body */
+  .terminal-body {
     padding: 10px;
+    color: #0f0;
+    min-height: 100px; /* コンテンツが少ない場合の高さ */
   }
 `;
 
-export default CodeEditorWrapper;
+export default TerminalWrapper;
