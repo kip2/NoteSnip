@@ -9,6 +9,7 @@ import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
+import CodeEditorWrapper from "./CodeEditorWrapper";
 
 const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()
@@ -46,14 +47,16 @@ const Editor= () => {
 
     return (
         <>
-            <CodeMirror
-                value={code}
-                height="700px"
-                extensions={[getLanguageExtension(language)]}
-                theme={theme}
-                onChange={onCodeChange}
-                style={{ border: "1px solid #ccc" }}
-            />
+            <CodeEditorWrapper>
+                <CodeMirror
+                    value={code}
+                    height="700px"
+                    extensions={[getLanguageExtension(language)]}
+                    theme={theme}
+                    onChange={onCodeChange}
+                    style={{ border: "1px solid #ccc" }}
+                />
+            </CodeEditorWrapper>
             <Container pb={0}>
                 <Grid 
                     templateColumns={{ base: "1fr 1fr", md:"1fr"}}
