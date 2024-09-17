@@ -7,6 +7,7 @@
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+import { useColorMode } from "@yamada-ui/react";
 import React, { FC } from "react";
 import styled from "styled-components";
 
@@ -15,9 +16,11 @@ interface TerminalWrapperProps {
 }
 
 const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
+  const { colorMode } = useColorMode()
+
   return (
     <StyledWrapper>
-      <div className="terminal">
+      <div className={`terminal ${colorMode}`}>
         <div className="terminal-header">
           <div className="buttons">
             <span className="close"></span>
@@ -33,17 +36,21 @@ const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
 };
 
 const StyledWrapper = styled.div`
-  /* Terminal Window */
   .terminal {
-    background-color: #000;
     color: #0f0;
     font-family: "Courier New", Courier, monospace;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   }
+  .terminal.dark {
+    background-color: #000;
+  }
+  .terminal.light {
+    background-color: #7f7f7f;
+  }
 
-  /* Terminal Header */
+
   .terminal-header {
     background-color: #333;
     padding: 5px;
@@ -82,11 +89,10 @@ const StyledWrapper = styled.div`
     text-align: center;
   }
 
-  /* Terminal Body */
   .terminal-body {
     padding: 5px;
     color: #0f0;
-    min-height: 100px; /* コンテンツが少ない場合の高さ */
+    min-height: 100px; 
   }
 `;
 
