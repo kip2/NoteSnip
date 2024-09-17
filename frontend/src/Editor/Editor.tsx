@@ -95,7 +95,6 @@ const Editor= () => {
                     </GridItem>
                 </Grid>
                 <RegisterSubmitButton/>
-                <SubmitButton/>
             </Container>
         </>
 

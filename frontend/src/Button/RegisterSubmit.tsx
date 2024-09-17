@@ -1,4 +1,4 @@
-import { Box, Button, Center,  useDisclosure } from "@yamada-ui/react"
+import { Box, Center,  useDisclosure } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useEffect, useState } from "react"
 import { useLanguageContext } from "../Languages/LanguageProvider"
@@ -6,8 +6,8 @@ import { useCodeContext } from "../Editor/CodeProvider"
 import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
 import ResultModal from "../Modal/ResultModal"
-import { useButtonColorScheme } from "./ButtonColorScheme"
 import RegisterLoadingModal from "../Modal/RegisterLoadingModal"
+import SubmitButton from "./SubmitButton"
 
 interface SuccessResponse {
     url: string
@@ -31,7 +31,6 @@ export const RegisterSubmitButton = () => {
     const [ isCopied, setIsCopied ] = useState(false)
     const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
 
-    const SubmitButtonColorScheme = useButtonColorScheme()
 
     // dotenvからの読み込み
     const path = import.meta.env.VITE_REGISTER_API_PATH
@@ -138,9 +137,9 @@ export const RegisterSubmitButton = () => {
             <Center>
                 <Box>
                     <Center>
-                        <Button 
-                            colorScheme={SubmitButtonColorScheme}
-                            onClick={onSubmitSettingOpen}>共有URL作成</Button>
+                        <SubmitButton
+                            onClick={onSubmitSettingOpen}
+                        />
                     </Center>
                 </Box>
             </Center>
