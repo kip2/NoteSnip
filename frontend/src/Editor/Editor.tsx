@@ -54,7 +54,7 @@ const Editor= () => {
                 onChange={onCodeChange}
                 style={{ border: "1px solid #ccc" }}
             />
-            <Container >
+            <Container pb={0}>
                 <Grid 
                     templateColumns={{ base: "1fr 1fr", md:"1fr"}}
                     gap={4}
