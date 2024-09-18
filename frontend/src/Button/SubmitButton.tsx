@@ -7,6 +7,7 @@
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+import { useColorMode } from "@yamada-ui/react";
 import { FC } from "react";
 import styled from "styled-components";
 
@@ -15,25 +16,30 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton: FC<SubmitButtonProps> = ({ onClick }) => {
+  const { colorMode } = useColorMode()
 
   return (
     <StyledWrapper>
-      <button onClick={onClick} className="animated-button">
+      <button onClick={onClick} className={`animated-button ${colorMode}`}>
         <svg
           viewBox="0 0 24 24"
           className="arr-2"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+          <path  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
-        <span className="text">共有URL作成</span>
-        <span className="circle" />
+        <span className={`text ${colorMode}`}>共有URL作成</span>
+        <span className={`circle ${colorMode}`} />
         <svg
           viewBox="0 0 24 24"
           className="arr-1"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+          { colorMode === "dark" ? 
+            <path  d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+          :
+            <path fill="#000" d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+          }
         </svg>
       </button>
     </StyledWrapper>
@@ -53,11 +59,19 @@ const StyledWrapper = styled.div`
   background-color: inherit;
   border-radius: 100px;
   font-weight: 600;
-  color: greenyellow;
-  box-shadow: 0 0 0 2px greenyellow;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+  .animated-button.dark {
+  color: greenyellow;
+  box-shadow: 0 0 0 2px greenyellow;
+}
+  .animated-button.light {
+  color: black;
+  box-shadow: 0 0 0 2px black;
+  background-color: #5cbdfd;
 }
 
 .animated-button svg {
@@ -83,11 +97,18 @@ const StyledWrapper = styled.div`
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background-color: greenyellow;
   border-radius: 50%;
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.animated-button .circle.dark {
+  background-color: greenyellow;
+}
+.animated-button .circle.light {
+  background-color: #fd8a26;
+}
+
 
 .animated-button .text {
   position: relative;
@@ -100,6 +121,10 @@ const StyledWrapper = styled.div`
   box-shadow: 0 0 0 12px transparent;
   color: #212121;
   border-radius: 12px;
+}
+
+.animated-button.light:hover {
+  background-color: transparent;
 }
 
 .animated-button:hover .arr-1 {
@@ -118,9 +143,13 @@ const StyledWrapper = styled.div`
   fill: #212121;
 }
 
-.animated-button:active {
+.animated-button.dark:active {
   scale: 0.95;
   box-shadow: 0 0 0 4px greenyellow;
+}
+.animated-button.light:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px #fd8a26;
 }
 
 .animated-button:hover .circle {
