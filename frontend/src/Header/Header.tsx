@@ -20,7 +20,7 @@ const Header = () => {
               NoteSnip
             </Text>
           </Flex>
-          <Text fontSize="md" className='dancing-script-regular'>
+          <Text fontSize="md" className='oswald-script-regular'>
             The website for sharing code snippets.
           </Text>
         </Box>
