@@ -79,7 +79,7 @@ const Editor= () => {
                 >
                     <GridItem>
                         <Flex alignItems="center" flexWrap="nowrap" minWidth="100%">
-                            <Text className="dancing-script-regular"  fontWeight="bold" whiteSpace="nowrap">
+                            <Text className="oswald-script-regular"  fontWeight="bold" whiteSpace="nowrap">
                                 Language ：
                             </Text>
                             <Autocomplete 
@@ -98,7 +98,7 @@ const Editor= () => {
                     </GridItem>
                     <GridItem>
                         <Flex alignItems="center" flexWrap="nowrap" minWidth="100%">
-                            <Text className="dancing-script-regular" fontWeight="bold" whiteSpace="nowrap">
+                            <Text className="oswald-script-regular" fontWeight="bold" whiteSpace="nowrap">
                                 Theme ： 
                             </Text>
                             <NativeSelect
@@ -111,7 +111,7 @@ const Editor= () => {
                     </GridItem>
                     <GridItem>
                         <Flex alignItems="center" flexWrap="nowrap" minWidth="100%">
-                            <Text className="dancing-script-regular" fontWeight="bold" whiteSpace="nowrap">
+                            <Text className="oswald-script-regular" fontWeight="bold" whiteSpace="nowrap">
                                 Editor's Height ： 
                             </Text>
                             <NativeSelect
