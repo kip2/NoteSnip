@@ -47,7 +47,10 @@ const Editor= () => {
 
     const handleEditorHeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         updateCodeChange()
-        setEditorHeight(event.target.value)
+        const dropdownValue = event.target.value
+        if (dropdownValue !== "") {
+            setEditorHeight(event.target.value)
+        }
     }
 
     const defaultEditorHeight = "700px"
