@@ -1,6 +1,6 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback,   useState } from "react";
-import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid, NativeSelectItem } from "@yamada-ui/react";
+import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
 import { getTheme, themeItems } from "../Themes/Themes";
@@ -10,6 +10,8 @@ import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 import CodeEditorWrapper from "./CodeEditorWrapper";
+import { useEditorHeightContext } from "./EditorHeightProvider";
+import { editorHeightItems } from "./EditorHeightItems";
 
 const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()
@@ -53,15 +55,7 @@ const Editor= () => {
         }
     }
 
-    const defaultEditorHeight = "700px"
-    const [ editorHeight, setEditorHeight ] = useState(defaultEditorHeight)
-
-    const editorHeightItems: NativeSelectItem[] = [
-        { label: "500px", value: "500px"},
-        { label: "700px", value: "700px"},
-        { label: "1000px", value: "1000px"},
-        { label: "2000px", value: "2000px"},
-    ]
+    const { editorHeight, setEditorHeight } = useEditorHeightContext()
 
     return (
         <>

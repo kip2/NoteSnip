@@ -5,6 +5,7 @@ import { LanguageProvider } from "./Languages/LanguageProvider";
 import { ThemeProvider } from "./Themes/ThemeContext";
 import { ExpirationProvider } from "./Pulldown/ExpirationProvider";
 import { CodeProvider } from "./Editor/CodeProvider";
+import { EditorHeightProvider } from "./Editor/EditorHeightProvider";
 
 interface ProvidersProps {
     children: ReactNode
@@ -18,7 +19,9 @@ const Providers = ({ children }: ProvidersProps) => {
                     <LanguageProvider>
                         <ExpirationProvider>
                             <CodeProvider>
-                                {children}
+                                <EditorHeightProvider>
+                                    {children}
+                                </EditorHeightProvider>
                             </CodeProvider>
                         </ExpirationProvider>
                     </LanguageProvider>
