@@ -1,13 +1,23 @@
+import { useEditorHeightContext } from "../../Editor/EditorHeightProvider"
+import { useLanguageContext } from "../../Languages/LanguageProvider"
+import { useCodeMirrorTheme } from "../../Themes/ThemeContext"
+import { getTheme } from "../../Themes/Themes"
 import { userSettingKey } from "./Definitions"
 
-export const loadingUserSettingData = () => {
-    const data = localStorage.getItem(userSettingKey)
-    if (data) {
-        // todo: ユーザー情報をローディングして、必要なstateにセットする処理を書く
-        // todo: jsonをパースする
-        // todo: 言語を取得してstateにセット
-        // todo: テーマを取得してstateにセット
-        // todo: editorの設定を取得して、stateにセット
-        return 
+export const useLoadingUserSettingData = () => {
+    const { setLanguage } = useLanguageContext()
+    const { setTheme } = useCodeMirrorTheme()
+    const { setEditorHeight } = useEditorHeightContext()
+    
+    const loadUserSetting = () => {
+        const data = localStorage.getItem(userSettingKey)
+        console.log(data)
+        if (data) {
+            const loadData = JSON.parse(data)
+            setLanguage(loadData.language)
+            setTheme(getTheme(loadData.theme))
+            setEditorHeight(loadData.height)
+        }
     }
+    return loadUserSetting
 }

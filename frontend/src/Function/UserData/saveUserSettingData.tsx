@@ -17,6 +17,7 @@ export const useSaveUserSettingData = () => {
                 theme: saveTheme,
                 height: editorHeight,
             }
+            console.log(saveJsonData)
             localStorage.setItem(userSettingKey, JSON.stringify(saveJsonData))
         }
     }

@@ -13,6 +13,7 @@ import CodeEditorWrapper from "./CodeEditorWrapper";
 import { useEditorHeightContext } from "./EditorHeightProvider";
 import { editorHeightItems } from "./EditorHeightItems";
 import { useSaveUserSettingData } from "../Function/UserData/SaveUserSettingData";
+import { useLoadingUserSettingData } from "../Function/UserData/lodingUserSettingData";
 
 const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()
@@ -59,6 +60,7 @@ const Editor= () => {
     const { editorHeight, setEditorHeight } = useEditorHeightContext()
 
     const saveUserSetting = useSaveUserSettingData()
+    const loadUserSetting = useLoadingUserSettingData()
 
     return (
         <>
@@ -128,7 +130,12 @@ const Editor= () => {
                 <Button
                     onClick={saveUserSetting}
                 >
-                    テストボタン
+                    saveテストボタン
+                </Button>
+                <Button
+                    onClick={loadUserSetting}
+                >
+                    loadテストボタン
                 </Button>
             </Container>
         </>
