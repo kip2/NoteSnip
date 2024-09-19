@@ -2,7 +2,8 @@ import {
     basicDark, githubLight , 
     abcdef, abyss, androidstudio, andromeda, atomone, aura, bbedit, bespin, consoleDark, consoleLight, copilot, duotoneDark, duotoneLight, dracula, darcula, eclipse, githubDark, gruvboxDark, gruvboxLight, kimbie, material, noctisLilac, nord, okaidia, quietlight, red, solarizedDark, solarizedLight, sublime, tokyoNight, tokyoNightDay, tokyoNightStorm, tomorrowNightBlue, vscodeDark, vscodeLight, whiteDark, whiteLight, xcodeDark, xcodeLight
 } from "@uiw/codemirror-themes-all";
-import { NativeSelectItem } from "@yamada-ui/react";
+import { Extension } from "@uiw/react-codemirror";
+import { defaultTheme, NativeSelectItem } from "@yamada-ui/react";
 
 export const themeItems: NativeSelectItem[] = [
     { label: "dark", value: "dark"},
@@ -93,7 +94,7 @@ type ThemeOption =
     "xcodeLight"
 
 
-const themes = {
+const themes: Record<string, Extension> = {
     dark: basicDark,
     light: githubLight,
     githubLight: githubLight,
@@ -136,6 +137,12 @@ const themes = {
     whiteLight: whiteLight,
     xcodeDark: xcodeDark,
     xcodeLight: xcodeLight,
+}
+
+export const defaultEditorTheme = basicDark
+
+export const findKeyByValue = (value: Extension) => {
+    return Object.keys(themes).find(key => themes[key] === value) 
 }
 
 
