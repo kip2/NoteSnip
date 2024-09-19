@@ -4,7 +4,7 @@ import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Gr
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
 import { getTheme, themeItems } from "../Themes/Themes";
-import { useCodeMirrorTheme } from "../Themes/ThemeContext";
+import { useThemeContext } from "../Themes/ThemeContext";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
@@ -36,7 +36,7 @@ const Editor= () => {
         setPreviousValue(value)
     }
 
-    const { theme, setTheme } = useCodeMirrorTheme()
+    const { theme, setTheme } = useThemeContext()
 
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = event.target.value

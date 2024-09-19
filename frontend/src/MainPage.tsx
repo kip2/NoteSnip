@@ -8,6 +8,7 @@ import GetLoadingModal from './Modal/GetLoadingModal';
 import { useCodeContext } from './Editor/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
 import Footer from './Footer/Footer';
+import { useLoadingUserSettingData } from './Function/UserData/lodingUserSettingData';
 
 const MainPage = () => {
     const [ errorTitle, setErrorTitle ] = useState("")
@@ -19,6 +20,7 @@ const MainPage = () => {
     const {isOpen: isLoadingModalOpen, onOpen: onLoadingModalOpen, onClose: onLoadingModalClose } = useDisclosure()
 
     const [ abortController, setAbortController] = useState<AbortController | null>()
+    const loadUserSetting = useLoadingUserSettingData()
 
     // URLパラメータからハッシュ値を取得
     const params = useParams<{ hash?: string}>()
@@ -98,11 +100,14 @@ const MainPage = () => {
     useEffect(() => {
         if (isFirstRender.current && pathHash) {
             fetchDataByHash(pathHash)
+        } else if (isFirstRender.current) {
+            loadUserSetting()
         }
 
         // 初回のみの動作にするため、useRefを更新する
         isFirstRender.current = false
     }, [pathHash])
+
 
     return (
         <Box bg={bg}>

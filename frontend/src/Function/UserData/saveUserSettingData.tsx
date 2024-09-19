@@ -1,11 +1,11 @@
 import { useEditorHeightContext } from "../../Editor/EditorHeightProvider"
 import { useLanguageContext } from "../../Languages/LanguageProvider"
-import { useCodeMirrorTheme } from "../../Themes/ThemeContext"
+import { useThemeContext } from "../../Themes/ThemeContext"
 import { UserSettingData, userSettingKey } from "./Definitions"
 
 export const useSaveUserSettingData = () => {
     const { language } = useLanguageContext()
-    const { theme } = useCodeMirrorTheme() 
+    const { theme } = useThemeContext() 
     const { editorHeight } = useEditorHeightContext()
 
     const saveUserSetting = () => {

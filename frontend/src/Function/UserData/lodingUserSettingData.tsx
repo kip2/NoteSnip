@@ -1,11 +1,11 @@
 import { useEditorHeightContext } from "../../Editor/EditorHeightProvider"
 import { useLanguageContext } from "../../Languages/LanguageProvider"
-import { useCodeMirrorTheme } from "../../Themes/ThemeContext"
+import { useThemeContext } from "../../Themes/ThemeContext"
 import { userSettingKey } from "./Definitions"
 
 export const useLoadingUserSettingData = () => {
     const { setLanguage } = useLanguageContext()
-    const { setTheme } = useCodeMirrorTheme()
+    const { theme, setTheme } = useThemeContext()
     const { setEditorHeight } = useEditorHeightContext()
     
     const loadUserSetting = () => {
@@ -14,7 +14,9 @@ export const useLoadingUserSettingData = () => {
         if (data) {
             const loadData = JSON.parse(data)
             setLanguage(loadData.language)
-            setTheme(loadData.theme)
+            if (theme !== loadData.theme) {
+                setTheme(loadData.theme)
+            }
             setEditorHeight(loadData.height)
         }
     }

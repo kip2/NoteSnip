@@ -13,7 +13,7 @@ const getSystemTheme = () => {
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme ] = useState(getSystemTheme())
+    const [theme, setTheme ] = useState(getSystemTheme)
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
@@ -22,8 +22,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
             const changeTheme = e.matches ? "dark" : "light"
             setTheme(changeTheme)
         }
-
-        setTheme(mediaQuery.matches ? "dark" : "light")
 
         mediaQuery.addEventListener("change", handleChange)
 
@@ -39,7 +37,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export const useCodeMirrorTheme = () => {
+export const useThemeContext = () => {
     const context = useContext(ThemeContext)
     if (!context) {
         throw new Error('useTheme must be used within a ThemeProvider')

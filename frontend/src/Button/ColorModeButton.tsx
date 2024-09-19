@@ -1,10 +1,10 @@
 import { Box,  Center, useColorMode, ColorMode } from "@yamada-ui/react"
-import { useCodeMirrorTheme } from "../Themes/ThemeContext"
+import { useThemeContext } from "../Themes/ThemeContext"
 import { useEffect } from "react"
 import "./ColorModeButton.css"
 
 export const ColorModeButton = () => {
-    const { setTheme } = useCodeMirrorTheme()
+    const { setTheme } = useThemeContext()
     const { colorMode, changeColorMode } = useColorMode()
 
     useEffect(() => {
@@ -28,14 +28,10 @@ export const ColorModeButton = () => {
         }
     }, [changeColorMode])
 
-    useEffect(() => {
-        setTheme(colorMode as string )
-    }, [colorMode, setTheme ])
-
     const toggleColorMode = () => {
         const newMode = colorMode === "light" ? "dark" : "light"
         changeColorMode(newMode as ColorMode)
-        setTheme(colorMode as string)
+        setTheme(newMode as string)
     }
 
     return(
