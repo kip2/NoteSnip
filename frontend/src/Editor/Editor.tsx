@@ -5,7 +5,6 @@ import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
 import { getTheme, themeItems } from "../Themes/Themes";
 import { useCodeMirrorTheme } from "../Themes/ThemeContext";
-import { useSelectedThemeContext } from "../Themes/ThemeProvider";
 import { useCodeContext } from "./CodeProvider";
 import { useLanguageContext } from "../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
@@ -38,15 +37,12 @@ const Editor= () => {
     }
 
     const { theme, setTheme } = useCodeMirrorTheme()
-    const { selectedTheme, setSelectedTheme } = useSelectedThemeContext()
 
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const theme = event.target.value
-        const currentTheme = getTheme(theme)
 
         updateCodeChange()
-        setSelectedTheme(theme)
-        setTheme(currentTheme)
+        setTheme(theme)
     }
 
     const handleEditorHeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -69,7 +65,7 @@ const Editor= () => {
                     value={code}
                     height={editorHeight}
                     extensions={[getLanguageExtension(language)]}
-                    theme={theme}
+                    theme={getTheme(theme)}
                     onChange={onCodeChange}
                     style={{ border: "1px solid #ccc" , borderRadius: "3px"}}
                 />
@@ -105,7 +101,7 @@ const Editor= () => {
                             </Text>
                             <NativeSelect
                                 placeholder="テーマを選択してください"
-                                value={selectedTheme}
+                                value={theme}
                                 items={themeItems}
                                 onChange={handleThemeChange}
                             />

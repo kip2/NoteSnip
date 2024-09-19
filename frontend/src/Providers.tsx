@@ -1,6 +1,5 @@
 import { UIProvider } from "@yamada-ui/react";
 import { ReactNode } from "react";
-import { SelectedThemeProvider } from "./Themes/ThemeProvider";
 import { LanguageProvider } from "./Languages/LanguageProvider";
 import { ThemeProvider } from "./Themes/ThemeContext";
 import { ExpirationProvider } from "./Pulldown/ExpirationProvider";
@@ -15,17 +14,15 @@ const Providers = ({ children }: ProvidersProps) => {
     return (
         <UIProvider>
             <ThemeProvider>
-                <SelectedThemeProvider>
-                    <LanguageProvider>
-                        <ExpirationProvider>
-                            <CodeProvider>
-                                <EditorHeightProvider>
-                                    {children}
-                                </EditorHeightProvider>
-                            </CodeProvider>
-                        </ExpirationProvider>
-                    </LanguageProvider>
-                </SelectedThemeProvider>
+                <LanguageProvider>
+                    <ExpirationProvider>
+                        <CodeProvider>
+                            <EditorHeightProvider>
+                                {children}
+                            </EditorHeightProvider>
+                        </CodeProvider>
+                    </ExpirationProvider>
+                </LanguageProvider>
             </ThemeProvider>
         </UIProvider>
     )
