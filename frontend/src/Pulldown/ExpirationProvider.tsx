@@ -3,7 +3,7 @@ import { defaultExpirationValue } from "./Expiration";
 
 interface ExpirationContextType {
     expiration: string;
-    setExpiration: (theme: string) => void;
+    setExpiration: (expiration: string) => void;
 }
 
 const ExpirationContext = createContext<ExpirationContextType>({
