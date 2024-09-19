@@ -1,6 +1,6 @@
 import CodeMirror from "@uiw/react-codemirror";
-import { useCallback,   useState } from "react";
-import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid, Button } from "@yamada-ui/react";
+import { useCallback } from "react";
+import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid  } from "@yamada-ui/react";
 import getLanguageExtension from "../Languages/Languages";
 import { items } from "../Languages/Languages";
 import { getTheme, themeItems } from "../Themes/Themes";
@@ -11,7 +11,6 @@ import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 import CodeEditorWrapper from "./CodeEditorWrapper";
 import { useEditorHeightContext } from "./EditorHeightProvider";
 import { editorHeightItems } from "./EditorHeightItems";
-import { useLoadingUserSettingData } from "../Function/UserData/lodingUserSettingData";
 import { useSaveUserSettingData } from "../Function/UserData/saveUserSettingData";
 
 const Editor= () => {
@@ -26,37 +25,37 @@ const Editor= () => {
     }
 
     const { language, setLanguage } = useLanguageContext()
-    const [previousValue, setPreviousValue] = useState("")
-    const handleLanguageChange = (value: string) => {
+    const handleLanguageChange = (currentLanguage: string) => {
         updateCodeChange()
-
-        if (value.length >= previousValue.length) {
-            setLanguage(value)
-        }
-        setPreviousValue(value)
+        setLanguage(currentLanguage)
+        saveUserSetting({languageArg: currentLanguage})
     }
 
     const { theme, setTheme } = useThemeContext()
 
     const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const theme = event.target.value
+        const currentTheme = event.target.value
 
         updateCodeChange()
-        setTheme(theme)
+        const dropdownValue = event.target.value
+        if (dropdownValue !== "") {
+            setTheme(currentTheme)
+            saveUserSetting({themeArg: currentTheme})
+        }
     }
 
     const handleEditorHeightChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         updateCodeChange()
         const dropdownValue = event.target.value
         if (dropdownValue !== "") {
-            setEditorHeight(event.target.value)
+            setEditorHeight(dropdownValue)
+            saveUserSetting({editorHeightArg: dropdownValue})
         }
     }
 
     const { editorHeight, setEditorHeight } = useEditorHeightContext()
 
     const saveUserSetting = useSaveUserSettingData()
-    const loadUserSetting = useLoadingUserSettingData()
 
     return (
         <>
@@ -123,16 +122,6 @@ const Editor= () => {
                     </GridItem>
                 </Grid>
                 <RegisterSubmitButton/>
-                <Button
-                    onClick={saveUserSetting}
-                >
-                    saveテストボタン
-                </Button>
-                <Button
-                    onClick={loadUserSetting}
-                >
-                    loadテストボタン
-                </Button>
             </Container>
         </>
 
