@@ -3,7 +3,7 @@ import { defaultLanguage } from "./DefaultSnippet";
 
 interface LanguageContextType {
     language: string;
-    setLanguage: (theme: string) => void;
+    setLanguage: (language: string) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
