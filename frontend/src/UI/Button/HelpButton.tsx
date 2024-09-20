@@ -54,10 +54,10 @@ const StyledWrapper = styled.div`
 }
 
 .button.dark:before {
-  border: 4px solid #f0eeef;
+  border: 3px solid #f0eeef;
 }
 .button.light:before{
-  border: 4px solid #454444;
+  border: 3px solid #454444;
 }
 
 .button:after {
@@ -68,10 +68,10 @@ const StyledWrapper = styled.div`
 }
   
 .button.dark:after {
-  border: 4px solid #96daf0;
+  border: 3px solid #96daf0;
 }
 .button.light:after {
-  border: 4px solid #454444;
+  border: 3px solid #454444;
 }
 
 .button:hover:before,
