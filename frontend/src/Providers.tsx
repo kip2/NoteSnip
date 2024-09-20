@@ -2,9 +2,9 @@ import { UIProvider } from "@yamada-ui/react";
 import { ReactNode } from "react";
 import { LanguageProvider } from "./Languages/LanguageProvider";
 import { ThemeProvider } from "./Themes/ThemeContext";
-import { ExpirationProvider } from "./Pulldown/ExpirationProvider";
-import { CodeProvider } from "./Editor/CodeProvider";
-import { EditorHeightProvider } from "./Editor/EditorHeightProvider";
+import { ExpirationProvider } from "./UI/Pulldown/ExpirationProvider";
+import { CodeProvider } from "./UI/Editor/CodeProvider";
+import { EditorHeightProvider } from "./UI/Editor/EditorHeightProvider";
 
 interface ProvidersProps {
     children: ReactNode

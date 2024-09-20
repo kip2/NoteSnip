@@ -1,13 +1,13 @@
 import { Box, Center, Container,  useColorModeValue, useDisclosure} from '@yamada-ui/react';
 import { useParams } from 'react-router-dom';
-import Editor from './Editor/Editor';
-import Header from './Header/Header';
+import Editor from './UI/Editor/Editor';
+import Header from './UI/Header/Header';
 import { useEffect, useRef, useState } from 'react';
-import ErrorReponseModal from './Modal/ErrorResponseModal';
-import GetLoadingModal from './Modal/GetLoadingModal';
-import { useCodeContext } from './Editor/CodeProvider';
+import ErrorReponseModal from './UI/Modal/ErrorResponseModal';
+import GetLoadingModal from './UI/Modal/GetLoadingModal';
+import { useCodeContext } from './UI/Editor/CodeProvider';
 import { useLanguageContext } from './Languages/LanguageProvider';
-import Footer from './Footer/Footer';
+import Footer from './UI/Footer/Footer';
 import { useLoadingUserSettingData } from './Function/UserData/lodingUserSettingData';
 
 const MainPage = () => {

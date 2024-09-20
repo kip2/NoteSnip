@@ -1,17 +1,17 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { useCallback } from "react";
 import { Container, Autocomplete, Center, NativeSelect, Text, Flex, GridItem, Grid  } from "@yamada-ui/react";
-import getLanguageExtension from "../Languages/Languages";
-import { items } from "../Languages/Languages";
-import { getTheme, themeItems } from "../Themes/Themes";
-import { useThemeContext } from "../Themes/ThemeContext";
+import getLanguageExtension from "../../Languages/Languages";
+import { items } from "../../Languages/Languages";
+import { getTheme, themeItems } from "../../Themes/Themes";
+import { useThemeContext } from "../../Themes/ThemeContext";
 import { useCodeContext } from "./CodeProvider";
-import { useLanguageContext } from "../Languages/LanguageProvider";
+import { useLanguageContext } from "../../Languages/LanguageProvider";
 import { RegisterSubmitButton } from "../Button/RegisterSubmit";
 import CodeEditorWrapper from "./CodeEditorWrapper";
 import { useEditorHeightContext } from "./EditorHeightProvider";
 import { editorHeightItems } from "./EditorHeightItems";
-import { useSaveUserSettingData } from "../Function/UserData/saveUserSettingData";
+import { useSaveUserSettingData } from "../../Function/UserData/saveUserSettingData";
 
 const Editor= () => {
     const {code, setCode, codeRef} = useCodeContext()

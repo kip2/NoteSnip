@@ -1,4 +1,4 @@
-import { useEditorHeightContext } from "../../Editor/EditorHeightProvider"
+import { useEditorHeightContext } from "../../UI/Editor/EditorHeightProvider"
 import { useLanguageContext } from "../../Languages/LanguageProvider"
 import { useThemeContext } from "../../Themes/ThemeContext"
 import { UserSettingData, userSettingKey } from "./Definitions"

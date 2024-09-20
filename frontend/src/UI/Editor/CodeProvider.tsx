@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useRef  } from "react";
-import { defaultSnippet } from "../Languages/DefaultSnippet";
+import { defaultSnippet } from "../../Languages/DefaultSnippet";
 
 interface CodeContextType {
     code: string;

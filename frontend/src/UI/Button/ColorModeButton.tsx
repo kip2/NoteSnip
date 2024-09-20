@@ -1,5 +1,5 @@
 import { Box,  Center, useColorMode, ColorMode } from "@yamada-ui/react"
-import { useThemeContext } from "../Themes/ThemeContext"
+import { useThemeContext } from "../../Themes/ThemeContext"
 import { useEffect } from "react"
 import "./ColorModeButton.css"
 

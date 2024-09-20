@@ -1,7 +1,7 @@
 import { Box, Center,  useDisclosure } from "@yamada-ui/react"
 import { useExpirationContext } from "../Pulldown/ExpirationProvider"
 import { useEffect, useState } from "react"
-import { useLanguageContext } from "../Languages/LanguageProvider"
+import { useLanguageContext } from "../../Languages/LanguageProvider"
 import { useCodeContext } from "../Editor/CodeProvider"
 import { defaultExpirationValue } from "../Pulldown/Expiration"
 import SubmitSettingModal from "../Modal/SubmitSettingModal"
