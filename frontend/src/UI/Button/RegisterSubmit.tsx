@@ -47,8 +47,6 @@ export const RegisterSubmitButton = () => {
         // 1つ目のモーダルを閉じる
         onSubmitSettingClose()
 
-        console.log("codeRef:", codeRef.current)
-
         const requestJsonData = {
             snippet: codeRef.current,
             snippet_language: language,
