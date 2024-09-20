@@ -20,16 +20,18 @@ const HelpModal:FC<HelpModalProps> = ({ isOpen, onClose }) => {
             </Center>
             <ModalCloseButton onClick={onClose}/>
             <ModalBody display="flex" flexDirection="column" alignItems="center">
-                <Box height="5px" />
-                    <Text>URLを用いて、コードを他人と共有できるサービスとなっています。</Text>
                     <Text>共有URLを作成して、コードを友達と共有しよう！</Text>
-                <Box height="5px" />
+                    <Box height="5px" />
                     <Text fontWeight="bold">使い方</Text>
-                <Box height="5px" />
-                    <Text>1. エディターで編集を行うか、ローカルで編集したコードなどをエディターに貼り付けてください。</Text>
-                    <Text>2. 送信ボタンを押すと、スニペット共有用のURLが作成されます。</Text>
-                    <Text>3. URLを共有すると、コードが共有されます。</Text>
-                    <Text>4. また、言語のハイライト、エディターのテーマ、エディターの高さは変更が可能となっています。</Text>
+                    <Text>1. エディターにコードを書く。</Text>
+                    <Text>2. 「共有URL作成」ボタンを押す。</Text>
+                    <Text>3. 保存期間を設定する。</Text>
+                    <Text>4. 「送信」ボタンをクリック！</Text>
+                    <Text>5. URLを友だちと共有しよう！</Text>
+                    <Box height="5px" />
+                    <Text fontWeight="bold">補足</Text>
+                    <Text>エディタの言語ハイライト、テーマ、高さは変更できます。</Text>
+                    <Text>Happy Hacking!</Text>
             </ModalBody>
             <Center>
                 <ModalFooter>
