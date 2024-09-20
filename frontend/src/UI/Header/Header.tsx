@@ -2,7 +2,6 @@ import { Box, Button, Flex, Text, useColorModeValue, useDisclosure } from'@yamad
 import { ColorModeButton } from '../Button/ColorModeButton';
 import GithubButton from '../Button/GithubButton';
 import HelpModal from '../Modal/HelpModal';
-import { CircleHelpIcon } from '@yamada-ui/lucide';
 import HelpButton from '../Button/HelpButton';
 
 const Header = () => {
