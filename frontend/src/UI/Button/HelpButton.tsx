@@ -68,7 +68,7 @@ const StyledWrapper = styled.div`
 }
   
 .button.dark:after {
-  border: 3px solid #96daf0;
+  border: 3px solid #ffffff;
 }
 .button.light:after {
   border: 3px solid #454444;
