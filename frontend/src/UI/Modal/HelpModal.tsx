@@ -30,7 +30,7 @@ const HelpModal:FC<HelpModalProps> = ({ isOpen, onClose }) => {
                     <Text>5. URLを友達と共有しよう！</Text>
                     <Box height="5px" />
                     <Text fontWeight="bold">=== 補足 ===</Text>
-                    <Text>エディタの言語ハイライト、テーマ、高さは変更できます。</Text>
+                    <Text>言語ハイライト、テーマ、高さは変更できます。</Text>
                     <Box height="5px" />
                     <Text fontSize={30} className="dancing-script-regular">Happy Hacking!</Text>
             </ModalBody>
