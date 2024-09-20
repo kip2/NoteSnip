@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text, useColorModeValue, useDisclosure } from'@yamada-ui/react';
+import { Box, Flex, Text, useColorModeValue, useDisclosure } from'@yamada-ui/react';
 import { ColorModeButton } from '../Button/ColorModeButton';
 import GithubButton from '../Button/GithubButton';
 import HelpModal from '../Modal/HelpModal';
@@ -23,16 +23,12 @@ const Header = () => {
             <Text fontSize="4xl" fontWeight="bold" color={textColor} className='dancing-script-regular'>
               NoteSnip
             </Text>
-            <Button
+            <Box
               onClick={onOpen}
-              ml={2}
-              size=""
-              borderRadius="full"
-              variant="ghost"
               color={textColor}
             >
               <HelpButton/>
-            </Button>
+            </Box>
           </Flex>
           <Text fontSize="md" className='oswald-script-regular'>
             The website for sharing code snippets.

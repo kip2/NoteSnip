@@ -10,7 +10,6 @@ export const useLoadingUserSettingData = () => {
     
     const loadUserSetting = () => {
         const data = localStorage.getItem(userSettingKey)
-        console.log(data)
         if (data) {
             const loadData = JSON.parse(data)
             setLanguage(loadData.language)
