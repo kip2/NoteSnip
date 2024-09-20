@@ -99,6 +99,7 @@ const MainPage = () => {
 
     useEffect(() => {
         if (isFirstRender.current && pathHash) {
+            loadUserSetting()
             fetchDataByHash(pathHash)
         } else if (isFirstRender.current) {
             loadUserSetting()
