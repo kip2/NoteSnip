@@ -3,6 +3,7 @@ import { ColorModeButton } from '../Button/ColorModeButton';
 import GithubButton from '../Button/GithubButton';
 import HelpModal from '../Modal/HelpModal';
 import { CircleHelpIcon } from '@yamada-ui/lucide';
+import HelpButton from '../Button/HelpButton';
 
 const Header = () => {
   const headerBg = useColorModeValue("amber.200", "sky.800")
@@ -25,14 +26,13 @@ const Header = () => {
             </Text>
             <Button
               onClick={onOpen}
-              ml={0}
-              p={0}
-              size="lg"
+              ml={2}
+              size=""
               borderRadius="full"
               variant="ghost"
               color={textColor}
             >
-              <CircleHelpIcon/>
+              <HelpButton/>
             </Button>
           </Flex>
           <Text fontSize="md" className='oswald-script-regular'>
