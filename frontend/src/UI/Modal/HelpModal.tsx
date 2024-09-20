@@ -22,15 +22,16 @@ const HelpModal:FC<HelpModalProps> = ({ isOpen, onClose }) => {
             <ModalBody display="flex" flexDirection="column" alignItems="center">
                     <Text>共有URLを作成して、コードを友達と共有しよう！</Text>
                     <Box height="5px" />
-                    <Text fontWeight="bold">使い方</Text>
+                    <Text fontWeight="bold">=== 使い方 ===</Text>
                     <Text>1. エディターにコードを書く。</Text>
                     <Text>2. 「共有URL作成」ボタンを押す。</Text>
                     <Text>3. 保存期間を設定する。</Text>
                     <Text>4. 「送信」ボタンをクリック！</Text>
-                    <Text>5. URLを友だちと共有しよう！</Text>
+                    <Text>5. URLを友達と共有しよう！</Text>
                     <Box height="5px" />
-                    <Text fontWeight="bold">補足</Text>
+                    <Text fontWeight="bold">=== 補足 ===</Text>
                     <Text>エディタの言語ハイライト、テーマ、高さは変更できます。</Text>
+                    <Box height="5px" />
                     <Text>Happy Hacking!</Text>
             </ModalBody>
             <Center>
