@@ -66,7 +66,6 @@ const Editor= () => {
                     extensions={[getLanguageExtension(language)]}
                     theme={getTheme(theme)}
                     onChange={onCodeChange}
-                    style={{ border: "1px solid #ccc" , borderRadius: "3px"}}
                 />
             </CodeEditorWrapper>
             <Container pb={0}>
