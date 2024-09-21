@@ -121,11 +121,17 @@
 
 [Button by gharsh11032000 made with CSS | Uiverse.io](https://uiverse.io/gharsh11032000/loud-chicken-53)
 
-## 参考文献
 
+---
 
+## 最後に
 
-# 最後に
+作成の際に検討したことなどを書いた[解説記事](doc/README.md)を作成しています。
 
-なお、ReacursionCSのバックエンドプロジェクトの課題でもあります。  
-RecursionCSユーザー向けの解説記事は別に作成していますので、興味のある方は[こちら](doc/README.md)を読んでください。  
+興味のある方はご覧になってください。
+
+## Special Thanks
+
+SKP621さん。サイトのロゴ画像の作成でお世話になりました。また、普段から応援してくださってありがとうございます。
+
+And you ...
