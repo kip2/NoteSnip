@@ -90,26 +90,35 @@
 ## お借りしたもの
 
 ### CodeMirror
+
 [React CodeMirror - CodeMirror component for React.](https://uiwjs.github.io/react-codemirror/)
 
 ### YamadaUI
 
-
+[Yamada UI - Reactアプリケーションのスタイリング、アニメーション、そして柔軟性の力を解き放つ、UIコンポーネントライブラリ。 - Yamada UI](https://yamada-ui.com/ja)
 
 ### Google Fonts
+
 [Nerko One - Google Fonts](https://fonts.google.com/specimen/Nerko+One)
+
 [Oswald - Google Fonts](https://fonts.google.com/specimen/Oswald)
+
 [Dancing Script - Google Fonts](https://fonts.google.com/specimen/Dancing+Script)
 
 ### favion
+
 [Phosphor Icons](https://phosphoricons.com/)
 
 ### UI
 
 [Switch by aymenthedeveloper made with CSS | Uiverse.io](https://uiverse.io/aymenthedeveloper/polite-elephant-80)
+
 [Button by McHaXYT made with CSS | Uiverse.io](https://uiverse.io/McHaXYT/swift-mayfly-80)
+
 [Button by xopc333 made with CSS | Uiverse.io](https://uiverse.io/xopc333/modern-stingray-68)
+
 [Loader by jeremyssocial made with CSS | Uiverse.io](https://uiverse.io/jeremyssocial/ordinary-baboon-49)
+
 [Button by gharsh11032000 made with CSS | Uiverse.io](https://uiverse.io/gharsh11032000/loud-chicken-53)
 
 ## 参考文献
