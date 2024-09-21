@@ -11,9 +11,9 @@ This site is **NoteSnip!**
 このウェブサイトは、 _ちょっとしたコード_ を他人と共有できるウェブサイトです。
 
 コードの*文字数が多くても*、大丈夫！
-共有するのは __短いURL__ になりますので、文字数が多いコードでも安心。
+共有は __短いURL__ を使って行うので、文字数が多いコードでも安心。
 
-~~プロジェクト単位のコードは[Github](https://github.co.jp/)や[GitLab](https://about.gitlab.com/)なんかを使ってね！~~
+~~プロジェクト単位のコードは[Github](https://github.co.jp/)や[GitLab](https://about.gitlab.com/)を使ってね！~~
 
 ## 使い方
 
