@@ -1,4 +1,4 @@
-<h1 align="center">NoteSnip</h1>
+<h1 align="center">🐈NoteSnip🐈</h1>
 
 ## What's this?
 
