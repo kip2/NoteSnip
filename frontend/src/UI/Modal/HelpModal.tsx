@@ -20,7 +20,7 @@ const HelpModal:FC<HelpModalProps> = ({ isOpen, onClose }) => {
             </Center>
             <ModalCloseButton onClick={onClose}/>
             <ModalBody display="flex" flexDirection="column" alignItems="center">
-                    <Text>共有URLを作成して、コードを友達と共有しよう！</Text>
+                    <Text>共有URLを作成して、ちょっとしたコードを友達と共有しよう！</Text>
                     <Box height="5px" />
                     <Text fontWeight="bold">=== 使い方 ===</Text>
                     <Text>1. エディターにコードを書く。</Text>
