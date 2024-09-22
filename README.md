@@ -5,7 +5,8 @@
 このウェブサイトは、**ちょっとしたコード**を**他人と共有**できるサービスです。
 
 コードの*文字数が多くても*、大丈夫！
-共有は __短いURL__ を使って行うので、文字数が多いコードでも安心。
+
+共有は __短いURL__ を使って行うので、文字数が多いコードでも安心です。
 
 ~~プロジェクト単位のコード共有は[Github](https://github.co.jp/)や[GitLab](https://about.gitlab.com/)を使ってね！~~
 
@@ -88,6 +89,20 @@
     <td>Docker</td>
   </tr>
 </table>
+
+自作マイグレーションツールは、課題のなかで必要となったため、自作したものです。
+
+DB周りの補助ツール。
+
+作成の経緯の詳細は[こちら](/doc/README.md)。
+
+ツールの該当のリポジトリは以下になります。
+
+[consowrap](https://github.com/kip2/consowrap)
+
+[migrate](https://github.com/kip2/migrate)
+
+[seeder](https://github.com/kip2/seeder)
 
 ## お借りしたもの
 
