@@ -63,7 +63,7 @@
     <td>Cloudflare Pages</td>
   </tr>
   <tr>
-    <td rowspan="5">バックエンド</td>
+    <td rowspan="6">バックエンド</td>
     <td>言語・ライブラリ等</td>
     <td>Rust</td>
   </tr>
@@ -75,11 +75,14 @@
     <td>自作マイグレーションツール</td>
   </tr>
   <tr>
-    <td rowspan="2">インフラ</td>
+    <td rowspan="3">インフラ</td>
     <td>AWS</td>
   </tr>
   <tr>
     <td>NGINX</td>
+  </tr>
+  <tr>
+    <td>systemd</td>
   </tr>
   <tr>
     <td rowspan="2" colspan="2">その他</td>
