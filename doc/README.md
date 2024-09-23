@@ -39,6 +39,12 @@
   - [言語の選定](#言語の選定)
     - [言語を変更したことによって生じた作業](#言語を変更したことによって生じた作業)
       - [Rustで作成した自作ツール郡](#rustで作成した自作ツール郡)
+        - [consowrap](#consowrap)
+        - [sqcr](#sqcr)
+        - [db-wipe](#db-wipe)
+        - [migrate](#migrate)
+        - [migrate-PostgreSQL](#migrate-postgresql)
+        - [seeder](#seeder)
 - [サーバ](#サーバ)
 - [バックエンド](#バックエンド)
   - [ハッシュ関数について](#ハッシュ関数について)
@@ -172,13 +178,10 @@
 ただ、プロジェクト側で静的型付け言語であればいいといった記載があったため（あったかな？ ...あったと思う）、趣味で以下の言語を選択しました。
 
 バックエンドはRust。
-
 趣味で選定。
 
 本来はバックエンドプロジェクトおわるまではRustの学習は我慢する予定でしたが、バックエンドプロジェクト自体が時間がかかる内容であることもあり、我慢できずRustを使用することにしました。
-
 というよりも、「やりたい言語があるのに自分を縛り続けるのも意味がわからないな」といったところが実情でしょうか。
-
 どうせ苦労するなら好きな言語使っちまえ、ということですね。
 
 やっぱり好きなものやるほうが健康に良いですね。
@@ -190,7 +193,6 @@
 フロントエンドはTypeScript + Reactを使っています。
 
 こちらはもともとReactプロジェクト等で勉強していたこと、それからjsx記法、コンポーネント化の機能を気に入っていたため使用しています。
-
 一つ前の静的サイトを作成する課題で使用していたので、そのまま続投した形です。
 
 なお、その時作ったサイトは[こちら](https://github.com/kip2/my-website)になります。
@@ -201,13 +203,10 @@
 Rustを選定したことによって生じた苦労について。
 
 もともとはphpで進めるプロジェクトであり、学習中のサンプルコードももちろんphpで書かれていました。
-
 しかし、Rustを選んだことで、そのサンプルは使えません。
-
 そのため、サンプルコードもRustで自力実装する必要が生じました。
 
 しかも、Rustとphpの言語の特徴の差異のため、この自力実装にかなり悩まされました。
-
 何に悩まされたかというと、
 
 - サンプルコードはphpによりOOPを使用したコードでした。RustはOOPも実装は可能ですが、せっかくならよりRustっぽく実装したいと思っていたので、Rustのパラダイムに変換しながら実装する必要が生じました。これは自分で背負った苦労です。
@@ -222,7 +221,6 @@ Rustを選定したことによって生じた苦労について。
 わりぃ...やっぱ...つれぇわ......
 
 まあ無事に完成したので無問題です。
-
 時間かかったことは特に気にしていません。後悔もしていません。本当です。信じてください（曇りなき眼）。
 
 冗談はさておき、苦労はしましたが、結果的には良かったと考えているのが以下の点です。
@@ -238,24 +236,32 @@ Rustを選定したことによって生じた苦労について。
 
 個別にリポジトリを切っているので、興味があればご覧ください。
 
+###### consowrap
+
 [GitHub - kip2/consowrap: It is a simple console wrapper application made in Rust.](https://github.com/kip2/consowrap)
 
 コマンドツールをまとめて一括で扱えるようにするためのCLIツール。
+
+###### sqcr
 
 [GitHub - kip2/sqcr: This is a simple application for executing SQL from the console.](https://github.com/kip2/sqcr)
 
 単純にsqlファイルのSQLを実行できるようにしたコマンド。当初必要かなと考えて作ったが、結局不要になったため使っていない。
 
+###### db-wipe
+
 [GitHub - kip2/db-wipe: A simple command-line tool for deleting databases in MySQL.](https://github.com/kip2/db-wipe)
 
 MySQLのバックアップを行うためのツール。MySQLは使用しないことになったため、作ったが使っていないツール。
 
+###### migrate
 
 [GitHub - kip2/migrate: This is a simple migration application that can be executed in the console.](https://github.com/kip2/migrate)
 
 マイグレーション用のツール。PostgreSQLとMySQLに対応したマイグレーションツール。
 MySQLが要件にあったが、マイグレーションの仕様を誤解していたため、DDL文によるトランザクションを回避する必要があると誤解し、PostgreSQLでも使用できるようにしている。
 
+###### migrate-PostgreSQL
 
 [GitHub - kip2/migrate-PostgreSQL: This is a simple migration application that can be executed in the console, using PostgreSQL as the database.](https://github.com/kip2/migrate-PostgreSQL)
 
@@ -263,6 +269,7 @@ MySQLが要件にあったが、マイグレーションの仕様を誤解して
 
 上のmigrateに機能が統合されたため、こちらは作ったが使っていない。
 
+###### seeder
 
 [GitHub - kip2/seeder](https://github.com/kip2/seeder)
 
