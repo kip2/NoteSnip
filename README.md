@@ -12,7 +12,7 @@
 
 ## Access
 
-[NoteSnip](https://nodesnip.kip2.dev/)にアクセスしてください。
+[NoteSnip](https://notesnip.kip2.dev/)にアクセスしてください。
 
 
 ## How to use
