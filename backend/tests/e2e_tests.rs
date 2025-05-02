@@ -167,7 +167,7 @@ mod tests {
     /// 2.APIアプリを起動状態にする
     #[tokio::test]
     async fn test_api_get_snippet() {
-        let url = "http://127.0.0.1:8000/get/XTWDuRIIqvq0bF7v5Z75sMRd";
+        let url = "http://127.0.0.1:8000/get/y2JNPjealKcero89PNpGFLGM";
 
         let client = Client::new();
 
@@ -181,8 +181,8 @@ mod tests {
 
         let response_body: serde_json::Value = response.json().await.expect("Failed to parse JSON");
         let expected_json = json!({
-            "snippet": "Example Snippet",
-            "snippet_language": "plain text",
+            "snippet": "test snippet",
+            "snippet_language": "Rust",
             "expiration_stat": "eternal"
         });
 
