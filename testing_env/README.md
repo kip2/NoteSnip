@@ -1,5 +1,11 @@
 # テスト環境
 
+1. テスト環境用DBを立ち上げる(テスト環境構築の欄を参照)。
+2. backendサーバーの`.env`の"DATABASE_URL"を、テスト環境用に変更する。
+3. backendサーバーの`.env`の"ALLOWED_ORIGIN"を、テスト環境用に変更する。
+4. backendサーバーを立ち上げる(`cargo run`)。
+5. frontendサーバーを立ち上げる(`npm run dev`)。
+
 ## CockroachDB
 
 ### テスト環境構築
@@ -20,6 +26,8 @@ docker-compose -f compose.yaml up
 ```sh
 psql "postgresql://root@127.0.0.1:26257/app?sslmode=disable"
 ```
+
+---
 
 ### クライアントコマンドについて
 
