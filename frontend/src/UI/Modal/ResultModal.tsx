@@ -1,8 +1,7 @@
-import { CopyIcon } from "@yamada-ui/lucide"
-import { Box, Button, Center, FormControl, IconButton, Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay , Text } from "@yamada-ui/react"
-import CopyPopover from "../Popover/CopyPopover"
+import { Box, Button, Center, FormControl,  Input, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay , Text } from "@yamada-ui/react"
 import { FC } from "react"
 import { useButtonColorScheme } from "../Button/ButtonColorScheme"
+import CopyButton from "../Button/CopyButton"
 
 interface ResultModalProps {
     isOpen: boolean
@@ -10,12 +9,14 @@ interface ResultModalProps {
     isError: boolean
     snippetURL: string
     isCopied: boolean
+    setIsCopied: (value: boolean) => void
     isPopoverOpen: boolean
-    onCopy: () => void
+    setIsPopoverOpen: (value: boolean) => void
 }
 
-const ResultModal: FC<ResultModalProps> = ({ isOpen, onClose, isError, snippetURL, isCopied, isPopoverOpen, onCopy}) => {
+const ResultModal: FC<ResultModalProps> = ({ isOpen, onClose, isError, snippetURL, isCopied, setIsCopied,  isPopoverOpen, setIsPopoverOpen}) => {
     const colorScheme =  useButtonColorScheme()
+
     return (
         <>
             <Modal isOpen={isOpen} onClose={onClose} size
@@ -46,11 +47,12 @@ const ResultModal: FC<ResultModalProps> = ({ isOpen, onClose, isError, snippetUR
                                     placeholder="Your snippet URL."
                                     value={snippetURL}
                                 />
-                                <CopyPopover isPopoverOpen={isPopoverOpen} isCopied={isCopied}/>
-                                <IconButton 
-                                    ml={3} 
-                                    icon={<CopyIcon />}
-                                    onClick={onCopy}
+                                <CopyButton
+                                    isCopied={isCopied}
+                                    setIsCopied={setIsCopied}
+                                    isPopoverOpen={isPopoverOpen}
+                                    setIsPopoverOpen={setIsPopoverOpen}
+                                    copyText={snippetURL}
                                 />
                             </Center>
                         </FormControl>

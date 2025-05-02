@@ -8,15 +8,20 @@
 
 
 import { useColorMode } from "@yamada-ui/react";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
+import CopyButton from "../Button/CopyButton";
+import { useCodeContext } from "./CodeProvider";
 
 interface TerminalWrapperProps {
   children: React.ReactNode;
 }
 
 const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
+  const [ isCopied, setIsCopied ] = useState(false)
+  const [ isPopoverOpen, setIsPopoverOpen ] = useState(false)
   const { colorMode } = useColorMode()
+  const { codeRef } = useCodeContext()
 
   return (
     <StyledWrapper>
@@ -28,6 +33,13 @@ const TerminalWrapper: FC<TerminalWrapperProps> = ({ children }) => {
             <span className="maximize"></span>
           </div>
           <div className="title">Code Editor</div>
+            <CopyButton
+                isCopied={isCopied}
+                setIsCopied={setIsCopied}
+                isPopoverOpen={isPopoverOpen}
+                setIsPopoverOpen={setIsPopoverOpen}
+                copyText={codeRef.current}
+            />
         </div>
         <div className="terminal-body">{children}</div>
       </div>

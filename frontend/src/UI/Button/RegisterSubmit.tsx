@@ -58,6 +58,7 @@ export const RegisterSubmitButton = () => {
 
         setLoadingOpen(true)
 
+
         try { 
             await fetchSnippetURL(requestJsonData)
         } catch  {
@@ -101,33 +102,6 @@ export const RegisterSubmitButton = () => {
         onResultModalOpen()
     }
 
-
-
-    const handleCopyButton = () => {
-        navigator.clipboard.writeText(snippetURL)
-            .then(() => {
-                handleCopySuccess()
-            })
-            .catch(() => {
-                handleCopyFailure()
-            }) 
-    }
-
-    const handleCopySuccess = () => {
-        setIsCopied(true)
-        togglePopover()
-    }
-
-    const handleCopyFailure = () => {
-        setIsCopied(false)
-        togglePopover()
-    }
-
-    const togglePopover = () => {
-        setIsPopoverOpen(true)
-        setTimeout(() => setIsPopoverOpen(false), 2000)
-    }
-
     const [ loadingOpen, setLoadingOpen ] = useState(false)
 
     return(
@@ -158,8 +132,9 @@ export const RegisterSubmitButton = () => {
                 isError={isResponseError}
                 snippetURL={snippetURL}
                 isCopied={isCopied}
+                setIsCopied={setIsCopied}
                 isPopoverOpen={isPopoverOpen}
-                onCopy={handleCopyButton}
+                setIsPopoverOpen={setIsPopoverOpen}
             />
 
         </>
